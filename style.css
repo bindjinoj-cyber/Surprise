@@ -1,757 +1,108 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html,
-body {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    font-family: Arial, sans-serif;
-}
-
-body {
-    background: #ffb6d9;
-}
-
-#game {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-}
+/* =====================================================
+   🌸 SURPRISE INTERACTIVE
+===================================================== */
 
 
 /* =========================================
-   🌅 CIEL
+   🔎 ÉLÉMENTS
 ========================================= */
 
-#sky {
-    position: absolute;
-    inset: 0;
+const startScreen = document.getElementById("startScreen");
+const startBtn = document.getElementById("startBtn");
 
-    background:
-        linear-gradient(
-            to bottom,
-            #ff9ecb,
-            #ffd6e9,
-            #fff1f8
-        );
+const step1 = document.getElementById("step1");
+const step2 = document.getElementById("step2");
+const step3 = document.getElementById("step3");
 
-    transition:
-        filter 2s,
-        background 2s;
-}
+const next1 = document.getElementById("next1");
+const next2 = document.getElementById("next2");
 
-#game.calm #sky {
-    filter:
-        brightness(.65)
-        saturate(.7);
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const noMessage = document.getElementById("noMessage");
 
-    background:
-        linear-gradient(
-            to bottom,
-            #9b8bb8,
-            #c4b5d9,
-            #eadcf0
-        );
-}
+const giftScene = document.getElementById("giftScene");
+const gift = document.getElementById("gift");
+const openGift = document.getElementById("openGift");
+const giftMessage = document.getElementById("giftMessage");
+
+const poemScene = document.getElementById("poemScene");
+const poem = document.getElementById("poem");
+const revealBtn = document.getElementById("revealBtn");
+
+const transitionScene =
+    document.getElementById("transitionScene");
+
+const transitionText =
+    document.getElementById("transitionText");
+
+const questionFinale =
+    document.getElementById("questionFinale");
+
+const finalYes =
+    document.getElementById("finalYes");
+
+const finalNo =
+    document.getElementById("finalNo");
+
+const finalNoMessage =
+    document.getElementById("finalNoMessage");
+
+const envelopeScene =
+    document.getElementById("envelopeScene");
+
+const envelope =
+    document.getElementById("envelope");
+
+const letterText =
+    document.getElementById("letterText");
+
+const revealScene =
+    document.getElementById("revealScene");
+
+const instagramBtn =
+    document.getElementById("instagramBtn");
+
+const restart =
+    document.getElementById("restart");
+
+const game =
+    document.getElementById("game");
+
+const backgroundMusic =
+    document.getElementById("backgroundMusic");
+
+const musicButton =
+    document.getElementById("musicButton");
+
+const stars =
+    document.getElementById("stars");
+
+const flowers =
+    document.getElementById("flowers");
+
+const fallingHearts =
+    document.getElementById("fallingHearts");
+
+const particles =
+    document.getElementById("particles");
 
 
 /* =========================================
-   ⭐ ÉTOILES
+   📩 GOOGLE FORM
 ========================================= */
 
-#stars {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 2;
-}
+const GOOGLE_FORM_YES_URL =
+    "https://docs.google.com/forms/d/e/1FAIpQLSc4OfKWZ4hFxpm3ktsZEHlU5xkqP62OEFWLzXPlUtM-zDQRDA/viewform?usp=pp_url&entry.1144722576=Oui";
 
-.star {
-    position: absolute;
 
-    width: 4px;
-    height: 4px;
+function sendYesToGoogleForm() {
 
-    border-radius: 50%;
-    background: white;
+    window.open(
+        GOOGLE_FORM_YES_URL,
+        "_blank"
+    );
 
-    animation:
-        twinkle 2s infinite alternate;
-}
-
-@keyframes twinkle {
-    from {
-        opacity: .2;
-        transform: scale(.5);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1.5);
-    }
-}
-
-
-/* =========================================
-   💕 COEURS
-========================================= */
-
-#fallingHearts {
-    position: absolute;
-    inset: 0;
-
-    overflow: hidden;
-    pointer-events: none;
-
-    z-index: 10;
-}
-
-.heart {
-    position: absolute;
-    top: -50px;
-
-    animation:
-        fall linear forwards;
-}
-
-@keyframes fall {
-    to {
-        transform:
-            translateY(110vh)
-            rotate(360deg);
-
-        opacity: 0;
-    }
-}
-
-
-/* =========================================
-   ✨ PARTICULES
-========================================= */
-
-#particles {
-    position: absolute;
-    inset: 0;
-
-    pointer-events: none;
-    z-index: 20;
-}
-
-.sparkle {
-    position: fixed;
-
-    pointer-events: none;
-
-    font-size: 18px;
-
-    animation:
-        sparkleAnimation
-        1.5s
-        ease-out
-        forwards;
-}
-
-@keyframes sparkleAnimation {
-
-    0% {
-        opacity: 0;
-
-        transform:
-            scale(.2)
-            rotate(0);
-    }
-
-    40% {
-        opacity: 1;
-
-        transform:
-            scale(1.2)
-            rotate(90deg);
-    }
-
-    100% {
-        opacity: 0;
-
-        transform:
-            scale(.4)
-            rotate(180deg)
-            translateY(-80px);
-    }
-}
-
-
-/* =========================================
-   🌷 FLEURS
-========================================= */
-
-#flowers {
-    position: absolute;
-
-    bottom: 0;
-
-    width: 100%;
-    height: 100px;
-
-    pointer-events: none;
-
-    z-index: 30;
-}
-
-.flower {
-    position: absolute;
-
-    bottom: 15px;
-
-    font-size: 25px;
-
-    animation:
-        flowerMove
-        2s
-        ease-in-out
-        infinite
-        alternate;
-}
-
-@keyframes flowerMove {
-
-    from {
-        transform: rotate(-8deg);
-    }
-
-    to {
-        transform: rotate(8deg);
-    }
-}
-
-
-/* =========================================
-   ☁️ NUAGES
-========================================= */
-
-.cloud {
-    position: absolute;
-
-    width: 160px;
-    height: 50px;
-
-    background:
-        rgba(255,255,255,.7);
-
-    border-radius: 50px;
-
-    animation:
-        cloudMove
-        30s
-        linear
-        infinite;
-
-    z-index: 3;
-}
-
-.cloud::before,
-.cloud::after {
-    content: "";
-
-    position: absolute;
-
-    background: inherit;
-
-    border-radius: 50%;
-}
-
-.cloud::before {
-    width: 70px;
-    height: 70px;
-
-    left: 25px;
-    top: -35px;
-}
-
-.cloud::after {
-    width: 80px;
-    height: 80px;
-
-    right: 20px;
-    top: -40px;
-}
-
-.cloud1 {
-    top: 15%;
-    left: -200px;
-}
-
-.cloud2 {
-    top: 30%;
-    left: -300px;
-}
-
-.cloud3 {
-    top: 8%;
-    left: -400px;
-}
-
-@keyframes cloudMove {
-
-    from {
-        transform: translateX(-250px);
-    }
-
-    to {
-        transform: translateX(130vw);
-    }
-}
-
-
-/* =========================================
-   🏔️ MONTAGNES
-========================================= */
-
-.mountains {
-    position: absolute;
-
-    bottom: 0;
-
-    width: 100%;
-    height: 35%;
-
-    z-index: 4;
-}
-
-.mountain {
-    position: absolute;
-
-    bottom: 0;
-
-    width: 0;
-    height: 0;
-
-    border-left:
-        250px solid transparent;
-
-    border-right:
-        250px solid transparent;
-
-    border-bottom:
-        300px solid
-        rgba(183,130,180,.55);
-}
-
-.mountain1 {
-    left: -100px;
-}
-
-.mountain2 {
-    left: 25%;
-
-    transform: scale(1.2);
-}
-
-.mountain3 {
-    right: -100px;
-
-    transform: scale(.9);
-}
-
-
-/* =========================================
-   🎵 MUSIQUE
-========================================= */
-
-.music-button {
-    position: fixed;
-
-    top: 20px;
-    right: 20px;
-
-    width: 50px;
-    height: 50px;
-
-    border: none;
-    border-radius: 50%;
-
-    background:
-        rgba(255,255,255,.9);
-
-    box-shadow:
-        0 8px 25px
-        rgba(0,0,0,.15);
-
-    font-size: 22px;
-
-    cursor: pointer;
-
-    z-index: 100000;
-}
-
-
-/* =========================================
-   🚪 COMMENCEMENT
-========================================= */
-
-.start-screen {
-    position: fixed;
-    inset: 0;
-
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-
-    background:
-        rgba(255,180,215,.4);
-
-    backdrop-filter:
-        blur(15px);
-
-    z-index: 5000;
-
-    transition:
-        opacity .7s,
-        visibility .7s;
-}
-
-.start-screen.hidden {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-}
-
-.start-box {
-    width:
-        min(90%, 450px);
-
-    padding:
-        45px 30px;
-
-    text-align: center;
-
-    border-radius: 35px;
-
-    background:
-        rgba(255,255,255,.96);
-
-    box-shadow:
-        0 30px 80px
-        rgba(100,30,80,.25);
-
-    animation:
-        startBoxAppear
-        .8s
-        ease;
-}
-
-@keyframes startBoxAppear {
-
-    from {
-        opacity: 0;
-        transform: scale(.8) translateY(30px);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-    }
-}
-
-.start-cat {
-    font-size: 80px;
-
-    margin-bottom: 15px;
-
-    animation:
-        catBounce
-        2s
-        infinite
-        alternate;
-}
-
-@keyframes catBounce {
-
-    to {
-        transform:
-            translateY(-10px);
-    }
-}
-
-.start-box h1 {
-    color: #d33f82;
-
-    margin-bottom: 15px;
-}
-
-.start-box p {
-    color: #71405a;
-
-    margin-bottom: 10px;
-
-    font-size: 18px;
-}
-
-.start-button {
-    border: none;
-
-    padding:
-        15px 35px;
-
-    border-radius: 30px;
-
-    background:
-        #ff67a8;
-
-    color: white;
-
-    font-size: 19px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-
-    margin-top: 15px;
-
-    transition:
-        transform .25s,
-        box-shadow .25s;
-}
-
-.start-button:hover {
-    transform: scale(1.06);
-
-    box-shadow:
-        0 10px 25px
-        rgba(255,70,160,.35);
-}
-
-
-/* =========================================
-   🌸 ÉCRANS
-========================================= */
-
-.mystery-screen {
-    position: fixed;
-    inset: 0;
-
-    display: none;
-
-    justify-content: center;
-    align-items: center;
-
-    background:
-        rgba(255,130,190,.25);
-
-    backdrop-filter:
-        blur(10px);
-
-    z-index: 3000;
-}
-
-.mystery-screen.active {
-    display: flex;
-
-    animation:
-        appear .5s ease;
-}
-
-.mystery-box {
-    width:
-        min(90%, 500px);
-
-    padding:
-        40px 30px;
-
-    text-align: center;
-
-    border-radius: 35px;
-
-    background:
-        rgba(255,255,255,.95);
-
-    box-shadow:
-        0 25px 70px
-        rgba(100,30,80,.25);
-
-    animation:
-        boxFloat
-        4s
-        ease-in-out
-        infinite;
-}
-
-@keyframes boxFloat {
-
-    50% {
-        transform:
-            translateY(-5px);
-    }
-}
-
-.mystery-icon {
-    font-size: 65px;
-
-    margin-bottom: 15px;
-}
-
-.mystery-box h1 {
-    color:
-        #e84791;
-
-    font-size: 36px;
-
-    margin-bottom: 15px;
-}
-
-.mystery-box p {
-    color:
-        #71405a;
-
-    font-size: 18px;
-
-    line-height: 1.5;
-
-    margin-bottom: 10px;
-}
-
-
-/* =========================================
-   🔘 BOUTONS
-========================================= */
-
-.buttons,
-.final-buttons {
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-
-    gap: 20px;
-
-    margin-top: 25px;
-}
-
-.buttons button,
-.final-buttons button {
-    border: none;
-
-    padding:
-        14px 28px;
-
-    border-radius: 30px;
-
-    font-size: 18px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-
-    transition:
-        transform .3s ease,
-        box-shadow .3s ease;
-}
-
-.yes,
-.final-yes {
-    background:
-        #ff5fa2;
-
-    color: white;
-
-    box-shadow:
-        0 8px 20px
-        rgba(255,50,140,.3);
-}
-
-.yes:hover,
-.final-yes:hover {
-    box-shadow:
-        0 12px 30px
-        rgba(255,50,140,.4);
-}
-
-.no,
-.final-no {
-    background:
-        #f1f1f1;
-
-    color:
-        #777;
-}
-
-.next-button {
-    margin-top: 25px;
-
-    padding:
-        14px 25px;
-
-    border: none;
-
-    border-radius: 25px;
-
-    background:
-        #ff67a8;
-
-    color: white;
-
-    font-size: 17px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-
-    transition:
-        transform .25s,
-        box-shadow .25s;
-}
-
-.next-button:hover {
-    transform:
-        scale(1.06);
-
-    box-shadow:
-        0 8px 20px
-        rgba(255,80,160,.25);
-}
-
-.no-message,
-.final-no-message {
-    min-height: 25px;
-
-    margin-top: 15px;
-
-    color:
-        #a34b77;
-
-    opacity: 0;
-
-    transition:
-        opacity .3s,
-        transform .3s;
-}
-
-.no-message.show,
-.final-no-message.show {
-    opacity: 1;
-
-    animation:
-        messageAppear
-        .4s
-        ease;
-}
-
-@keyframes messageAppear {
-
-    from {
-        opacity: 0;
-        transform: translateY(8px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 
@@ -759,319 +110,423 @@ body {
    🐱 CHAT
 ========================================= */
 
-#catContainer {
-    display: none;
+const catContainer =
+    document.getElementById("catContainer");
 
-    position: fixed;
+const characterMessage =
+    document.getElementById("characterMessage");
 
-    right: 20px;
-    bottom: 15px;
+const catEyeLeft =
+    document.getElementById("catEyeLeft");
 
-    width: 160px;
-    height: 160px;
+const catEyeRight =
+    document.getElementById("catEyeRight");
 
-    z-index: 99999;
+const catMouth =
+    document.getElementById("catMouth");
 
-    pointer-events: none;
-}
 
-#catContainer.show {
-    display: block;
+/* =========================================
+   🐱 EXPRESSIONS
+========================================= */
 
-    animation:
-        catAppear
-        .4s
-        ease;
-}
+const catExpressions = {
 
-@keyframes catAppear {
+    content: {
+        left: "^",
+        right: "^",
+        mouth: "◡"
+    },
 
-    from {
-        opacity: 0;
-        transform: translateY(20px) scale(.8);
+    gene: {
+        left: "•",
+        right: "•",
+        mouth: "⌣"
+    },
+
+    surpris: {
+        left: "O",
+        right: "O",
+        mouth: "o"
+    },
+
+    heureux: {
+        left: "♥",
+        right: "♥",
+        mouth: "◡"
+    },
+
+    fatigue: {
+        left: "—",
+        right: "—",
+        mouth: "︵"
+    },
+
+    triste: {
+        left: "•",
+        right: "•",
+        mouth: "︵"
     }
 
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
+};
 
-.cat-character {
-    position: absolute;
 
-    right: 0;
-    bottom: 0;
+function setCatExpression(expression) {
 
-    width: 100px;
-    height: 100px;
+    const face =
+        catExpressions[expression];
 
-    animation:
-        catFloat
-        2s
-        infinite
-        alternate;
-}
-
-@keyframes catFloat {
-
-    from {
-        transform:
-            translateY(0);
+    if (!face) {
+        return;
     }
 
-    to {
-        transform:
-            translateY(-8px);
-    }
-}
+    catEyeLeft.textContent =
+        face.left;
 
-.cat-face {
-    position: absolute;
+    catEyeRight.textContent =
+        face.right;
 
-    left: 15px;
-    top: 10px;
+    catMouth.textContent =
+        face.mouth;
 
-    width: 70px;
-    height: 62px;
-
-    background: white;
-
-    border-radius: 50%;
-
-    z-index: 2;
-
-    box-shadow:
-        0 5px 15px
-        rgba(80,30,60,.12);
-}
-
-.cat-ear {
-    position: absolute;
-
-    width: 30px;
-    height: 30px;
-
-    top: 0;
-
-    background: white;
-
-    border-radius: 50%;
-}
-
-.cat-ear-left {
-    left: 12px;
-}
-
-.cat-ear-right {
-    right: 12px;
-}
-
-.cat-eye {
-    position: absolute;
-
-    top: 23px;
-
-    width: 9px;
-    height: 12px;
-
-    background:
-        #382333;
-
-    border-radius: 50%;
-
-    color:
-        #382333;
-
-    font-size: 10px;
-
-    text-align: center;
-
-    transition:
-        all .25s ease;
-}
-
-.left-eye {
-    left: 18px;
-}
-
-.right-eye {
-    right: 18px;
-}
-
-.cat-mouth {
-    position: absolute;
-
-    left: 50%;
-    top: 40px;
-
-    transform:
-        translateX(-50%);
-
-    color:
-        #603247;
-
-    font-size: 18px;
-
-    transition:
-        all .25s ease;
-}
-
-.cat-nose {
-    position: absolute;
-
-    left: 50%;
-    top: 32px;
-
-    transform:
-        translateX(-50%);
-
-    color:
-        #ff6fae;
-
-    font-size: 11px;
-}
-
-.cat-body {
-    position: absolute;
-
-    left: 20px;
-    bottom: 0;
-
-    width: 65px;
-    height: 45px;
-
-    background: white;
-
-    border-radius:
-        50px 50px 25px 25px;
-}
-
-.cat-tail {
-    position: absolute;
-
-    right: 0;
-    bottom: 5px;
-
-    width: 32px;
-    height: 32px;
-
-    border:
-        7px solid white;
-
-    border-left: none;
-
-    border-radius:
-        0 30px 30px 0;
-}
-
-.character-message {
-    position: absolute;
-
-    right: 0;
-    bottom: 115px;
-
-    width: 190px;
-
-    padding:
-        10px 13px;
-
-    background: white;
-
-    color:
-        #8d3869;
-
-    font-size: 13px;
-
-    font-weight: bold;
-
-    text-align: center;
-
-    border-radius: 18px;
-
-    box-shadow:
-        0 8px 25px
-        rgba(0,0,0,.15);
-
-    animation:
-        bubbleFloat
-        2s
-        ease-in-out
-        infinite
-        alternate;
-}
-
-@keyframes bubbleFloat {
-
-    to {
-        transform:
-            translateY(-4px);
-    }
 }
 
 
 /* =========================================
-   🐱 EXPRESSIONS VISUELLES
+   🐱 AFFICHER CHAT
 ========================================= */
 
-#catContainer.expression-happy .cat-face {
-    transform: rotate(-2deg);
+function showCat(
+    message,
+    expression = "content"
+) {
+
+    catContainer.classList.add("show");
+
+    characterMessage.textContent =
+        message;
+
+    setCatExpression(
+        expression
+    );
+
 }
 
-#catContainer.expression-shy .cat-face {
-    transform: rotate(2deg);
+
+/* =========================================
+   😴 CHAT SI ON ATTEND
+========================================= */
+
+let waitingTimer = null;
+
+
+function startWaitingTimer() {
+
+    clearTimeout(
+        waitingTimer
+    );
+
+    waitingTimer =
+        setTimeout(() => {
+
+            showCat(
+                "Tu réfléchis encore ? 😴💗",
+                "fatigue"
+            );
+
+        }, 15000);
+
 }
 
-#catContainer.expression-surprised .cat-face {
-    transform: scale(1.05);
+
+function resetWaitingTimer() {
+
+    clearTimeout(
+        waitingTimer
+    );
+
+    startWaitingTimer();
+
 }
 
-#catContainer.expression-excited .cat-character {
-    animation:
-        catExcited
-        .35s
-        infinite alternate;
-}
 
-@keyframes catExcited {
+/* =========================================
+   🎵 MUSIQUE
+========================================= */
 
-    from {
-        transform:
-            translateY(0)
-            rotate(-3deg);
+let musicPlaying = false;
+
+
+function startMusic() {
+
+    if (!backgroundMusic) {
+        return;
     }
 
-    to {
-        transform:
-            translateY(-12px)
-            rotate(3deg);
-    }
+    backgroundMusic.volume = 0.25;
+
+    backgroundMusic
+        .play()
+        .then(() => {
+
+            musicPlaying = true;
+
+            musicButton.textContent =
+                "🔊";
+
+        })
+        .catch(() => {
+
+            musicPlaying = false;
+
+            musicButton.textContent =
+                "🔇";
+
+        });
+
 }
 
-#catContainer.expression-tired {
-    opacity: .8;
+
+if (musicButton) {
+
+    musicButton.addEventListener(
+        "click",
+        () => {
+
+            if (!musicPlaying) {
+
+                startMusic();
+
+            }
+            else {
+
+                backgroundMusic.pause();
+
+                musicPlaying = false;
+
+                musicButton.textContent =
+                    "🔇";
+
+            }
+
+        }
+    );
+
 }
 
-#catContainer.expression-tired .cat-character {
-    animation:
-        catTired
-        3s
-        ease-in-out
-        infinite;
+
+/* =========================================
+   🚪 COMMENCER
+========================================= */
+
+if (startBtn) {
+
+    startBtn.addEventListener(
+        "click",
+        () => {
+
+            startMusic();
+
+            startScreen.classList.add(
+                "hidden"
+            );
+
+            setTimeout(() => {
+
+                step1.classList.add(
+                    "active"
+                );
+
+                showCat(
+                    "Coucou ! 🐱💗",
+                    "content"
+                );
+
+                createSparkles(15);
+
+                startWaitingTimer();
+
+            }, 600);
+
+        }
+    );
+
 }
 
-@keyframes catTired {
 
-    0%,
-    100% {
-        transform:
-            translateY(0);
-    }
+/* =========================================
+   🌸 ÉTAPE 1
+========================================= */
 
-    50% {
-        transform:
-            translateY(5px);
-    }
+if (next1) {
+
+    next1.addEventListener(
+        "click",
+        () => {
+
+            resetWaitingTimer();
+
+            step1.classList.remove(
+                "active"
+            );
+
+            step2.classList.add(
+                "active"
+            );
+
+            showCat(
+                "On continue ? 🌸",
+                "content"
+            );
+
+            createSparkles(20);
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   🌷 ÉTAPE 2
+========================================= */
+
+if (next2) {
+
+    next2.addEventListener(
+        "click",
+        () => {
+
+            resetWaitingTimer();
+
+            step2.classList.remove(
+                "active"
+            );
+
+            step3.classList.add(
+                "active"
+            );
+
+            showCat(
+                "J'ai une petite question... 😳",
+                "gene"
+            );
+
+            createPetals(15);
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   ❌ PREMIER NON
+========================================= */
+
+let noClicks = 0;
+
+
+const noMessages = [
+
+    "Oh... 🥺🌸",
+
+    "Le petit chat est surpris... 🥺",
+
+    "Je comprends 😊",
+
+    "Encore une petite chance de continuer ? 🌷",
+
+    "Promis, la suite reste une surprise 💗"
+
+];
+
+
+if (noBtn) {
+
+    noBtn.addEventListener(
+        "click",
+        () => {
+
+            resetWaitingTimer();
+
+            noClicks++;
+
+            const noScale =
+                Math.max(
+                    0.65,
+                    1 - noClicks * 0.05
+                );
+
+            const yesScale =
+                Math.min(
+                    1.35,
+                    1 + noClicks * 0.05
+                );
+
+            noBtn.style.transform =
+                `scale(${noScale})`;
+
+            yesBtn.style.transform =
+                `scale(${yesScale})`;
+
+            noMessage.textContent =
+                noMessages[
+                    Math.min(
+                        noClicks - 1,
+                        noMessages.length - 1
+                    )
+                ];
+
+            noMessage.classList.add(
+                "show"
+            );
+
+            showCat(
+                noMessage.textContent,
+                "surpris"
+            );
+
+            createPetals(8);
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   💗 PREMIER OUI
+========================================= */
+
+if (yesBtn) {
+
+    yesBtn.addEventListener(
+        "click",
+        () => {
+
+            resetWaitingTimer();
+
+            step3.classList.remove(
+                "active"
+            );
+
+            giftScene.classList.add(
+                "active"
+            );
+
+            showCat(
+                "Ohhh ! Regarde ! 😸💗",
+                "heureux"
+            );
+
+            createSparkles(30);
+
+            createPetals(20);
+
+        }
+    );
+
 }
 
 
@@ -1079,242 +534,217 @@ body {
    🎁 CADEAU
 ========================================= */
 
-.gift-scene {
-    position: fixed;
+let giftOpened = false;
 
-    inset: 0;
 
-    display: none;
+if (openGift) {
 
-    flex-direction: column;
+    openGift.addEventListener(
+        "click",
+        () => {
 
-    justify-content: center;
-    align-items: center;
+            if (giftOpened) {
+                return;
+            }
 
-    background:
-        rgba(255,150,200,.3);
+            giftOpened = true;
 
-    backdrop-filter:
-        blur(12px);
+            resetWaitingTimer();
 
-    z-index: 3500;
+            openGift.disabled = true;
+
+            gift.classList.add(
+                "shake"
+            );
+
+            giftMessage.textContent =
+                "Attends... qu'est-ce qu'il y a dedans ? 👀";
+
+            showCat(
+                "Ça bouge ! 😳",
+                "surpris"
+            );
+
+            createSparkles(25);
+
+
+            setTimeout(() => {
+
+                giftHeartExplosion();
+
+                showCat(
+                    "Ohhh !!! 😸💗",
+                    "heureux"
+                );
+
+            }, 700);
+
+
+            setTimeout(() => {
+
+                gift.classList.remove(
+                    "shake"
+                );
+
+                gift.classList.add(
+                    "open"
+                );
+
+                giftMessage.textContent =
+                    "Une petite surprise pour toi 💗";
+
+            }, 1200);
+
+
+            setTimeout(() => {
+
+                giftScene.classList.remove(
+                    "active"
+                );
+
+                poemScene.classList.add(
+                    "active"
+                );
+
+                showCat(
+                    "Lis tranquillement... 🌸",
+                    "content"
+                );
+
+                startTypingPoem();
+
+            }, 3000);
+
+        }
+    );
+
 }
 
-.gift-scene.active {
-    display: flex;
 
-    animation:
-        appear .5s ease;
-}
+/* =========================================
+   💗 EXPLOSION DE COEURS
+========================================= */
 
-.gift-message {
-    position: absolute;
+function giftHeartExplosion() {
 
-    top: 15%;
+    const rect =
+        gift.getBoundingClientRect();
 
-    padding:
-        12px 22px;
+    const items = [
 
-    background:
-        rgba(255,255,255,.9);
+        "💗",
+        "💕",
+        "💖",
+        "💓",
+        "🌸",
+        "✨",
+        "🌷"
 
-    color:
-        #a23c72;
+    ];
 
-    border-radius: 30px;
 
-    font-weight: bold;
+    for (
+        let i = 0;
+        i < 35;
+        i++
+    ) {
 
-    animation:
-        messageFloat
-        2s
-        infinite
-        alternate;
-}
+        const item =
+            document.createElement(
+                "div"
+            );
 
-.gift-title {
-    color: white;
+        item.className =
+            "gift-heart";
 
-    font-size: 32px;
+        item.textContent =
+            items[
+                Math.floor(
+                    Math.random() *
+                    items.length
+                )
+            ];
 
-    font-weight: bold;
+        item.style.left =
+            (
+                rect.left +
+                rect.width / 2
+            ) + "px";
 
-    margin-bottom: 45px;
+        item.style.top =
+            (
+                rect.top +
+                rect.height / 2
+            ) + "px";
 
-    text-align: center;
 
-    text-shadow:
-        0 3px 12px
-        rgba(100,20,70,.25);
-}
-
-.gift {
-    position: relative;
-
-    width: 190px;
-    height: 170px;
-
-    cursor: pointer;
-
-    transition:
-        transform .3s;
-}
-
-.gift-body {
-    position: absolute;
-
-    left: 10px;
-    bottom: 0;
-
-    width: 170px;
-    height: 125px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ff5b9f,
-            #e9478d
+        document.body.appendChild(
+            item
         );
 
-    border-radius: 8px;
 
-    box-shadow:
-        0 20px 35px
-        rgba(120,20,70,.2);
-}
+        const x =
+            (Math.random() - 0.5) *
+            420;
 
-.gift-ribbon {
-    position: absolute;
+        const y =
+            -80 -
+            Math.random() *
+            320;
 
-    left: 50%;
 
-    transform:
-        translateX(-50%);
+        item.animate(
+            [
 
-    width: 30px;
-    height: 100%;
+                {
+                    transform:
+                        "translate(-50%,-50%) scale(.2)",
 
-    background:
-        #ffd0e5;
-}
+                    opacity: 0
+                },
 
-.gift-lid {
-    position: absolute;
+                {
+                    transform:
+                        "translate(-50%,-50%) scale(1.2)",
 
-    top: 10px;
-    left: 0;
+                    opacity: 1
+                },
 
-    width: 190px;
-    height: 48px;
+                {
+                    transform:
+                        `translate(
+                            calc(-50% + ${x}px),
+                            calc(-50% + ${y}px)
+                        )
+                        rotate(360deg)
+                        scale(.6)`,
 
-    background:
-        linear-gradient(
-            135deg,
-            #ff78b4,
-            #f14e96
+                    opacity: 0
+                }
+
+            ],
+            {
+
+                duration:
+                    1300 +
+                    Math.random() *
+                    900,
+
+                easing:
+                    "cubic-bezier(.2,.8,.3,1)"
+
+            }
         );
 
-    border-radius: 8px;
 
-    transition:
-        transform .8s
-        cubic-bezier(.2,.8,.3,1);
+        setTimeout(() => {
 
-    z-index: 4;
+            item.remove();
 
-    box-shadow:
-        0 8px 15px
-        rgba(100,20,60,.15);
-}
+        }, 2300);
 
-.lid-ribbon {
-    position: absolute;
-
-    left: 50%;
-
-    transform:
-        translateX(-50%);
-
-    width: 30px;
-    height: 100%;
-
-    background:
-        #ffd0e5;
-}
-
-.gift-bow {
-    position: absolute;
-
-    left: 50%;
-    top: -48px;
-
-    transform:
-        translateX(-50%);
-
-    font-size: 55px;
-
-    z-index: 5;
-
-    transition:
-        transform .8s;
-}
-
-.gift.shake {
-    animation:
-        giftShake
-        .12s
-        infinite;
-}
-
-@keyframes giftShake {
-
-    0% {
-        transform:
-            rotate(0);
     }
 
-    25% {
-        transform:
-            rotate(-4deg);
-    }
-
-    50% {
-        transform:
-            rotate(4deg);
-    }
-
-    75% {
-        transform:
-            rotate(-3deg);
-    }
-
-    100% {
-        transform:
-            rotate(0);
-    }
-}
-
-.gift.open .gift-lid {
-    transform:
-        translateY(-95px)
-        rotate(-8deg);
-}
-
-.gift.open .gift-bow {
-    transform:
-        translateX(-50%)
-        translateY(-90px)
-        rotate(-10deg);
-}
-
-.gift-heart {
-    position: fixed;
-
-    pointer-events: none;
-
-    z-index: 1000000;
-
-    font-size: 22px;
 }
 
 
@@ -1322,83 +752,104 @@ body {
    📖 POÈME
 ========================================= */
 
-.poem-scene {
-    position: fixed;
+function startTypingPoem() {
 
-    inset: 0;
+    const paragraphs =
+        poem.querySelectorAll("p");
 
-    display: none;
 
-    justify-content: center;
-    align-items: center;
+    paragraphs.forEach(
+        paragraph => {
 
-    padding: 20px;
+            paragraph.style.display =
+                "none";
 
-    background:
-        rgba(255,130,190,.25);
+        }
+    );
 
-    backdrop-filter:
-        blur(12px);
 
-    z-index: 3600;
-}
+    let paragraphIndex = 0;
 
-.poem-scene.active {
-    display: flex;
 
-    animation:
-        appear .5s ease;
-}
+    function typeParagraph() {
 
-.poem-box {
-    width:
-        min(90%, 650px);
+        if (
+            paragraphIndex >=
+            paragraphs.length
+        ) {
 
-    max-height: 90vh;
+            revealBtn.style.display =
+                "inline-block";
 
-    overflow-y: auto;
+            return;
 
-    padding:
-        40px 30px;
+        }
 
-    text-align: center;
 
-    border-radius: 35px;
+        const paragraph =
+            paragraphs[
+                paragraphIndex
+            ];
 
-    background:
-        rgba(255,255,255,.96);
 
-    box-shadow:
-        0 25px 70px
-        rgba(100,30,80,.25);
-}
+        const originalText =
+            paragraph.textContent.trim();
 
-.poem-heart {
-    font-size: 65px;
 
-    animation:
-        heartBeat
-        1.5s
-        infinite;
-}
+        paragraph.textContent =
+            "";
 
-.poem-box h1 {
-    color:
-        #e84791;
+        paragraph.style.display =
+            "block";
 
-    margin:
-        10px 0 25px;
-}
+        paragraph.style.opacity =
+            "1";
 
-.poem p {
-    color:
-        #71405a;
 
-    font-size: 18px;
+        let charIndex = 0;
 
-    line-height: 1.7;
 
-    margin-bottom: 22px;
+        const interval =
+            setInterval(() => {
+
+                paragraph.textContent +=
+                    originalText[
+                        charIndex
+                    ];
+
+                charIndex++;
+
+
+                if (
+                    charIndex >=
+                    originalText.length
+                ) {
+
+                    clearInterval(
+                        interval
+                    );
+
+                    paragraphIndex++;
+
+
+                    setTimeout(
+                        typeParagraph,
+                        900
+                    );
+
+                }
+
+            }, 32);
+
+    }
+
+
+    revealBtn.style.display =
+        "none";
+
+
+    typeParagraph();
+
 }
 
 
@@ -1406,712 +857,788 @@ body {
    🌙 TRANSITION
 ========================================= */
 
-.transition-scene {
-    position: fixed;
+if (revealBtn) {
 
-    inset: 0;
+    revealBtn.addEventListener(
+        "click",
+        () => {
 
-    display: none;
+            resetWaitingTimer();
 
-    justify-content: center;
-    align-items: center;
+            poemScene.classList.remove(
+                "active"
+            );
 
-    background:
-        rgba(25,20,50,.9);
+            game.classList.add(
+                "calm"
+            );
 
-    z-index: 6000;
-}
+            transitionScene.classList.add(
+                "active"
+            );
 
-.transition-scene.active {
-    display: flex;
+            transitionText.textContent =
+                "Bon... j'ai une dernière petite question 😳💗";
 
-    animation:
-        appear 1s ease;
-}
 
-.transition-content {
-    text-align: center;
+            showCat(
+                "Bon... j'ai une dernière petite question 😳💗",
+                "gene"
+            );
 
-    color: white;
 
-    font-size: 30px;
+            setTimeout(() => {
 
-    padding: 20px;
-}
+                transitionScene.classList.remove(
+                    "active"
+                );
 
-.transition-stars {
-    font-size: 35px;
+                questionFinale.classList.add(
+                    "active"
+                );
 
-    margin-bottom: 25px;
+                showCat(
+                    "Voilà... 😳💗",
+                    "gene"
+                );
 
-    animation:
-        twinkle
-        2s
-        infinite alternate;
-}
+                createSparkles(20);
 
-#transitionText {
-    opacity: 0;
+            }, 4000);
 
-    animation:
-        fadeText
-        2s
-        forwards;
-}
+        }
+    );
 
-@keyframes fadeText {
-
-    to {
-        opacity: 1;
-    }
 }
 
 
 /* =========================================
-   💗 QUESTION FINALE
+   ❌ NON FINAL
 ========================================= */
 
-.final-question {
-    position: fixed;
+let finalNoClicks = 0;
 
-    inset: 0;
 
-    display: none;
+const finalNoMessages = [
 
-    justify-content: center;
-    align-items: center;
+    "Oh... 🥺",
 
-    background:
-        rgba(60,40,80,.45);
+    "Je comprends 💗",
 
-    backdrop-filter:
-        blur(15px);
+    "Le petit chat est un peu surpris... 🐱",
 
-    z-index: 3700;
-}
+    "Pas de pression 🌸",
 
-.final-question.active {
-    display: flex;
+    "Le plus important est d'être sincère 💕",
 
-    animation:
-        appear .7s ease;
-}
+    "Merci quand même d'avoir regardé ma surprise 🌷"
 
-.final-question-box {
-    width:
-        min(90%, 550px);
+];
 
-    padding:
-        40px 25px;
 
-    text-align: center;
+if (finalNo) {
 
-    border-radius: 35px;
+    finalNo.addEventListener(
+        "click",
+        () => {
 
-    background:
-        rgba(255,255,255,.96);
+            finalNoClicks++;
 
-    box-shadow:
-        0 30px 80px
-        rgba(30,20,50,.3);
-}
+            resetWaitingTimer();
 
-.final-question-heart {
-    font-size: 70px;
 
-    animation:
-        heartBeat
-        1.5s
-        infinite;
-}
+            const noScale =
+                Math.max(
+                    0.65,
+                    1 - finalNoClicks * 0.05
+                );
 
-.final-question-box h1 {
-    color:
-        #e84791;
 
-    font-size: 36px;
-}
+            const yesScale =
+                Math.min(
+                    1.35,
+                    1 + finalNoClicks * 0.05
+                );
 
-.final-question-box p {
-    color:
-        #8d3869;
 
-    margin:
-        12px 0;
-}
+            finalNo.style.transform =
+                `scale(${noScale})`;
 
-.final-question-box h2 {
-    color:
-        #71405a;
+            finalYes.style.transform =
+                `scale(${yesScale})`;
 
-    font-size:
-        clamp(24px,5vw,36px);
 
-    margin:
-        20px 0;
+            const message =
+                finalNoMessages[
+                    Math.min(
+                        finalNoClicks - 1,
+                        finalNoMessages.length - 1
+                    )
+                ];
+
+
+            finalNoMessage.textContent =
+                message;
+
+            finalNoMessage.classList.add(
+                "show"
+            );
+
+
+            showCat(
+                message,
+                "triste"
+            );
+
+
+            createPetals(8);
+
+        }
+    );
+
 }
 
 
 /* =========================================
-   💌 ENVELOPPE
-   VERSION CORRIGÉE
+   💗 OUI FINAL
 ========================================= */
 
-.envelope-scene {
-    position: fixed;
+if (finalYes) {
 
-    inset: 0;
+    finalYes.addEventListener(
+        "click",
+        () => {
 
-    display: none;
+            resetWaitingTimer();
 
-    flex-direction: column;
+            /*
+             * Ouvre le Google Form
+             * avec "Oui" déjà sélectionné.
+             */
+            sendYesToGoogleForm();
 
-    justify-content: center;
-    align-items: center;
 
-    background:
-        linear-gradient(
-            135deg,
-            #ffd4e8,
-            #fff1f8
+            questionFinale.classList.remove(
+                "active"
+            );
+
+            game.classList.remove(
+                "calm"
+            );
+
+            envelopeScene.classList.add(
+                "active"
+            );
+
+
+            showCat(
+                "J'ai encore une petite chose pour toi 💗",
+                "heureux"
+            );
+
+
+            createCelebration();
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   💌 OUVRIR ENVELOPPE
+========================================= */
+
+if (envelope) {
+
+    envelope.addEventListener(
+        "click",
+        () => {
+
+            if (
+                envelope.classList.contains(
+                    "open"
+                )
+            ) {
+
+                return;
+
+            }
+
+
+            envelope.classList.add(
+                "open"
+            );
+
+
+            showCat(
+                "Une dernière petite surprise... 💗",
+                "heureux"
+            );
+
+
+            setTimeout(() => {
+
+                typeLetter();
+
+            }, 900);
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   💌 MESSAGE DE LA LETTRE
+========================================= */
+
+function typeLetter() {
+
+    const message =
+        "Merci d'avoir pris le temps de regarder toute cette petite surprise. 🌸\n\n" +
+        "J'espère simplement qu'elle t'aura fait sourire. 💗\n\n" +
+        "Peu importe ta réponse, le plus important est qu'elle soit sincère. 😊";
+
+
+    letterText.textContent =
+        "";
+
+
+    let index = 0;
+
+
+    const interval =
+        setInterval(() => {
+
+            letterText.textContent +=
+                message[index];
+
+            index++;
+
+
+            if (
+                index >=
+                message.length
+            ) {
+
+                clearInterval(
+                    interval
+                );
+
+
+                setTimeout(() => {
+
+                    envelopeScene.classList.remove(
+                        "active"
+                    );
+
+                    revealScene.classList.add(
+                        "active"
+                    );
+
+
+                    showCat(
+                        "Merci beaucoup ! 😸💗",
+                        "heureux"
+                    );
+
+
+                    createCelebration();
+
+                }, 2500);
+
+            }
+
+        }, 25);
+
+}
+
+
+/* =========================================
+   📱 INSTAGRAM
+========================================= */
+
+if (instagramBtn) {
+
+    instagramBtn.addEventListener(
+        "click",
+        () => {
+
+            window.open(
+                "https://www.instagram.com/bindjinoj/",
+                "_blank"
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   🔄 RECOMMENCER
+========================================= */
+
+if (restart) {
+
+    restart.addEventListener(
+        "click",
+        () => {
+
+            location.reload();
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   ⭐ ÉTOILES
+========================================= */
+
+function createStars() {
+
+    for (
+        let i = 0;
+        i < 80;
+        i++
+    ) {
+
+        const star =
+            document.createElement(
+                "div"
+            );
+
+        star.className =
+            "star";
+
+        star.style.left =
+            Math.random() *
+            100 +
+            "%";
+
+        star.style.top =
+            Math.random() *
+            80 +
+            "%";
+
+        star.style.animationDelay =
+            Math.random() *
+            3 +
+            "s";
+
+        stars.appendChild(
+            star
         );
 
-    z-index: 5000;
+    }
 
-    overflow: visible;
 }
 
-.envelope-scene.active {
-    display: flex;
 
-    animation:
-        appear .7s ease;
-}
+createStars();
 
 
 /* =========================================
-   ✉️ ENVELOPPE
+   🌷 FLEURS
 ========================================= */
 
-.envelope {
-    position: relative;
+function createFlowers() {
 
-    width: 320px;
-    height: 220px;
+    const types = [
 
-    cursor: pointer;
+        "🌸",
+        "🌷",
+        "🌼",
+        "🌺"
 
-    perspective: 1000px;
-
-    /*
-       Important :
-       permet à la lettre de sortir
-       complètement de l'enveloppe.
-    */
-    overflow: visible;
-
-    margin-top: 80px;
-}
+    ];
 
 
-/* =========================================
-   ✉️ DOS
-========================================= */
+    for (
+        let i = 0;
+        i < 25;
+        i++
+    ) {
 
-.envelope-back {
-    position: absolute;
+        const flower =
+            document.createElement(
+                "div"
+            );
 
-    inset: 0;
+        flower.className =
+            "flower";
 
-    background:
-        #f58bb8;
+        flower.textContent =
+            types[
+                Math.floor(
+                    Math.random() *
+                    types.length
+                )
+            ];
 
-    border-radius: 8px;
+        flower.style.left =
+            Math.random() *
+            100 +
+            "%";
 
-    box-shadow:
-        0 25px 50px
-        rgba(100,30,80,.25);
+        flower.style.animationDelay =
+            Math.random() *
+            2 +
+            "s";
 
-    z-index: 1;
-}
-
-
-/* =========================================
-   📜 PAPIER
-========================================= */
-
-.envelope-paper {
-    position: absolute;
-
-    left: 15px;
-    right: 15px;
-
-    bottom: 10px;
-
-    /*
-       Papier plus grand.
-    */
-    height: 210px;
-
-    padding:
-        28px 25px;
-
-    background:
-        #fffdf9;
-
-    border-radius: 8px;
-
-    transform:
-        translateY(0);
-
-    transition:
-        transform 1s cubic-bezier(.2,.8,.3,1);
-
-    /*
-       Le papier est devant
-       l'arrière de l'enveloppe.
-    */
-    z-index: 7;
-
-    overflow: visible;
-
-    box-shadow:
-        0 10px 25px
-        rgba(0,0,0,.12);
-}
-
-
-/*
-   Quand la lettre sort,
-   elle monte beaucoup plus haut.
-*/
-
-.envelope.open .envelope-paper {
-
-    transform:
-        translateY(-245px)
-        scale(1.03);
-
-    z-index: 20;
-}
-
-
-/* =========================================
-   📝 TEXTE DE LA LETTRE
-========================================= */
-
-.letter-text {
-    position: relative;
-
-    width: 100%;
-
-    color:
-        #71405a;
-
-    font-size: 17px;
-
-    line-height: 1.65;
-
-    text-align: center;
-
-    white-space: pre-line;
-
-    z-index: 30;
-
-    padding:
-        5px 5px 15px;
-
-    /*
-       Le texte reste toujours
-       au-dessus du papier.
-    */
-    opacity: 1;
-
-    overflow: visible;
-
-    word-wrap: break-word;
-}
-
-
-/* =========================================
-   ✉️ AVANT DE L'ENVELOPPE
-========================================= */
-
-.envelope-front {
-    position: absolute;
-
-    inset: 0;
-
-    background:
-        #ff9ac4;
-
-    clip-path:
-        polygon(
-            0 45%,
-            50% 100%,
-            100% 45%,
-            100% 100%,
-            0 100%
+        flowers.appendChild(
+            flower
         );
 
-    z-index: 4;
+    }
 
-    transition:
-        opacity .5s;
 }
 
 
-/*
-   Quand la lettre sort,
-   l'avant passe derrière.
-*/
-
-.envelope.open .envelope-front {
-    z-index: 2;
-}
+createFlowers();
 
 
 /* =========================================
-   🔺 RABAT
+   💕 COEURS QUI TOMBENT
 ========================================= */
 
-.envelope-flap {
-    position: absolute;
+function createHeart() {
 
-    top: 0;
-    left: 0;
-
-    width: 100%;
-    height: 120px;
-
-    background:
-        #ffacd0;
-
-    clip-path:
-        polygon(
-            0 0,
-            100% 0,
-            50% 100%
+    const heart =
+        document.createElement(
+            "div"
         );
 
-    transform-origin:
-        top;
+    heart.className =
+        "heart";
 
-    transition:
-        transform 1s ease;
 
-    z-index: 10;
+    const types = [
+
+        "💗",
+        "💕",
+        "💖",
+        "💓",
+        "🌸"
+
+    ];
+
+
+    heart.textContent =
+        types[
+            Math.floor(
+                Math.random() *
+                types.length
+            )
+        ];
+
+
+    heart.style.left =
+        Math.random() *
+        100 +
+        "%";
+
+
+    heart.style.fontSize =
+        15 +
+        Math.random() *
+        18 +
+        "px";
+
+
+    heart.style.animationDuration =
+        4 +
+        Math.random() *
+        5 +
+        "s";
+
+
+    fallingHearts.appendChild(
+        heart
+    );
+
+
+    setTimeout(() => {
+
+        heart.remove();
+
+    }, 9000);
+
 }
 
 
-/*
-   Le rabat s'ouvre.
-*/
+setInterval(
+    createHeart,
+    800
+);
 
-.envelope.open .envelope-flap {
 
-    transform:
-        rotateX(180deg);
+/* =========================================
+   ✨ PARTICULES LUMINEUSES
+========================================= */
 
-    z-index: 1;
+function createSparkles(
+    amount = 15
+) {
+
+    const symbols = [
+
+        "✨",
+        "⭐",
+        "💫",
+        "🌟"
+
+    ];
+
+
+    for (
+        let i = 0;
+        i < amount;
+        i++
+    ) {
+
+        setTimeout(() => {
+
+            const sparkle =
+                document.createElement(
+                    "div"
+                );
+
+            sparkle.className =
+                "sparkle";
+
+            sparkle.textContent =
+                symbols[
+                    Math.floor(
+                        Math.random() *
+                        symbols.length
+                    )
+                ];
+
+            sparkle.style.left =
+                Math.random() *
+                100 +
+                "vw";
+
+            sparkle.style.top =
+                Math.random() *
+                100 +
+                "vh";
+
+
+            particles.appendChild(
+                sparkle
+            );
+
+
+            setTimeout(() => {
+
+                sparkle.remove();
+
+            }, 1600);
+
+        }, i * 60);
+
+    }
+
 }
 
 
 /* =========================================
-   💗 COEUR
+   🌸 PÉTALES
 ========================================= */
 
-.envelope-heart {
-    position: absolute;
+function createPetals(
+    amount = 15
+) {
 
-    left: 50%;
-    top: 50%;
+    const petals = [
 
-    transform:
-        translate(-50%,-50%);
+        "🌸",
+        "🌷",
+        "🌺",
+        "💕"
 
-    font-size: 40px;
+    ];
 
-    z-index: 12;
 
-    transition:
-        opacity .3s,
-        transform .4s;
-}
+    for (
+        let i = 0;
+        i < amount;
+        i++
+    ) {
 
-.envelope.open .envelope-heart {
-    opacity: 0;
+        const petal =
+            document.createElement(
+                "div"
+            );
 
-    transform:
-        translate(-50%,-50%)
-        scale(.5);
+        petal.className =
+            "sparkle";
+
+        petal.textContent =
+            petals[
+                Math.floor(
+                    Math.random() *
+                    petals.length
+                )
+            ];
+
+
+        petal.style.left =
+            Math.random() *
+            100 +
+            "vw";
+
+
+        petal.style.top =
+            70 +
+            Math.random() *
+            20 +
+            "vh";
+
+
+        particles.appendChild(
+            petal
+        );
+
+
+        setTimeout(() => {
+
+            petal.remove();
+
+        }, 1600);
+
+    }
+
 }
 
 
 /* =========================================
-   💌 INDICATION
+   🎉 CÉLÉBRATION
 ========================================= */
 
-.envelope-hint {
-    margin-top: 65px;
+function createCelebration() {
 
-    color:
-        #8d3869;
+    const items = [
 
-    font-weight: bold;
+        "💗",
+        "💕",
+        "💖",
+        "✨",
+        "🌸",
+        "🌷"
 
-    font-size: 17px;
-
-    transition:
-        opacity .5s;
-}
-
-.envelope.open + .envelope-hint {
-    opacity: 0;
-}
+    ];
 
 
-/* =========================================
-   💌 PETITS COEURS AUTOUR
-========================================= */
+    for (
+        let i = 0;
+        i < 45;
+        i++
+    ) {
 
-.envelope-scene::before,
-.envelope-scene::after {
-    content: "💗";
+        const item =
+            document.createElement(
+                "div"
+            );
 
-    position: absolute;
 
-    font-size: 30px;
+        item.textContent =
+            items[
+                Math.floor(
+                    Math.random() *
+                    items.length
+                )
+            ];
 
-    opacity: .6;
 
-    animation:
-        envelopeHeartFloat
-        3s
-        ease-in-out
-        infinite
-        alternate;
-}
+        item.style.position =
+            "fixed";
 
-.envelope-scene::before {
-    left: 20%;
-    top: 30%;
-}
+        item.style.left =
+            "50%";
 
-.envelope-scene::after {
-    right: 20%;
-    top: 55%;
+        item.style.top =
+            "50%";
 
-    animation-delay:
-        1s;
-}
+        item.style.fontSize =
+            "25px";
 
-@keyframes envelopeHeartFloat {
+        item.style.zIndex =
+            "999999";
 
-    from {
-        transform:
-            translateY(0)
-            rotate(-8deg);
+        item.style.pointerEvents =
+            "none";
 
-        opacity: .4;
+
+        const x =
+            (Math.random() - 0.5) *
+            800;
+
+        const y =
+            (Math.random() - 0.5) *
+            650;
+
+
+        item.animate(
+            [
+
+                {
+                    transform:
+                        "translate(-50%,-50%) scale(.2)",
+
+                    opacity: 0
+                },
+
+                {
+                    transform:
+                        "translate(-50%,-50%) scale(1.2)",
+
+                    opacity: 1
+                },
+
+                {
+                    transform:
+                        `translate(
+                            calc(-50% + ${x}px),
+                            calc(-50% + ${y}px)
+                        )
+                        rotate(360deg)
+                        scale(.5)`,
+
+                    opacity: 0
+                }
+
+            ],
+            {
+
+                duration:
+                    1500 +
+                    Math.random() *
+                    1000,
+
+                easing:
+                    "ease-out"
+
+            }
+        );
+
+
+        document.body.appendChild(
+            item
+        );
+
+
+        setTimeout(() => {
+
+            item.remove();
+
+        }, 2600);
+
     }
 
-    to {
-        transform:
-            translateY(-18px)
-            rotate(8deg);
-
-        opacity: .8;
-    }
-}
-
-
-/* =========================================
-   🎉 FIN
-========================================= */
-
-.reveal-scene {
-    position: fixed;
-
-    inset: 0;
-
-    display: none;
-
-    justify-content: center;
-    align-items: center;
-
-    padding: 20px;
-
-    background:
-        rgba(255,120,190,.3);
-
-    backdrop-filter:
-        blur(14px);
-
-    z-index: 7000;
-}
-
-.reveal-scene.active {
-    display: flex;
-
-    animation:
-        appear .5s ease;
-}
-
-.reveal-box {
-    width:
-        min(90%,550px);
-
-    padding:
-        40px 25px;
-
-    text-align: center;
-
-    border-radius: 35px;
-
-    background:
-        rgba(255,255,255,.96);
-
-    box-shadow:
-        0 25px 70px
-        rgba(100,30,80,.2);
-}
-
-.reveal-heart {
-    font-size: 80px;
-
-    animation:
-        heartBeat
-        1s
-        infinite;
-}
-
-.reveal-box h1 {
-    color:
-        #e84791;
-
-    font-size: 45px;
-
-    margin:
-        15px 0;
-}
-
-.reveal-box p {
-    color:
-        #71405a;
-
-    font-size: 18px;
-
-    line-height: 1.5;
-}
-
-
-/* =========================================
-   ✨ ANIMATIONS
-========================================= */
-
-@keyframes appear {
-
-    from {
-        opacity: 0;
-
-        transform:
-            scale(.95);
-    }
-
-    to {
-        opacity: 1;
-
-        transform:
-            scale(1);
-    }
-}
-
-@keyframes heartBeat {
-
-    50% {
-        transform:
-            scale(1.15);
-    }
-}
-
-
-/* =========================================
-   📱 MOBILE
-========================================= */
-
-@media (max-width:600px) {
-
-    #catContainer {
-        right: 5px;
-        bottom: 5px;
-
-        transform:
-            scale(.85);
-
-        transform-origin:
-            bottom right;
-    }
-
-    .character-message {
-        width: 160px;
-
-        font-size: 12px;
-    }
-
-    .gift {
-        transform:
-            scale(.85);
-    }
-
-    .gift-title {
-        font-size: 25px;
-    }
-
-    .envelope {
-        width: 300px;
-        height: 205px;
-
-        transform:
-            scale(.82);
-
-        margin-top: 80px;
-    }
-
-    .envelope.open .envelope-paper {
-        transform:
-            translateY(-250px)
-            scale(1.03);
-    }
-
-    .envelope-paper {
-        height: 215px;
-
-        padding:
-            25px 20px;
-    }
-
-    .letter-text {
-        font-size: 16px;
-
-        line-height: 1.55;
-    }
-
-    .envelope-hint {
-        margin-top: 55px;
-    }
-
-    .poem p {
-        font-size: 16px;
-    }
-
-    .mystery-box {
-        padding:
-            30px 20px;
-    }
-
-    .final-question-box {
-        padding:
-            30px 20px;
-    }
 }
