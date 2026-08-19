@@ -3,12 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Une petite surprise 💗</title>
 
     <link rel="stylesheet" href="style.css">
@@ -18,10 +13,7 @@
 
 <div id="game">
 
-    <!-- =========================================
-         🌅 DÉCOR
-    ========================================== -->
-
+    <!-- 🌅 DÉCOR -->
     <div id="sky"></div>
     <div id="stars"></div>
     <div id="fallingHearts"></div>
@@ -38,31 +30,16 @@
         <div class="mountain mountain3"></div>
     </div>
 
+    <!-- 🎵 MUSIQUE -->
+    <audio id="backgroundMusic" src="ambiance.mp3" loop></audio>
 
-    <!-- =========================================
-         🎵 MUSIQUE
-    ========================================== -->
-
-    <audio
-        id="backgroundMusic"
-        src="ambiance.mp3"
-        loop>
-    </audio>
-
-    <button
-        id="musicButton"
-        class="music-button">
+    <button id="musicButton" class="music-button">
         🔊
     </button>
 
 
-    <!-- =========================================
-         🎬 INTRO
-    ========================================== -->
-
-    <div
-        id="startScreen"
-        class="start-screen">
+    <!-- 🎬 INTRO -->
+    <div id="startScreen" class="start-screen">
 
         <div class="start-box">
 
@@ -80,12 +57,10 @@
 
             <p>
                 J'ai préparé quelque chose
-                de spécial...
+                de spécial pour toi...
             </p>
 
-            <button
-                id="startBtn"
-                class="start-button">
+            <button id="startBtn" class="start-button">
                 Commencer 💗
             </button>
 
@@ -94,13 +69,8 @@
     </div>
 
 
-    <!-- =========================================
-         🌸 ÉTAPE 1
-    ========================================== -->
-
-    <div
-        id="step1"
-        class="mystery-screen">
+    <!-- 🌸 ÉTAPE 1 -->
+    <div id="step1" class="mystery-screen">
 
         <div class="mystery-box">
 
@@ -123,9 +93,7 @@
                 de différent 🌷
             </p>
 
-            <button
-                id="next1"
-                class="next-button">
+            <button id="next1" class="next-button">
                 Continuer 🌸
             </button>
 
@@ -134,13 +102,8 @@
     </div>
 
 
-    <!-- =========================================
-         🌷 ÉTAPE 2
-    ========================================== -->
-
-    <div
-        id="step2"
-        class="mystery-screen">
+    <!-- 🌷 ÉTAPE 2 -->
+    <div id="step2" class="mystery-screen">
 
         <div class="mystery-box">
 
@@ -163,9 +126,7 @@
                 une pour toi 💕
             </p>
 
-            <button
-                id="next2"
-                class="next-button">
+            <button id="next2" class="next-button">
                 Continuer 💕
             </button>
 
@@ -174,13 +135,8 @@
     </div>
 
 
-    <!-- =========================================
-         ❓ PREMIÈRE QUESTION
-    ========================================== -->
-
-    <div
-        id="step3"
-        class="mystery-screen">
+    <!-- ❓ PREMIÈRE QUESTION -->
+    <div id="step3" class="mystery-screen">
 
         <div class="mystery-box">
 
@@ -199,58 +155,42 @@
 
             <div class="buttons">
 
-                <button
-                    id="yesBtn"
-                    class="yes">
+                <button id="yesBtn" class="yes">
                     Oui 💗
                 </button>
 
-                <button
-                    id="noBtn"
-                    class="no">
+                <button id="noBtn" class="no">
                     Non 🌷
                 </button>
 
             </div>
 
-            <div
-                id="noMessage"
-                class="no-message">
-            </div>
+            <div id="noMessage" class="no-message"></div>
 
         </div>
 
     </div>
 
 
-    <!-- =========================================
-         🐱 CHAT
-    ========================================== -->
-
+    <!-- 🐱 CHAT -->
     <div id="catContainer">
 
-        <div
-            id="catCharacter"
-            class="cat-character">
+        <div id="catCharacter" class="cat-character">
 
             <div class="cat-ear cat-ear-left"></div>
             <div class="cat-ear cat-ear-right"></div>
 
             <div class="cat-face">
 
-                <div
-                    id="catEyeLeft"
-                    class="cat-eye left-eye">
+                <div id="catEyeLeft" class="cat-eye left-eye">
+                    ^
                 </div>
 
-                <div
-                    id="catEyeRight"
-                    class="cat-eye right-eye">
+                <div id="catEyeRight" class="cat-eye right-eye">
+                    ^
                 </div>
 
-                <div
-                    id="catMouth"
-                    class="cat-mouth">
+                <div id="catMouth" class="cat-mouth">
                     ◡
                 </div>
 
@@ -261,31 +201,21 @@
             </div>
 
             <div class="cat-body"></div>
-
             <div class="cat-tail"></div>
 
         </div>
 
-        <div
-            id="characterMessage"
-            class="character-message">
+        <div id="characterMessage" class="character-message">
             Coucou 🐱💗
         </div>
 
     </div>
 
 
-    <!-- =========================================
-         🎁 CADEAU
-    ========================================== -->
+    <!-- 🎁 CADEAU -->
+    <div id="giftScene" class="gift-scene">
 
-    <div
-        id="giftScene"
-        class="gift-scene">
-
-        <div
-            id="giftMessage"
-            class="gift-message">
+        <div id="giftMessage" class="gift-message">
             Regarde ce petit cadeau... 🎁
         </div>
 
@@ -293,14 +223,10 @@
             Une petite surprise pour toi
         </div>
 
-        <div
-            id="gift"
-            class="gift">
+        <div id="gift" class="gift">
 
             <div class="gift-bow">
-                <span class="bow-left">
-                    🎀
-                </span>
+                🎀
             </div>
 
             <div class="gift-lid">
@@ -313,22 +239,15 @@
 
         </div>
 
-        <button
-            id="openGift"
-            class="next-button">
+        <button id="openGift" class="next-button">
             Ouvrir le cadeau 🎁
         </button>
 
     </div>
 
 
-    <!-- =========================================
-         📖 POÈME
-    ========================================== -->
-
-    <div
-        id="poemScene"
-        class="poem-scene">
+    <!-- 📖 POÈME -->
+    <div id="poemScene" class="poem-scene">
 
         <div class="poem-box">
 
@@ -340,9 +259,7 @@
                 Un petit poème 🌸
             </h1>
 
-            <div
-                id="poem"
-                class="poem">
+            <div id="poem" class="poem">
 
                 <p>
                     Parmi toutes les personnes
@@ -382,9 +299,7 @@
 
             </div>
 
-            <button
-                id="revealBtn"
-                class="next-button">
+            <button id="revealBtn" class="next-button">
                 Continuer 💗
             </button>
 
@@ -393,13 +308,8 @@
     </div>
 
 
-    <!-- =========================================
-         🌙 TRANSITION
-    ========================================== -->
-
-    <div
-        id="transitionScene"
-        class="transition-scene">
+    <!-- 🌙 TRANSITION -->
+    <div id="transitionScene" class="transition-scene">
 
         <div class="transition-content">
 
@@ -416,13 +326,43 @@
     </div>
 
 
-    <!-- =========================================
-         💗 QUESTION FINALE
-    ========================================== -->
+    <!-- 💌 ENVELOPPE AVANT QUESTION FINALE -->
+    <div id="envelopeScene" class="envelope-scene">
 
-    <div
-        id="questionFinale"
-        class="final-question">
+        <div class="envelope-title">
+            Une dernière petite chose... 💌
+        </div>
+
+        <div id="envelope" class="envelope">
+
+            <div class="envelope-back"></div>
+
+            <div class="envelope-paper">
+
+                <div id="letterText" class="letter-text">
+                </div>
+
+            </div>
+
+            <div class="envelope-front"></div>
+
+            <div class="envelope-flap"></div>
+
+            <div class="envelope-heart">
+                💗
+            </div>
+
+        </div>
+
+        <p class="envelope-hint">
+            Clique sur l'enveloppe 💌
+        </p>
+
+    </div>
+
+
+    <!-- 💗 QUESTION FINALE -->
+    <div id="questionFinale" class="final-question">
 
         <div class="final-question-box">
 
@@ -446,77 +386,25 @@
 
             <div class="final-buttons">
 
-                <button
-                    id="finalYes"
-                    class="final-yes">
+                <button id="finalYes" class="final-yes">
                     Oui 💗
                 </button>
 
-                <button
-                    id="finalNo"
-                    class="final-no">
+                <button id="finalNo" class="final-no">
                     Non 🌷
                 </button>
 
             </div>
 
-            <div
-                id="finalNoMessage"
-                class="final-no-message">
-            </div>
+            <div id="finalNoMessage" class="final-no-message"></div>
 
         </div>
 
     </div>
 
 
-    <!-- =========================================
-         💌 ENVELOPPE
-    ========================================== -->
-
-    <div
-        id="envelopeScene"
-        class="envelope-scene">
-
-        <div
-            id="envelope"
-            class="envelope">
-
-            <div class="envelope-back"></div>
-
-            <div class="envelope-paper">
-
-                <div
-                    id="letterText"
-                    class="letter-text">
-                </div>
-
-            </div>
-
-            <div class="envelope-front"></div>
-
-            <div class="envelope-flap"></div>
-
-            <div class="envelope-heart">
-                💗
-            </div>
-
-        </div>
-
-        <p class="envelope-hint">
-            Clique sur l'enveloppe 💌
-        </p>
-
-    </div>
-
-
-    <!-- =========================================
-         🎉 MESSAGE FINAL
-    ========================================== -->
-
-    <div
-        id="revealScene"
-        class="reveal-scene">
+    <!-- 🎉 FIN -->
+    <div id="revealScene" class="reveal-scene">
 
         <div class="reveal-box">
 
@@ -537,17 +425,13 @@
                 surprise t'aura fait sourire.
             </p>
 
-            <button
-                id="instagramBtn"
-                class="next-button">
+            <button id="instagramBtn" class="next-button">
                 Me répondre sur Instagram 📱
             </button>
 
             <br><br>
 
-            <button
-                id="restart"
-                class="next-button">
+            <button id="restart" class="next-button">
                 Recommencer 🔄
             </button>
 
