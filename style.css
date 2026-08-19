@@ -1,3 +1,7 @@
+/* =====================================================
+   🌸 SURPRISE V2 — STYLE COMPLET
+===================================================== */
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -16,6 +20,10 @@ body {
     background: #ffb6d9;
 }
 
+button {
+    font-family: inherit;
+}
+
 #game {
     position: relative;
     width: 100vw;
@@ -24,9 +32,211 @@ body {
 }
 
 
-/* =========================================
+/* =====================================================
+   🎬 INTRO CINÉMATIQUE
+===================================================== */
+
+.cinematic-intro {
+    position: fixed;
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #21152f,
+            #08050d 70%
+        );
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 999999;
+
+    transition:
+        opacity 1.2s ease,
+        visibility 1.2s ease;
+}
+
+.cinematic-intro.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.intro-content {
+    position: relative;
+
+    text-align: center;
+
+    color: white;
+
+    z-index: 2;
+}
+
+.intro-small {
+    opacity: 0;
+
+    font-size: 16px;
+
+    letter-spacing: 4px;
+
+    animation:
+        introFade 2s ease forwards;
+
+    animation-delay: .5s;
+}
+
+.intro-title {
+    margin-top: 25px;
+
+    font-size:
+        clamp(38px, 8vw, 75px);
+
+    font-weight: bold;
+
+    opacity: 0;
+
+    animation:
+        introTitle 2s ease forwards;
+
+    animation-delay: 1.5s;
+}
+
+.intro-heart {
+    margin-top: 25px;
+
+    font-size:
+        clamp(50px, 10vw, 100px);
+
+    opacity: 0;
+
+    animation:
+        introHeart 2s ease forwards;
+
+    animation-delay: 3s;
+}
+
+.intro-start {
+    margin-top: 35px;
+
+    padding: 15px 32px;
+
+    border: none;
+
+    border-radius: 30px;
+
+    background: #ff67a8;
+
+    color: white;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    opacity: 0;
+
+    animation:
+        introButton 1s ease forwards;
+
+    animation-delay: 4s;
+
+    box-shadow:
+        0 0 30px
+        rgba(255,103,168,.5);
+
+    transition:
+        transform .25s,
+        box-shadow .25s;
+}
+
+.intro-start:hover {
+    transform: scale(1.08);
+
+    box-shadow:
+        0 0 45px
+        rgba(255,103,168,.8);
+}
+
+@keyframes introFade {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes introTitle {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+        filter: blur(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+@keyframes introHeart {
+    from {
+        opacity: 0;
+        transform: scale(.2);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes introButton {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.intro-star {
+    position: absolute;
+
+    width: 3px;
+    height: 3px;
+
+    background: white;
+
+    border-radius: 50%;
+
+    animation:
+        introTwinkle
+        2s
+        infinite
+        alternate;
+}
+
+@keyframes introTwinkle {
+    from {
+        opacity: .2;
+        transform: scale(.5);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1.7);
+    }
+}
+
+
+/* =====================================================
    🌅 CIEL
-========================================= */
+===================================================== */
 
 #sky {
     position: absolute;
@@ -41,33 +251,35 @@ body {
         );
 
     transition:
-        filter 2s,
-        background 2s;
+        background 2s,
+        filter 2s;
 }
 
 #game.calm #sky {
-    filter:
-        brightness(.65)
-        saturate(.7);
-
     background:
         linear-gradient(
             to bottom,
-            #9b8bb8,
-            #c4b5d9,
-            #eadcf0
+            #11142e,
+            #292752,
+            #51416d
         );
+
+    filter:
+        brightness(.9)
+        saturate(.8);
 }
 
 
-/* =========================================
+/* =====================================================
    ⭐ ÉTOILES
-========================================= */
+===================================================== */
 
 #stars {
     position: absolute;
     inset: 0;
+
     pointer-events: none;
+
     z-index: 2;
 }
 
@@ -78,10 +290,14 @@ body {
     height: 4px;
 
     border-radius: 50%;
+
     background: white;
 
     animation:
-        twinkle 2s infinite alternate;
+        twinkle
+        2s
+        infinite
+        alternate;
 }
 
 @keyframes twinkle {
@@ -97,15 +313,71 @@ body {
 }
 
 
-/* =========================================
+/* =====================================================
+   🌌 MODE NUIT
+===================================================== */
+
+.night-overlay {
+    position: absolute;
+    inset: 0;
+
+    pointer-events: none;
+
+    opacity: 0;
+
+    z-index: 5;
+
+    transition:
+        opacity 2s;
+}
+
+#game.night .night-overlay {
+    opacity: 1;
+}
+
+.moon {
+    position: absolute;
+
+    top: 9%;
+    right: 12%;
+
+    font-size: 80px;
+
+    filter:
+        drop-shadow(
+            0 0 25px
+            rgba(255,255,255,.5)
+        );
+}
+
+.night-star {
+    position: absolute;
+
+    width: 3px;
+    height: 3px;
+
+    background: white;
+
+    border-radius: 50%;
+
+    animation:
+        twinkle
+        2s
+        infinite
+        alternate;
+}
+
+
+/* =====================================================
    💕 COEURS
-========================================= */
+===================================================== */
 
 #fallingHearts {
     position: absolute;
     inset: 0;
 
     overflow: hidden;
+
     pointer-events: none;
 
     z-index: 10;
@@ -113,10 +385,13 @@ body {
 
 .heart {
     position: absolute;
+
     top: -50px;
 
     animation:
-        fall linear forwards;
+        fall
+        linear
+        forwards;
 }
 
 @keyframes fall {
@@ -130,16 +405,125 @@ body {
 }
 
 
-/* =========================================
+/* =====================================================
+   💗 COEURS INTERACTIFS
+===================================================== */
+
+.interactive-hearts {
+    position: fixed;
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 2500;
+}
+
+.interactive-heart {
+    position: absolute;
+
+    pointer-events: auto;
+
+    cursor: pointer;
+
+    font-size: 28px;
+
+    animation:
+        interactiveFloat
+        3s
+        ease-in-out
+        infinite alternate;
+
+    transition:
+        transform .25s;
+}
+
+.interactive-heart:hover {
+    transform:
+        scale(1.4)
+        rotate(10deg);
+}
+
+@keyframes interactiveFloat {
+    from {
+        transform:
+            translateY(0);
+    }
+
+    to {
+        transform:
+            translateY(-20px);
+    }
+}
+
+.heart-message {
+    position: fixed;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    padding:
+        18px 25px;
+
+    border-radius: 25px;
+
+    background:
+        rgba(255,255,255,.97);
+
+    color:
+        #a33e73;
+
+    font-weight: bold;
+
+    box-shadow:
+        0 15px 50px
+        rgba(0,0,0,.2);
+
+    z-index: 999999;
+
+    animation:
+        heartMessage
+        1.5s
+        ease forwards;
+}
+
+@keyframes heartMessage {
+    from {
+        opacity: 0;
+        transform:
+            translate(-50%,-50%)
+            scale(.5);
+    }
+
+    20% {
+        opacity: 1;
+        transform:
+            translate(-50%,-50%)
+            scale(1.05);
+    }
+
+    to {
+        opacity: 0;
+        transform:
+            translate(-50%,-80%)
+            scale(.9);
+    }
+}
+
+
+/* =====================================================
    ✨ PARTICULES
-========================================= */
+===================================================== */
 
 #particles {
     position: absolute;
     inset: 0;
 
     pointer-events: none;
-    z-index: 20;
+
+    z-index: 100;
 }
 
 .sparkle {
@@ -157,7 +541,6 @@ body {
 }
 
 @keyframes sparkleAnimation {
-
     0% {
         opacity: 0;
 
@@ -185,9 +568,9 @@ body {
 }
 
 
-/* =========================================
+/* =====================================================
    🌷 FLEURS
-========================================= */
+===================================================== */
 
 #flowers {
     position: absolute;
@@ -218,7 +601,6 @@ body {
 }
 
 @keyframes flowerMove {
-
     from {
         transform: rotate(-8deg);
     }
@@ -229,9 +611,9 @@ body {
 }
 
 
-/* =========================================
+/* =====================================================
    ☁️ NUAGES
-========================================= */
+===================================================== */
 
 .cloud {
     position: absolute;
@@ -296,7 +678,6 @@ body {
 }
 
 @keyframes cloudMove {
-
     from {
         transform: translateX(-250px);
     }
@@ -307,9 +688,9 @@ body {
 }
 
 
-/* =========================================
+/* =====================================================
    🏔️ MONTAGNES
-========================================= */
+===================================================== */
 
 .mountains {
     position: absolute;
@@ -358,9 +739,9 @@ body {
 }
 
 
-/* =========================================
+/* =====================================================
    🎵 MUSIQUE
-========================================= */
+===================================================== */
 
 .music-button {
     position: fixed;
@@ -372,6 +753,7 @@ body {
     height: 50px;
 
     border: none;
+
     border-radius: 50%;
 
     background:
@@ -389,9 +771,9 @@ body {
 }
 
 
-/* =========================================
-   🚪 COMMENCEMENT
-========================================= */
+/* =====================================================
+   🚪 START
+===================================================== */
 
 .start-screen {
     position: fixed;
@@ -418,6 +800,7 @@ body {
 .start-screen.hidden {
     opacity: 0;
     visibility: hidden;
+
     pointer-events: none;
 }
 
@@ -446,15 +829,20 @@ body {
 }
 
 @keyframes startBoxAppear {
-
     from {
         opacity: 0;
-        transform: scale(.8) translateY(30px);
+
+        transform:
+            scale(.8)
+            translateY(30px);
     }
 
     to {
         opacity: 1;
-        transform: scale(1) translateY(0);
+
+        transform:
+            scale(1)
+            translateY(0);
     }
 }
 
@@ -471,7 +859,6 @@ body {
 }
 
 @keyframes catBounce {
-
     to {
         transform:
             translateY(-10px);
@@ -479,13 +866,15 @@ body {
 }
 
 .start-box h1 {
-    color: #d33f82;
+    color:
+        #d33f82;
 
     margin-bottom: 15px;
 }
 
 .start-box p {
-    color: #71405a;
+    color:
+        #71405a;
 
     margin-bottom: 10px;
 
@@ -527,9 +916,9 @@ body {
 }
 
 
-/* =========================================
+/* =====================================================
    🌸 ÉCRANS
-========================================= */
+===================================================== */
 
 .mystery-screen {
     position: fixed;
@@ -553,7 +942,9 @@ body {
     display: flex;
 
     animation:
-        appear .5s ease;
+        appear
+        .5s
+        ease;
 }
 
 .mystery-box {
@@ -582,7 +973,6 @@ body {
 }
 
 @keyframes boxFloat {
-
     50% {
         transform:
             translateY(-5px);
@@ -616,9 +1006,9 @@ body {
 }
 
 
-/* =========================================
+/* =====================================================
    🔘 BOUTONS
-========================================= */
+===================================================== */
 
 .buttons,
 .final-buttons {
@@ -727,8 +1117,7 @@ body {
     opacity: 0;
 
     transition:
-        opacity .3s,
-        transform .3s;
+        opacity .3s;
 }
 
 .no-message.show,
@@ -742,22 +1131,25 @@ body {
 }
 
 @keyframes messageAppear {
-
     from {
         opacity: 0;
-        transform: translateY(8px);
+
+        transform:
+            translateY(8px);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0);
+
+        transform:
+            translateY(0);
     }
 }
 
 
-/* =========================================
+/* =====================================================
    🐱 CHAT
-========================================= */
+===================================================== */
 
 #catContainer {
     display: none;
@@ -785,15 +1177,20 @@ body {
 }
 
 @keyframes catAppear {
-
     from {
         opacity: 0;
-        transform: translateY(20px) scale(.8);
+
+        transform:
+            translateY(20px)
+            scale(.8);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0) scale(1);
+
+        transform:
+            translateY(0)
+            scale(1);
     }
 }
 
@@ -814,7 +1211,6 @@ body {
 }
 
 @keyframes catFloat {
-
     from {
         transform:
             translateY(0);
@@ -880,15 +1276,8 @@ body {
 
     border-radius: 50%;
 
-    color:
-        #382333;
-
-    font-size: 10px;
-
-    text-align: center;
-
     transition:
-        all .25s ease;
+        all .2s;
 }
 
 .left-eye {
@@ -897,6 +1286,14 @@ body {
 
 .right-eye {
     right: 18px;
+}
+
+.cat-blink .cat-eye {
+    height: 2px;
+
+    top: 28px;
+
+    border-radius: 100%;
 }
 
 .cat-mouth {
@@ -912,9 +1309,6 @@ body {
         #603247;
 
     font-size: 18px;
-
-    transition:
-        all .25s ease;
 }
 
 .cat-nose {
@@ -930,6 +1324,25 @@ body {
         #ff6fae;
 
     font-size: 11px;
+}
+
+.cat-cheek {
+    position: absolute;
+
+    top: 37px;
+
+    color:
+        #ff9bc4;
+
+    font-size: 12px;
+}
+
+.left-cheek {
+    left: 7px;
+}
+
+.right-cheek {
+    right: 7px;
 }
 
 .cat-body {
@@ -1002,7 +1415,6 @@ body {
 }
 
 @keyframes bubbleFloat {
-
     to {
         transform:
             translateY(-4px);
@@ -1010,74 +1422,9 @@ body {
 }
 
 
-/* =========================================
-   🐱 EXPRESSIONS VISUELLES
-========================================= */
-
-#catContainer.expression-happy .cat-face {
-    transform: rotate(-2deg);
-}
-
-#catContainer.expression-shy .cat-face {
-    transform: rotate(2deg);
-}
-
-#catContainer.expression-surprised .cat-face {
-    transform: scale(1.05);
-}
-
-#catContainer.expression-excited .cat-character {
-    animation:
-        catExcited
-        .35s
-        infinite alternate;
-}
-
-@keyframes catExcited {
-
-    from {
-        transform:
-            translateY(0)
-            rotate(-3deg);
-    }
-
-    to {
-        transform:
-            translateY(-12px)
-            rotate(3deg);
-    }
-}
-
-#catContainer.expression-tired {
-    opacity: .8;
-}
-
-#catContainer.expression-tired .cat-character {
-    animation:
-        catTired
-        3s
-        ease-in-out
-        infinite;
-}
-
-@keyframes catTired {
-
-    0%,
-    100% {
-        transform:
-            translateY(0);
-    }
-
-    50% {
-        transform:
-            translateY(5px);
-    }
-}
-
-
-/* =========================================
+/* =====================================================
    🎁 CADEAU
-========================================= */
+===================================================== */
 
 .gift-scene {
     position: fixed;
@@ -1124,12 +1471,6 @@ body {
     border-radius: 30px;
 
     font-weight: bold;
-
-    animation:
-        messageFloat
-        2s
-        infinite
-        alternate;
 }
 
 .gift-title {
@@ -1217,14 +1558,9 @@ body {
     border-radius: 8px;
 
     transition:
-        transform .8s
-        cubic-bezier(.2,.8,.3,1);
+        transform .8s;
 
     z-index: 4;
-
-    box-shadow:
-        0 8px 15px
-        rgba(100,20,60,.15);
 }
 
 .lid-ribbon {
@@ -1267,30 +1603,24 @@ body {
 }
 
 @keyframes giftShake {
-
     0% {
-        transform:
-            rotate(0);
+        transform: rotate(0);
     }
 
     25% {
-        transform:
-            rotate(-4deg);
+        transform: rotate(-4deg);
     }
 
     50% {
-        transform:
-            rotate(4deg);
+        transform: rotate(4deg);
     }
 
     75% {
-        transform:
-            rotate(-3deg);
+        transform: rotate(-3deg);
     }
 
     100% {
-        transform:
-            rotate(0);
+        transform: rotate(0);
     }
 }
 
@@ -1317,10 +1647,202 @@ body {
     font-size: 22px;
 }
 
+.gift-progress {
+    display: flex;
 
-/* =========================================
+    gap: 8px;
+
+    margin-top: 25px;
+}
+
+.gift-dot {
+    width: 9px;
+    height: 9px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.5);
+}
+
+.gift-dot.active {
+    background: white;
+
+    transform: scale(1.3);
+}
+
+
+/* =====================================================
+   📸 GALERIE
+===================================================== */
+
+.gallery-scene {
+    position: fixed;
+
+    inset: 0;
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+
+    background:
+        rgba(255,150,200,.3);
+
+    backdrop-filter:
+        blur(14px);
+
+    z-index: 3650;
+}
+
+.gallery-scene.active {
+    display: flex;
+
+    animation:
+        appear .6s ease;
+}
+
+.gallery-box {
+    width:
+        min(95%, 850px);
+
+    max-height: 92vh;
+
+    overflow-y: auto;
+
+    padding:
+        35px 25px;
+
+    text-align: center;
+
+    border-radius: 35px;
+
+    background:
+        rgba(255,255,255,.97);
+
+    box-shadow:
+        0 30px 80px
+        rgba(100,30,80,.25);
+}
+
+.gallery-heart {
+    font-size: 55px;
+}
+
+.gallery-box h1 {
+    color:
+        #e84791;
+
+    margin:
+        10px 0;
+}
+
+.gallery-subtitle {
+    color:
+        #8d3869;
+
+    margin-bottom: 25px;
+}
+
+.gallery {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+}
+
+.memory-card {
+    padding: 10px;
+
+    background: white;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 8px 25px
+        rgba(80,30,60,.12);
+
+    transform:
+        rotate(
+            calc(
+                (var(--rotation, 0) * 1deg)
+            )
+        );
+
+    transition:
+        transform .3s;
+}
+
+.memory-card:nth-child(1) {
+    transform: rotate(-3deg);
+}
+
+.memory-card:nth-child(2) {
+    transform: rotate(2deg);
+}
+
+.memory-card:nth-child(3) {
+    transform: rotate(-1deg);
+}
+
+.memory-card:hover {
+    transform:
+        rotate(0)
+        scale(1.05);
+}
+
+.memory-image {
+    position: relative;
+
+    height: 180px;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffd4e8,
+            #fff0f7
+        );
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.memory-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.image-placeholder {
+    position: absolute;
+
+    font-size: 55px;
+}
+
+.memory-card p {
+    color:
+        #71405a;
+
+    font-weight: bold;
+
+    margin-top: 10px;
+}
+
+
+/* =====================================================
    📖 POÈME
-========================================= */
+===================================================== */
 
 .poem-scene {
     position: fixed;
@@ -1402,9 +1924,9 @@ body {
 }
 
 
-/* =========================================
+/* =====================================================
    🌙 TRANSITION
-========================================= */
+===================================================== */
 
 .transition-scene {
     position: fixed;
@@ -1417,7 +1939,7 @@ body {
     align-items: center;
 
     background:
-        rgba(25,20,50,.9);
+        rgba(5,5,20,.95);
 
     z-index: 6000;
 }
@@ -1447,7 +1969,28 @@ body {
     animation:
         twinkle
         2s
-        infinite alternate;
+        infinite
+        alternate;
+}
+
+.transition-moon {
+    margin-top: 25px;
+
+    font-size: 70px;
+
+    animation:
+        moonFloat
+        3s
+        ease-in-out
+        infinite
+        alternate;
+}
+
+@keyframes moonFloat {
+    to {
+        transform:
+            translateY(-12px);
+    }
 }
 
 #transitionText {
@@ -1460,16 +2003,15 @@ body {
 }
 
 @keyframes fadeText {
-
     to {
         opacity: 1;
     }
 }
 
 
-/* =========================================
+/* =====================================================
    💗 QUESTION FINALE
-========================================= */
+===================================================== */
 
 .final-question {
     position: fixed;
@@ -1482,7 +2024,7 @@ body {
     align-items: center;
 
     background:
-        rgba(60,40,80,.45);
+        rgba(10,10,35,.45);
 
     backdrop-filter:
         blur(15px);
@@ -1552,10 +2094,9 @@ body {
 }
 
 
-/* =========================================
+/* =====================================================
    💌 ENVELOPPE
-   VERSION CORRIGÉE
-========================================= */
+===================================================== */
 
 .envelope-scene {
     position: fixed;
@@ -1572,8 +2113,8 @@ body {
     background:
         linear-gradient(
             135deg,
-            #ffd4e8,
-            #fff1f8
+            #10122e,
+            #302b55
         );
 
     z-index: 5000;
@@ -1588,11 +2129,6 @@ body {
         appear .7s ease;
 }
 
-
-/* =========================================
-   ✉️ ENVELOPPE
-========================================= */
-
 .envelope {
     position: relative;
 
@@ -1603,20 +2139,10 @@ body {
 
     perspective: 1000px;
 
-    /*
-       Important :
-       permet à la lettre de sortir
-       complètement de l'enveloppe.
-    */
     overflow: visible;
 
     margin-top: 80px;
 }
-
-
-/* =========================================
-   ✉️ DOS
-========================================= */
 
 .envelope-back {
     position: absolute;
@@ -1630,15 +2156,10 @@ body {
 
     box-shadow:
         0 25px 50px
-        rgba(100,30,80,.25);
+        rgba(0,0,0,.35);
 
     z-index: 1;
 }
-
-
-/* =========================================
-   📜 PAPIER
-========================================= */
 
 .envelope-paper {
     position: absolute;
@@ -1648,9 +2169,6 @@ body {
 
     bottom: 10px;
 
-    /*
-       Papier plus grand.
-    */
     height: 210px;
 
     padding:
@@ -1665,12 +2183,9 @@ body {
         translateY(0);
 
     transition:
-        transform 1s cubic-bezier(.2,.8,.3,1);
+        transform 1s
+        cubic-bezier(.2,.8,.3,1);
 
-    /*
-       Le papier est devant
-       l'arrière de l'enveloppe.
-    */
     z-index: 7;
 
     overflow: visible;
@@ -1680,14 +2195,7 @@ body {
         rgba(0,0,0,.12);
 }
 
-
-/*
-   Quand la lettre sort,
-   elle monte beaucoup plus haut.
-*/
-
 .envelope.open .envelope-paper {
-
     transform:
         translateY(-245px)
         scale(1.03);
@@ -1695,14 +2203,7 @@ body {
     z-index: 20;
 }
 
-
-/* =========================================
-   📝 TEXTE DE LA LETTRE
-========================================= */
-
 .letter-text {
-    position: relative;
-
     width: 100%;
 
     color:
@@ -1716,26 +2217,8 @@ body {
 
     white-space: pre-line;
 
-    z-index: 30;
-
-    padding:
-        5px 5px 15px;
-
-    /*
-       Le texte reste toujours
-       au-dessus du papier.
-    */
-    opacity: 1;
-
-    overflow: visible;
-
     word-wrap: break-word;
 }
-
-
-/* =========================================
-   ✉️ AVANT DE L'ENVELOPPE
-========================================= */
 
 .envelope-front {
     position: absolute;
@@ -1755,25 +2238,11 @@ body {
         );
 
     z-index: 4;
-
-    transition:
-        opacity .5s;
 }
-
-
-/*
-   Quand la lettre sort,
-   l'avant passe derrière.
-*/
 
 .envelope.open .envelope-front {
     z-index: 2;
 }
-
-
-/* =========================================
-   🔺 RABAT
-========================================= */
 
 .envelope-flap {
     position: absolute;
@@ -1803,23 +2272,12 @@ body {
     z-index: 10;
 }
 
-
-/*
-   Le rabat s'ouvre.
-*/
-
 .envelope.open .envelope-flap {
-
     transform:
         rotateX(180deg);
 
     z-index: 1;
 }
-
-
-/* =========================================
-   💗 COEUR
-========================================= */
 
 .envelope-heart {
     position: absolute;
@@ -1835,100 +2293,27 @@ body {
     z-index: 12;
 
     transition:
-        opacity .3s,
-        transform .4s;
+        opacity .3s;
 }
 
 .envelope.open .envelope-heart {
     opacity: 0;
-
-    transform:
-        translate(-50%,-50%)
-        scale(.5);
 }
-
-
-/* =========================================
-   💌 INDICATION
-========================================= */
 
 .envelope-hint {
     margin-top: 65px;
 
-    color:
-        #8d3869;
+    color: white;
 
     font-weight: bold;
 
     font-size: 17px;
-
-    transition:
-        opacity .5s;
-}
-
-.envelope.open + .envelope-hint {
-    opacity: 0;
 }
 
 
-/* =========================================
-   💌 PETITS COEURS AUTOUR
-========================================= */
-
-.envelope-scene::before,
-.envelope-scene::after {
-    content: "💗";
-
-    position: absolute;
-
-    font-size: 30px;
-
-    opacity: .6;
-
-    animation:
-        envelopeHeartFloat
-        3s
-        ease-in-out
-        infinite
-        alternate;
-}
-
-.envelope-scene::before {
-    left: 20%;
-    top: 30%;
-}
-
-.envelope-scene::after {
-    right: 20%;
-    top: 55%;
-
-    animation-delay:
-        1s;
-}
-
-@keyframes envelopeHeartFloat {
-
-    from {
-        transform:
-            translateY(0)
-            rotate(-8deg);
-
-        opacity: .4;
-    }
-
-    to {
-        transform:
-            translateY(-18px)
-            rotate(8deg);
-
-        opacity: .8;
-    }
-}
-
-
-/* =========================================
+/* =====================================================
    🎉 FIN
-========================================= */
+===================================================== */
 
 .reveal-scene {
     position: fixed;
@@ -1943,7 +2328,7 @@ body {
     padding: 20px;
 
     background:
-        rgba(255,120,190,.3);
+        rgba(20,15,50,.35);
 
     backdrop-filter:
         blur(14px);
@@ -1974,7 +2359,7 @@ body {
 
     box-shadow:
         0 25px 70px
-        rgba(100,30,80,.2);
+        rgba(0,0,0,.25);
 }
 
 .reveal-heart {
@@ -2006,12 +2391,42 @@ body {
 }
 
 
-/* =========================================
+/* =====================================================
+   🎆 FEUX D'ARTIFICE
+===================================================== */
+
+.fireworks {
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 1000000;
+}
+
+.firework-particle {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    font-size: 22px;
+
+    pointer-events: none;
+}
+
+
+/* =====================================================
    ✨ ANIMATIONS
-========================================= */
+===================================================== */
 
 @keyframes appear {
-
     from {
         opacity: 0;
 
@@ -2028,7 +2443,6 @@ body {
 }
 
 @keyframes heartBeat {
-
     50% {
         transform:
             scale(1.15);
@@ -2036,36 +2450,105 @@ body {
 }
 
 
-/* =========================================
+/* =====================================================
    📱 MOBILE
-========================================= */
+===================================================== */
 
-@media (max-width:600px) {
+@media (max-width: 700px) {
+
+    .intro-title {
+        font-size: 42px;
+    }
+
+    .intro-small {
+        font-size: 13px;
+
+        letter-spacing: 2px;
+    }
+
+    .mystery-box {
+        padding:
+            30px 20px;
+    }
+
+    .mystery-box h1 {
+        font-size: 29px;
+    }
+
+    .mystery-box p {
+        font-size: 16px;
+    }
 
     #catContainer {
-        right: 5px;
-        bottom: 5px;
+        right: 4px;
+        bottom: 4px;
 
         transform:
-            scale(.85);
+            scale(.75);
 
         transform-origin:
             bottom right;
     }
 
     .character-message {
-        width: 160px;
+        width: 165px;
 
         font-size: 12px;
     }
 
-    .gift {
-        transform:
-            scale(.85);
-    }
-
     .gift-title {
         font-size: 25px;
+
+        margin-bottom: 35px;
+    }
+
+    .gift {
+        transform:
+            scale(.82);
+    }
+
+    .gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-box {
+        padding:
+            25px 18px;
+
+        max-height: 88vh;
+    }
+
+    .memory-image {
+        height: 150px;
+    }
+
+    .poem-box {
+        padding:
+            30px 20px;
+    }
+
+    .poem p {
+        font-size: 16px;
+    }
+
+    .final-question-box {
+        padding:
+            30px 20px;
+    }
+
+    .final-question-box h1 {
+        font-size: 29px;
+    }
+
+    .final-buttons {
+        gap: 10px;
+    }
+
+    .final-buttons button {
+        padding:
+            13px 20px;
+
+        font-size: 16px;
     }
 
     .envelope {
@@ -2073,9 +2556,9 @@ body {
         height: 205px;
 
         transform:
-            scale(.82);
+            scale(.78);
 
-        margin-top: 80px;
+        margin-top: 70px;
     }
 
     .envelope.open .envelope-paper {
@@ -2084,34 +2567,17 @@ body {
             scale(1.03);
     }
 
-    .envelope-paper {
-        height: 215px;
-
-        padding:
-            25px 20px;
-    }
-
     .letter-text {
-        font-size: 16px;
-
-        line-height: 1.55;
+        font-size: 15px;
     }
 
-    .envelope-hint {
-        margin-top: 55px;
+    .moon {
+        right: 7%;
+
+        font-size: 55px;
     }
 
-    .poem p {
-        font-size: 16px;
-    }
-
-    .mystery-box {
-        padding:
-            30px 20px;
-    }
-
-    .final-question-box {
-        padding:
-            30px 20px;
+    .interactive-heart {
+        font-size: 23px;
     }
 }
