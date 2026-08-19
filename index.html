@@ -19,13 +19,57 @@
 <div id="game">
 
     <!-- =========================================
+         🎬 INTRO CINÉMATIQUE
+    ========================================== -->
+
+    <div id="cinematicIntro" class="cinematic-intro">
+
+        <div id="introStars"></div>
+
+        <div class="intro-content">
+
+            <div class="intro-small">
+                ✨ Une petite surprise ✨
+            </div>
+
+            <div
+                id="introTitle"
+                class="intro-title"
+            >
+                Pour toi...
+            </div>
+
+            <div
+                id="introHeart"
+                class="intro-heart"
+            >
+                💗
+            </div>
+
+            <button
+                id="introStart"
+                class="intro-start"
+            >
+                Découvrir 💕
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
          🌅 DÉCOR
     ========================================== -->
 
     <div id="sky"></div>
+
     <div id="stars"></div>
+
     <div id="fallingHearts"></div>
+
     <div id="flowers"></div>
+
     <div id="particles"></div>
 
     <div class="cloud cloud1"></div>
@@ -33,9 +77,29 @@
     <div class="cloud cloud3"></div>
 
     <div class="mountains">
+
         <div class="mountain mountain1"></div>
         <div class="mountain mountain2"></div>
         <div class="mountain mountain3"></div>
+
+    </div>
+
+
+    <!-- =========================================
+         🌌 MODE NUIT
+    ========================================== -->
+
+    <div
+        id="nightOverlay"
+        class="night-overlay"
+    >
+
+        <div class="moon">
+            🌙
+        </div>
+
+        <div id="nightStars"></div>
+
     </div>
 
 
@@ -53,12 +117,12 @@
         id="musicButton"
         class="music-button"
     >
-        🔊
+        🔇
     </button>
 
 
     <!-- =========================================
-         🚪 COMMENCEMENT
+         🚪 ÉCRAN DE DÉPART
     ========================================== -->
 
     <div
@@ -182,6 +246,16 @@
 
 
     <!-- =========================================
+         💗 CŒURS INTERACTIFS
+    ========================================== -->
+
+    <div
+        id="interactiveHearts"
+        class="interactive-hearts"
+    ></div>
+
+
+    <!-- =========================================
          ❓ PREMIÈRE QUESTION
     ========================================== -->
 
@@ -252,12 +326,16 @@
                 <div
                     id="catEyeLeft"
                     class="cat-eye left-eye"
-                ></div>
+                >
+                    ^
+                </div>
 
                 <div
                     id="catEyeRight"
                     class="cat-eye right-eye"
-                ></div>
+                >
+                    ^
+                </div>
 
                 <div
                     id="catMouth"
@@ -268,6 +346,14 @@
 
                 <div class="cat-nose">
                     ♥
+                </div>
+
+                <div class="cat-cheek left-cheek">
+                    •
+                </div>
+
+                <div class="cat-cheek right-cheek">
+                    •
                 </div>
 
             </div>
@@ -315,7 +401,7 @@
 
             <div class="gift-bow">
 
-                <span class="bow-left">
+                <span>
                     🎀
                 </span>
 
@@ -341,6 +427,118 @@
         >
             Ouvrir le cadeau 🎁
         </button>
+
+        <div
+            id="giftProgress"
+            class="gift-progress"
+        >
+
+            <span class="gift-dot active"></span>
+            <span class="gift-dot"></span>
+            <span class="gift-dot"></span>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         📸 GALERIE
+    ========================================== -->
+
+    <div
+        id="galleryScene"
+        class="gallery-scene"
+    >
+
+        <div class="gallery-box">
+
+            <div class="gallery-heart">
+                💗
+            </div>
+
+            <h1>
+                Quelques petits souvenirs 🌸
+            </h1>
+
+            <p class="gallery-subtitle">
+                Une petite galerie rien que pour toi.
+            </p>
+
+            <div class="gallery">
+
+                <div class="memory-card">
+
+                    <div class="memory-image">
+                        <img
+                            src="images/photo1.jpg"
+                            alt="Souvenir 1"
+                            onerror="this.style.display='none'"
+                        >
+
+                        <span class="image-placeholder">
+                            🌸
+                        </span>
+                    </div>
+
+                    <p>
+                        Un petit moment 💗
+                    </p>
+
+                </div>
+
+
+                <div class="memory-card">
+
+                    <div class="memory-image">
+                        <img
+                            src="images/photo2.jpg"
+                            alt="Souvenir 2"
+                            onerror="this.style.display='none'"
+                        >
+
+                        <span class="image-placeholder">
+                            🌷
+                        </span>
+                    </div>
+
+                    <p>
+                        Un autre souvenir ✨
+                    </p>
+
+                </div>
+
+
+                <div class="memory-card">
+
+                    <div class="memory-image">
+                        <img
+                            src="images/photo3.jpg"
+                            alt="Souvenir 3"
+                            onerror="this.style.display='none'"
+                        >
+
+                        <span class="image-placeholder">
+                            💕
+                        </span>
+                    </div>
+
+                    <p>
+                        Et encore un 💖
+                    </p>
+
+                </div>
+
+            </div>
+
+            <button
+                id="galleryNext"
+                class="next-button"
+            >
+                Continuer 🌸
+            </button>
+
+        </div>
 
     </div>
 
@@ -420,7 +618,7 @@
 
 
     <!-- =========================================
-         🌙 TRANSITION
+         🌙 TRANSITION NUIT
     ========================================== -->
 
     <div
@@ -437,6 +635,13 @@
             <p id="transitionText">
                 Bon...
             </p>
+
+            <div
+                id="transitionMoon"
+                class="transition-moon"
+            >
+                🌙
+            </div>
 
         </div>
 
@@ -543,7 +748,7 @@
 
 
     <!-- =========================================
-         🎉 MESSAGE FINAL
+         🎉 FIN
     ========================================== -->
 
     <div
@@ -590,7 +795,18 @@
 
     </div>
 
+
+    <!-- =========================================
+         🎆 FEUX D'ARTIFICE
+    ========================================== -->
+
+    <div
+        id="fireworks"
+        class="fireworks"
+    ></div>
+
 </div>
+
 
 <script src="script.js"></script>
 
