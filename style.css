@@ -1,0 +1,2117 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #ffb6d9;
+}
+
+#game {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+
+/* =========================================
+   🌅 CIEL
+========================================= */
+
+#sky {
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ff9ecb,
+            #ffd6e9,
+            #fff1f8
+        );
+
+    transition:
+        filter 2s,
+        background 2s;
+}
+
+#game.calm #sky {
+    filter:
+        brightness(.65)
+        saturate(.7);
+
+    background:
+        linear-gradient(
+            to bottom,
+            #9b8bb8,
+            #c4b5d9,
+            #eadcf0
+        );
+}
+
+
+/* =========================================
+   ⭐ ÉTOILES
+========================================= */
+
+#stars {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.star {
+    position: absolute;
+
+    width: 4px;
+    height: 4px;
+
+    border-radius: 50%;
+    background: white;
+
+    animation:
+        twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+    from {
+        opacity: .2;
+        transform: scale(.5);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1.5);
+    }
+}
+
+
+/* =========================================
+   💕 COEURS
+========================================= */
+
+#fallingHearts {
+    position: absolute;
+    inset: 0;
+
+    overflow: hidden;
+    pointer-events: none;
+
+    z-index: 10;
+}
+
+.heart {
+    position: absolute;
+    top: -50px;
+
+    animation:
+        fall linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform:
+            translateY(110vh)
+            rotate(360deg);
+
+        opacity: 0;
+    }
+}
+
+
+/* =========================================
+   ✨ PARTICULES
+========================================= */
+
+#particles {
+    position: absolute;
+    inset: 0;
+
+    pointer-events: none;
+    z-index: 20;
+}
+
+.sparkle {
+    position: fixed;
+
+    pointer-events: none;
+
+    font-size: 18px;
+
+    animation:
+        sparkleAnimation
+        1.5s
+        ease-out
+        forwards;
+}
+
+@keyframes sparkleAnimation {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            scale(.2)
+            rotate(0);
+    }
+
+    40% {
+        opacity: 1;
+
+        transform:
+            scale(1.2)
+            rotate(90deg);
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            scale(.4)
+            rotate(180deg)
+            translateY(-80px);
+    }
+}
+
+
+/* =========================================
+   🌷 FLEURS
+========================================= */
+
+#flowers {
+    position: absolute;
+
+    bottom: 0;
+
+    width: 100%;
+    height: 100px;
+
+    pointer-events: none;
+
+    z-index: 30;
+}
+
+.flower {
+    position: absolute;
+
+    bottom: 15px;
+
+    font-size: 25px;
+
+    animation:
+        flowerMove
+        2s
+        ease-in-out
+        infinite
+        alternate;
+}
+
+@keyframes flowerMove {
+
+    from {
+        transform: rotate(-8deg);
+    }
+
+    to {
+        transform: rotate(8deg);
+    }
+}
+
+
+/* =========================================
+   ☁️ NUAGES
+========================================= */
+
+.cloud {
+    position: absolute;
+
+    width: 160px;
+    height: 50px;
+
+    background:
+        rgba(255,255,255,.7);
+
+    border-radius: 50px;
+
+    animation:
+        cloudMove
+        30s
+        linear
+        infinite;
+
+    z-index: 3;
+}
+
+.cloud::before,
+.cloud::after {
+    content: "";
+
+    position: absolute;
+
+    background: inherit;
+
+    border-radius: 50%;
+}
+
+.cloud::before {
+    width: 70px;
+    height: 70px;
+
+    left: 25px;
+    top: -35px;
+}
+
+.cloud::after {
+    width: 80px;
+    height: 80px;
+
+    right: 20px;
+    top: -40px;
+}
+
+.cloud1 {
+    top: 15%;
+    left: -200px;
+}
+
+.cloud2 {
+    top: 30%;
+    left: -300px;
+}
+
+.cloud3 {
+    top: 8%;
+    left: -400px;
+}
+
+@keyframes cloudMove {
+
+    from {
+        transform: translateX(-250px);
+    }
+
+    to {
+        transform: translateX(130vw);
+    }
+}
+
+
+/* =========================================
+   🏔️ MONTAGNES
+========================================= */
+
+.mountains {
+    position: absolute;
+
+    bottom: 0;
+
+    width: 100%;
+    height: 35%;
+
+    z-index: 4;
+}
+
+.mountain {
+    position: absolute;
+
+    bottom: 0;
+
+    width: 0;
+    height: 0;
+
+    border-left:
+        250px solid transparent;
+
+    border-right:
+        250px solid transparent;
+
+    border-bottom:
+        300px solid
+        rgba(183,130,180,.55);
+}
+
+.mountain1 {
+    left: -100px;
+}
+
+.mountain2 {
+    left: 25%;
+
+    transform: scale(1.2);
+}
+
+.mountain3 {
+    right: -100px;
+
+    transform: scale(.9);
+}
+
+
+/* =========================================
+   🎵 MUSIQUE
+========================================= */
+
+.music-button {
+    position: fixed;
+
+    top: 20px;
+    right: 20px;
+
+    width: 50px;
+    height: 50px;
+
+    border: none;
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.9);
+
+    box-shadow:
+        0 8px 25px
+        rgba(0,0,0,.15);
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+    z-index: 100000;
+}
+
+
+/* =========================================
+   🚪 COMMENCEMENT
+========================================= */
+
+.start-screen {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    background:
+        rgba(255,180,215,.4);
+
+    backdrop-filter:
+        blur(15px);
+
+    z-index: 5000;
+
+    transition:
+        opacity .7s,
+        visibility .7s;
+}
+
+.start-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.start-box {
+    width:
+        min(90%, 450px);
+
+    padding:
+        45px 30px;
+
+    text-align: center;
+
+    border-radius: 35px;
+
+    background:
+        rgba(255,255,255,.96);
+
+    box-shadow:
+        0 30px 80px
+        rgba(100,30,80,.25);
+
+    animation:
+        startBoxAppear
+        .8s
+        ease;
+}
+
+@keyframes startBoxAppear {
+
+    from {
+        opacity: 0;
+        transform: scale(.8) translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.start-cat {
+    font-size: 80px;
+
+    margin-bottom: 15px;
+
+    animation:
+        catBounce
+        2s
+        infinite
+        alternate;
+}
+
+@keyframes catBounce {
+
+    to {
+        transform:
+            translateY(-10px);
+    }
+}
+
+.start-box h1 {
+    color: #d33f82;
+
+    margin-bottom: 15px;
+}
+
+.start-box p {
+    color: #71405a;
+
+    margin-bottom: 10px;
+
+    font-size: 18px;
+}
+
+.start-button {
+    border: none;
+
+    padding:
+        15px 35px;
+
+    border-radius: 30px;
+
+    background:
+        #ff67a8;
+
+    color: white;
+
+    font-size: 19px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    margin-top: 15px;
+
+    transition:
+        transform .25s,
+        box-shadow .25s;
+}
+
+.start-button:hover {
+    transform: scale(1.06);
+
+    box-shadow:
+        0 10px 25px
+        rgba(255,70,160,.35);
+}
+
+
+/* =========================================
+   🌸 ÉCRANS
+========================================= */
+
+.mystery-screen {
+    position: fixed;
+    inset: 0;
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    background:
+        rgba(255,130,190,.25);
+
+    backdrop-filter:
+        blur(10px);
+
+    z-index: 3000;
+}
+
+.mystery-screen.active {
+    display: flex;
+
+    animation:
+        appear .5s ease;
+}
+
+.mystery-box {
+    width:
+        min(90%, 500px);
+
+    padding:
+        40px 30px;
+
+    text-align: center;
+
+    border-radius: 35px;
+
+    background:
+        rgba(255,255,255,.95);
+
+    box-shadow:
+        0 25px 70px
+        rgba(100,30,80,.25);
+
+    animation:
+        boxFloat
+        4s
+        ease-in-out
+        infinite;
+}
+
+@keyframes boxFloat {
+
+    50% {
+        transform:
+            translateY(-5px);
+    }
+}
+
+.mystery-icon {
+    font-size: 65px;
+
+    margin-bottom: 15px;
+}
+
+.mystery-box h1 {
+    color:
+        #e84791;
+
+    font-size: 36px;
+
+    margin-bottom: 15px;
+}
+
+.mystery-box p {
+    color:
+        #71405a;
+
+    font-size: 18px;
+
+    line-height: 1.5;
+
+    margin-bottom: 10px;
+}
+
+
+/* =========================================
+   🔘 BOUTONS
+========================================= */
+
+.buttons,
+.final-buttons {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 20px;
+
+    margin-top: 25px;
+}
+
+.buttons button,
+.final-buttons button {
+    border: none;
+
+    padding:
+        14px 28px;
+
+    border-radius: 30px;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease;
+}
+
+.yes,
+.final-yes {
+    background:
+        #ff5fa2;
+
+    color: white;
+
+    box-shadow:
+        0 8px 20px
+        rgba(255,50,140,.3);
+}
+
+.yes:hover,
+.final-yes:hover {
+    box-shadow:
+        0 12px 30px
+        rgba(255,50,140,.4);
+}
+
+.no,
+.final-no {
+    background:
+        #f1f1f1;
+
+    color:
+        #777;
+}
+
+.next-button {
+    margin-top: 25px;
+
+    padding:
+        14px 25px;
+
+    border: none;
+
+    border-radius: 25px;
+
+    background:
+        #ff67a8;
+
+    color: white;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        transform .25s,
+        box-shadow .25s;
+}
+
+.next-button:hover {
+    transform:
+        scale(1.06);
+
+    box-shadow:
+        0 8px 20px
+        rgba(255,80,160,.25);
+}
+
+.no-message,
+.final-no-message {
+    min-height: 25px;
+
+    margin-top: 15px;
+
+    color:
+        #a34b77;
+
+    opacity: 0;
+
+    transition:
+        opacity .3s,
+        transform .3s;
+}
+
+.no-message.show,
+.final-no-message.show {
+    opacity: 1;
+
+    animation:
+        messageAppear
+        .4s
+        ease;
+}
+
+@keyframes messageAppear {
+
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================
+   🐱 CHAT
+========================================= */
+
+#catContainer {
+    display: none;
+
+    position: fixed;
+
+    right: 20px;
+    bottom: 15px;
+
+    width: 160px;
+    height: 160px;
+
+    z-index: 99999;
+
+    pointer-events: none;
+}
+
+#catContainer.show {
+    display: block;
+
+    animation:
+        catAppear
+        .4s
+        ease;
+}
+
+@keyframes catAppear {
+
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.cat-character {
+    position: absolute;
+
+    right: 0;
+    bottom: 0;
+
+    width: 100px;
+    height: 100px;
+
+    animation:
+        catFloat
+        2s
+        infinite
+        alternate;
+}
+
+@keyframes catFloat {
+
+    from {
+        transform:
+            translateY(0);
+    }
+
+    to {
+        transform:
+            translateY(-8px);
+    }
+}
+
+.cat-face {
+    position: absolute;
+
+    left: 15px;
+    top: 10px;
+
+    width: 70px;
+    height: 62px;
+
+    background: white;
+
+    border-radius: 50%;
+
+    z-index: 2;
+
+    box-shadow:
+        0 5px 15px
+        rgba(80,30,60,.12);
+}
+
+.cat-ear {
+    position: absolute;
+
+    width: 30px;
+    height: 30px;
+
+    top: 0;
+
+    background: white;
+
+    border-radius: 50%;
+}
+
+.cat-ear-left {
+    left: 12px;
+}
+
+.cat-ear-right {
+    right: 12px;
+}
+
+.cat-eye {
+    position: absolute;
+
+    top: 23px;
+
+    width: 9px;
+    height: 12px;
+
+    background:
+        #382333;
+
+    border-radius: 50%;
+
+    color:
+        #382333;
+
+    font-size: 10px;
+
+    text-align: center;
+
+    transition:
+        all .25s ease;
+}
+
+.left-eye {
+    left: 18px;
+}
+
+.right-eye {
+    right: 18px;
+}
+
+.cat-mouth {
+    position: absolute;
+
+    left: 50%;
+    top: 40px;
+
+    transform:
+        translateX(-50%);
+
+    color:
+        #603247;
+
+    font-size: 18px;
+
+    transition:
+        all .25s ease;
+}
+
+.cat-nose {
+    position: absolute;
+
+    left: 50%;
+    top: 32px;
+
+    transform:
+        translateX(-50%);
+
+    color:
+        #ff6fae;
+
+    font-size: 11px;
+}
+
+.cat-body {
+    position: absolute;
+
+    left: 20px;
+    bottom: 0;
+
+    width: 65px;
+    height: 45px;
+
+    background: white;
+
+    border-radius:
+        50px 50px 25px 25px;
+}
+
+.cat-tail {
+    position: absolute;
+
+    right: 0;
+    bottom: 5px;
+
+    width: 32px;
+    height: 32px;
+
+    border:
+        7px solid white;
+
+    border-left: none;
+
+    border-radius:
+        0 30px 30px 0;
+}
+
+.character-message {
+    position: absolute;
+
+    right: 0;
+    bottom: 115px;
+
+    width: 190px;
+
+    padding:
+        10px 13px;
+
+    background: white;
+
+    color:
+        #8d3869;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    text-align: center;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0,0,0,.15);
+
+    animation:
+        bubbleFloat
+        2s
+        ease-in-out
+        infinite
+        alternate;
+}
+
+@keyframes bubbleFloat {
+
+    to {
+        transform:
+            translateY(-4px);
+    }
+}
+
+
+/* =========================================
+   🐱 EXPRESSIONS VISUELLES
+========================================= */
+
+#catContainer.expression-happy .cat-face {
+    transform: rotate(-2deg);
+}
+
+#catContainer.expression-shy .cat-face {
+    transform: rotate(2deg);
+}
+
+#catContainer.expression-surprised .cat-face {
+    transform: scale(1.05);
+}
+
+#catContainer.expression-excited .cat-character {
+    animation:
+        catExcited
+        .35s
+        infinite alternate;
+}
+
+@keyframes catExcited {
+
+    from {
+        transform:
+            translateY(0)
+            rotate(-3deg);
+    }
+
+    to {
+        transform:
+            translateY(-12px)
+            rotate(3deg);
+    }
+}
+
+#catContainer.expression-tired {
+    opacity: .8;
+}
+
+#catContainer.expression-tired .cat-character {
+    animation:
+        catTired
+        3s
+        ease-in-out
+        infinite;
+}
+
+@keyframes catTired {
+
+    0%,
+    100% {
+        transform:
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            translateY(5px);
+    }
+}
+
+
+/* =========================================
+   🎁 CADEAU
+========================================= */
+
+.gift-scene {
+    position: fixed;
+
+    inset: 0;
+
+    display: none;
+
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    background:
+        rgba(255,150,200,.3);
+
+    backdrop-filter:
+        blur(12px);
+
+    z-index: 3500;
+}
+
+.gift-scene.active {
+    display: flex;
+
+    animation:
+        appear .5s ease;
+}
+
+.gift-message {
+    position: absolute;
+
+    top: 15%;
+
+    padding:
+        12px 22px;
+
+    background:
+        rgba(255,255,255,.9);
+
+    color:
+        #a23c72;
+
+    border-radius: 30px;
+
+    font-weight: bold;
+
+    animation:
+        messageFloat
+        2s
+        infinite
+        alternate;
+}
+
+.gift-title {
+    color: white;
+
+    font-size: 32px;
+
+    font-weight: bold;
+
+    margin-bottom: 45px;
+
+    text-align: center;
+
+    text-shadow:
+        0 3px 12px
+        rgba(100,20,70,.25);
+}
+
+.gift {
+    position: relative;
+
+    width: 190px;
+    height: 170px;
+
+    cursor: pointer;
+
+    transition:
+        transform .3s;
+}
+
+.gift-body {
+    position: absolute;
+
+    left: 10px;
+    bottom: 0;
+
+    width: 170px;
+    height: 125px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff5b9f,
+            #e9478d
+        );
+
+    border-radius: 8px;
+
+    box-shadow:
+        0 20px 35px
+        rgba(120,20,70,.2);
+}
+
+.gift-ribbon {
+    position: absolute;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    width: 30px;
+    height: 100%;
+
+    background:
+        #ffd0e5;
+}
+
+.gift-lid {
+    position: absolute;
+
+    top: 10px;
+    left: 0;
+
+    width: 190px;
+    height: 48px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff78b4,
+            #f14e96
+        );
+
+    border-radius: 8px;
+
+    transition:
+        transform .8s
+        cubic-bezier(.2,.8,.3,1);
+
+    z-index: 4;
+
+    box-shadow:
+        0 8px 15px
+        rgba(100,20,60,.15);
+}
+
+.lid-ribbon {
+    position: absolute;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    width: 30px;
+    height: 100%;
+
+    background:
+        #ffd0e5;
+}
+
+.gift-bow {
+    position: absolute;
+
+    left: 50%;
+    top: -48px;
+
+    transform:
+        translateX(-50%);
+
+    font-size: 55px;
+
+    z-index: 5;
+
+    transition:
+        transform .8s;
+}
+
+.gift.shake {
+    animation:
+        giftShake
+        .12s
+        infinite;
+}
+
+@keyframes giftShake {
+
+    0% {
+        transform:
+            rotate(0);
+    }
+
+    25% {
+        transform:
+            rotate(-4deg);
+    }
+
+    50% {
+        transform:
+            rotate(4deg);
+    }
+
+    75% {
+        transform:
+            rotate(-3deg);
+    }
+
+    100% {
+        transform:
+            rotate(0);
+    }
+}
+
+.gift.open .gift-lid {
+    transform:
+        translateY(-95px)
+        rotate(-8deg);
+}
+
+.gift.open .gift-bow {
+    transform:
+        translateX(-50%)
+        translateY(-90px)
+        rotate(-10deg);
+}
+
+.gift-heart {
+    position: fixed;
+
+    pointer-events: none;
+
+    z-index: 1000000;
+
+    font-size: 22px;
+}
+
+
+/* =========================================
+   📖 POÈME
+========================================= */
+
+.poem-scene {
+    position: fixed;
+
+    inset: 0;
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+
+    background:
+        rgba(255,130,190,.25);
+
+    backdrop-filter:
+        blur(12px);
+
+    z-index: 3600;
+}
+
+.poem-scene.active {
+    display: flex;
+
+    animation:
+        appear .5s ease;
+}
+
+.poem-box {
+    width:
+        min(90%, 650px);
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    padding:
+        40px 30px;
+
+    text-align: center;
+
+    border-radius: 35px;
+
+    background:
+        rgba(255,255,255,.96);
+
+    box-shadow:
+        0 25px 70px
+        rgba(100,30,80,.25);
+}
+
+.poem-heart {
+    font-size: 65px;
+
+    animation:
+        heartBeat
+        1.5s
+        infinite;
+}
+
+.poem-box h1 {
+    color:
+        #e84791;
+
+    margin:
+        10px 0 25px;
+}
+
+.poem p {
+    color:
+        #71405a;
+
+    font-size: 18px;
+
+    line-height: 1.7;
+
+    margin-bottom: 22px;
+}
+
+
+/* =========================================
+   🌙 TRANSITION
+========================================= */
+
+.transition-scene {
+    position: fixed;
+
+    inset: 0;
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    background:
+        rgba(25,20,50,.9);
+
+    z-index: 6000;
+}
+
+.transition-scene.active {
+    display: flex;
+
+    animation:
+        appear 1s ease;
+}
+
+.transition-content {
+    text-align: center;
+
+    color: white;
+
+    font-size: 30px;
+
+    padding: 20px;
+}
+
+.transition-stars {
+    font-size: 35px;
+
+    margin-bottom: 25px;
+
+    animation:
+        twinkle
+        2s
+        infinite alternate;
+}
+
+#transitionText {
+    opacity: 0;
+
+    animation:
+        fadeText
+        2s
+        forwards;
+}
+
+@keyframes fadeText {
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* =========================================
+   💗 QUESTION FINALE
+========================================= */
+
+.final-question {
+    position: fixed;
+
+    inset: 0;
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    background:
+        rgba(60,40,80,.45);
+
+    backdrop-filter:
+        blur(15px);
+
+    z-index: 3700;
+}
+
+.final-question.active {
+    display: flex;
+
+    animation:
+        appear .7s ease;
+}
+
+.final-question-box {
+    width:
+        min(90%, 550px);
+
+    padding:
+        40px 25px;
+
+    text-align: center;
+
+    border-radius: 35px;
+
+    background:
+        rgba(255,255,255,.96);
+
+    box-shadow:
+        0 30px 80px
+        rgba(30,20,50,.3);
+}
+
+.final-question-heart {
+    font-size: 70px;
+
+    animation:
+        heartBeat
+        1.5s
+        infinite;
+}
+
+.final-question-box h1 {
+    color:
+        #e84791;
+
+    font-size: 36px;
+}
+
+.final-question-box p {
+    color:
+        #8d3869;
+
+    margin:
+        12px 0;
+}
+
+.final-question-box h2 {
+    color:
+        #71405a;
+
+    font-size:
+        clamp(24px,5vw,36px);
+
+    margin:
+        20px 0;
+}
+
+
+/* =========================================
+   💌 ENVELOPPE
+   VERSION CORRIGÉE
+========================================= */
+
+.envelope-scene {
+    position: fixed;
+
+    inset: 0;
+
+    display: none;
+
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffd4e8,
+            #fff1f8
+        );
+
+    z-index: 5000;
+
+    overflow: visible;
+}
+
+.envelope-scene.active {
+    display: flex;
+
+    animation:
+        appear .7s ease;
+}
+
+
+/* =========================================
+   ✉️ ENVELOPPE
+========================================= */
+
+.envelope {
+    position: relative;
+
+    width: 320px;
+    height: 220px;
+
+    cursor: pointer;
+
+    perspective: 1000px;
+
+    /*
+       Important :
+       permet à la lettre de sortir
+       complètement de l'enveloppe.
+    */
+    overflow: visible;
+
+    margin-top: 80px;
+}
+
+
+/* =========================================
+   ✉️ DOS
+========================================= */
+
+.envelope-back {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        #f58bb8;
+
+    border-radius: 8px;
+
+    box-shadow:
+        0 25px 50px
+        rgba(100,30,80,.25);
+
+    z-index: 1;
+}
+
+
+/* =========================================
+   📜 PAPIER
+========================================= */
+
+.envelope-paper {
+    position: absolute;
+
+    left: 15px;
+    right: 15px;
+
+    bottom: 10px;
+
+    /*
+       Papier plus grand.
+    */
+    height: 210px;
+
+    padding:
+        28px 25px;
+
+    background:
+        #fffdf9;
+
+    border-radius: 8px;
+
+    transform:
+        translateY(0);
+
+    transition:
+        transform 1s cubic-bezier(.2,.8,.3,1);
+
+    /*
+       Le papier est devant
+       l'arrière de l'enveloppe.
+    */
+    z-index: 7;
+
+    overflow: visible;
+
+    box-shadow:
+        0 10px 25px
+        rgba(0,0,0,.12);
+}
+
+
+/*
+   Quand la lettre sort,
+   elle monte beaucoup plus haut.
+*/
+
+.envelope.open .envelope-paper {
+
+    transform:
+        translateY(-245px)
+        scale(1.03);
+
+    z-index: 20;
+}
+
+
+/* =========================================
+   📝 TEXTE DE LA LETTRE
+========================================= */
+
+.letter-text {
+    position: relative;
+
+    width: 100%;
+
+    color:
+        #71405a;
+
+    font-size: 17px;
+
+    line-height: 1.65;
+
+    text-align: center;
+
+    white-space: pre-line;
+
+    z-index: 30;
+
+    padding:
+        5px 5px 15px;
+
+    /*
+       Le texte reste toujours
+       au-dessus du papier.
+    */
+    opacity: 1;
+
+    overflow: visible;
+
+    word-wrap: break-word;
+}
+
+
+/* =========================================
+   ✉️ AVANT DE L'ENVELOPPE
+========================================= */
+
+.envelope-front {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        #ff9ac4;
+
+    clip-path:
+        polygon(
+            0 45%,
+            50% 100%,
+            100% 45%,
+            100% 100%,
+            0 100%
+        );
+
+    z-index: 4;
+
+    transition:
+        opacity .5s;
+}
+
+
+/*
+   Quand la lettre sort,
+   l'avant passe derrière.
+*/
+
+.envelope.open .envelope-front {
+    z-index: 2;
+}
+
+
+/* =========================================
+   🔺 RABAT
+========================================= */
+
+.envelope-flap {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 120px;
+
+    background:
+        #ffacd0;
+
+    clip-path:
+        polygon(
+            0 0,
+            100% 0,
+            50% 100%
+        );
+
+    transform-origin:
+        top;
+
+    transition:
+        transform 1s ease;
+
+    z-index: 10;
+}
+
+
+/*
+   Le rabat s'ouvre.
+*/
+
+.envelope.open .envelope-flap {
+
+    transform:
+        rotateX(180deg);
+
+    z-index: 1;
+}
+
+
+/* =========================================
+   💗 COEUR
+========================================= */
+
+.envelope-heart {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    font-size: 40px;
+
+    z-index: 12;
+
+    transition:
+        opacity .3s,
+        transform .4s;
+}
+
+.envelope.open .envelope-heart {
+    opacity: 0;
+
+    transform:
+        translate(-50%,-50%)
+        scale(.5);
+}
+
+
+/* =========================================
+   💌 INDICATION
+========================================= */
+
+.envelope-hint {
+    margin-top: 65px;
+
+    color:
+        #8d3869;
+
+    font-weight: bold;
+
+    font-size: 17px;
+
+    transition:
+        opacity .5s;
+}
+
+.envelope.open + .envelope-hint {
+    opacity: 0;
+}
+
+
+/* =========================================
+   💌 PETITS COEURS AUTOUR
+========================================= */
+
+.envelope-scene::before,
+.envelope-scene::after {
+    content: "💗";
+
+    position: absolute;
+
+    font-size: 30px;
+
+    opacity: .6;
+
+    animation:
+        envelopeHeartFloat
+        3s
+        ease-in-out
+        infinite
+        alternate;
+}
+
+.envelope-scene::before {
+    left: 20%;
+    top: 30%;
+}
+
+.envelope-scene::after {
+    right: 20%;
+    top: 55%;
+
+    animation-delay:
+        1s;
+}
+
+@keyframes envelopeHeartFloat {
+
+    from {
+        transform:
+            translateY(0)
+            rotate(-8deg);
+
+        opacity: .4;
+    }
+
+    to {
+        transform:
+            translateY(-18px)
+            rotate(8deg);
+
+        opacity: .8;
+    }
+}
+
+
+/* =========================================
+   🎉 FIN
+========================================= */
+
+.reveal-scene {
+    position: fixed;
+
+    inset: 0;
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+
+    background:
+        rgba(255,120,190,.3);
+
+    backdrop-filter:
+        blur(14px);
+
+    z-index: 7000;
+}
+
+.reveal-scene.active {
+    display: flex;
+
+    animation:
+        appear .5s ease;
+}
+
+.reveal-box {
+    width:
+        min(90%,550px);
+
+    padding:
+        40px 25px;
+
+    text-align: center;
+
+    border-radius: 35px;
+
+    background:
+        rgba(255,255,255,.96);
+
+    box-shadow:
+        0 25px 70px
+        rgba(100,30,80,.2);
+}
+
+.reveal-heart {
+    font-size: 80px;
+
+    animation:
+        heartBeat
+        1s
+        infinite;
+}
+
+.reveal-box h1 {
+    color:
+        #e84791;
+
+    font-size: 45px;
+
+    margin:
+        15px 0;
+}
+
+.reveal-box p {
+    color:
+        #71405a;
+
+    font-size: 18px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   ✨ ANIMATIONS
+========================================= */
+
+@keyframes appear {
+
+    from {
+        opacity: 0;
+
+        transform:
+            scale(.95);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            scale(1);
+    }
+}
+
+@keyframes heartBeat {
+
+    50% {
+        transform:
+            scale(1.15);
+    }
+}
+
+
+/* =========================================
+   📱 MOBILE
+========================================= */
+
+@media (max-width:600px) {
+
+    #catContainer {
+        right: 5px;
+        bottom: 5px;
+
+        transform:
+            scale(.85);
+
+        transform-origin:
+            bottom right;
+    }
+
+    .character-message {
+        width: 160px;
+
+        font-size: 12px;
+    }
+
+    .gift {
+        transform:
+            scale(.85);
+    }
+
+    .gift-title {
+        font-size: 25px;
+    }
+
+    .envelope {
+        width: 300px;
+        height: 205px;
+
+        transform:
+            scale(.82);
+
+        margin-top: 80px;
+    }
+
+    .envelope.open .envelope-paper {
+        transform:
+            translateY(-250px)
+            scale(1.03);
+    }
+
+    .envelope-paper {
+        height: 215px;
+
+        padding:
+            25px 20px;
+    }
+
+    .letter-text {
+        font-size: 16px;
+
+        line-height: 1.55;
+    }
+
+    .envelope-hint {
+        margin-top: 55px;
+    }
+
+    .poem p {
+        font-size: 16px;
+    }
+
+    .mystery-box {
+        padding:
+            30px 20px;
+    }
+
+    .final-question-box {
+        padding:
+            30px 20px;
+    }
+}

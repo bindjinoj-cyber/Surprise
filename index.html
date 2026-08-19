@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Une petite surprise 💗</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="game">
+
+    <!-- =========================================
+         🌅 DÉCOR
+    ========================================== -->
+
+    <div id="sky"></div>
+    <div id="stars"></div>
+    <div id="fallingHearts"></div>
+    <div id="flowers"></div>
+    <div id="particles"></div>
+
+    <div class="cloud cloud1"></div>
+    <div class="cloud cloud2"></div>
+    <div class="cloud cloud3"></div>
+
+    <div class="mountains">
+        <div class="mountain mountain1"></div>
+        <div class="mountain mountain2"></div>
+        <div class="mountain mountain3"></div>
+    </div>
+
+
+    <!-- =========================================
+         🎵 MUSIQUE
+    ========================================== -->
+
+    <audio
+        id="backgroundMusic"
+        src="ambiance.mp3"
+        loop
+    ></audio>
+
+    <button
+        id="musicButton"
+        class="music-button"
+    >
+        🔊
+    </button>
+
+
+    <!-- =========================================
+         🚪 COMMENCEMENT
+    ========================================== -->
+
+    <div
+        id="startScreen"
+        class="start-screen"
+    >
+
+        <div class="start-box">
+
+            <div class="start-cat">
+                🐱💗
+            </div>
+
+            <h1>
+                Une petite surprise
+            </h1>
+
+            <p>
+                Coucou 🌸
+            </p>
+
+            <p>
+                J'ai préparé quelque chose
+                de spécial...
+            </p>
+
+            <button
+                id="startBtn"
+                class="start-button"
+            >
+                Commencer 💗
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         🌸 ÉTAPE 1
+    ========================================== -->
+
+    <div
+        id="step1"
+        class="mystery-screen"
+    >
+
+        <div class="mystery-box">
+
+            <div class="mystery-icon">
+                🌸
+            </div>
+
+            <h1>
+                Coucou 💗
+            </h1>
+
+            <p>
+                Je voulais simplement
+                préparer une petite surprise.
+            </p>
+
+            <p>
+                Rien de compliqué...
+                juste quelque chose
+                de différent 🌷
+            </p>
+
+            <button
+                id="next1"
+                class="next-button"
+            >
+                Continuer 🌸
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         🌷 ÉTAPE 2
+    ========================================== -->
+
+    <div
+        id="step2"
+        class="mystery-screen"
+    >
+
+        <div class="mystery-box">
+
+            <div class="mystery-icon">
+                🌷
+            </div>
+
+            <h1>
+                Une petite histoire...
+            </h1>
+
+            <p>
+                Parfois, une petite surprise
+                suffit simplement à faire sourire
+                quelqu'un.
+            </p>
+
+            <p>
+                Alors j'ai décidé d'en préparer
+                une pour toi 💕
+            </p>
+
+            <button
+                id="next2"
+                class="next-button"
+            >
+                Continuer 💕
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         ❓ PREMIÈRE QUESTION
+    ========================================== -->
+
+    <div
+        id="step3"
+        class="mystery-screen"
+    >
+
+        <div class="mystery-box">
+
+            <div class="mystery-icon">
+                🌸
+            </div>
+
+            <h1>
+                Une petite question...
+            </h1>
+
+            <p>
+                Est-ce que tu veux continuer
+                cette petite surprise ? 😊
+            </p>
+
+            <div class="buttons">
+
+                <button
+                    id="yesBtn"
+                    class="yes"
+                >
+                    Oui 💗
+                </button>
+
+                <button
+                    id="noBtn"
+                    class="no"
+                >
+                    Non 🌷
+                </button>
+
+            </div>
+
+            <div
+                id="noMessage"
+                class="no-message"
+            ></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         🐱 CHAT
+    ========================================== -->
+
+    <div id="catContainer">
+
+        <div
+            id="catCharacter"
+            class="cat-character"
+        >
+
+            <div class="cat-ear cat-ear-left"></div>
+            <div class="cat-ear cat-ear-right"></div>
+
+            <div class="cat-face">
+
+                <div
+                    id="catEyeLeft"
+                    class="cat-eye left-eye"
+                ></div>
+
+                <div
+                    id="catEyeRight"
+                    class="cat-eye right-eye"
+                ></div>
+
+                <div
+                    id="catMouth"
+                    class="cat-mouth"
+                >
+                    ◡
+                </div>
+
+                <div class="cat-nose">
+                    ♥
+                </div>
+
+            </div>
+
+            <div class="cat-body"></div>
+
+            <div class="cat-tail"></div>
+
+        </div>
+
+        <div
+            id="characterMessage"
+            class="character-message"
+        >
+            Coucou 🐱💗
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         🎁 CADEAU
+    ========================================== -->
+
+    <div
+        id="giftScene"
+        class="gift-scene"
+    >
+
+        <div
+            id="giftMessage"
+            class="gift-message"
+        >
+            Regarde ce petit cadeau... 🎁
+        </div>
+
+        <div class="gift-title">
+            Une petite surprise pour toi
+        </div>
+
+        <div
+            id="gift"
+            class="gift"
+        >
+
+            <div class="gift-bow">
+
+                <span class="bow-left">
+                    🎀
+                </span>
+
+            </div>
+
+            <div class="gift-lid">
+
+                <div class="lid-ribbon"></div>
+
+            </div>
+
+            <div class="gift-body">
+
+                <div class="gift-ribbon"></div>
+
+            </div>
+
+        </div>
+
+        <button
+            id="openGift"
+            class="next-button"
+        >
+            Ouvrir le cadeau 🎁
+        </button>
+
+    </div>
+
+
+    <!-- =========================================
+         📖 POÈME
+    ========================================== -->
+
+    <div
+        id="poemScene"
+        class="poem-scene"
+    >
+
+        <div class="poem-box">
+
+            <div class="poem-heart">
+                💗
+            </div>
+
+            <h1>
+                Un petit poème 🌸
+            </h1>
+
+            <div
+                id="poem"
+                class="poem"
+            >
+
+                <p>
+                    Parmi toutes les personnes
+                    que l'on peut rencontrer,
+                    certaines arrivent simplement
+                    à nous faire sourire.
+                </p>
+
+                <p>
+                    Un petit message,
+                    un petit rire,
+                    un petit moment...
+                    et soudain la journée
+                    devient un peu plus jolie. 🌷
+                </p>
+
+                <p>
+                    Alors aujourd'hui,
+                    je voulais simplement
+                    offrir quelques mots
+                    et un petit sourire. 💗
+                </p>
+
+                <p>
+                    Peut-être que cette surprise
+                    ne changera rien...
+                    ou peut-être qu'elle
+                    commencera quelque chose
+                    de nouveau. 🌸
+                </p>
+
+                <p>
+                    Dans tous les cas,
+                    merci d'avoir pris le temps
+                    de la regarder. 🥰
+                </p>
+
+            </div>
+
+            <button
+                id="revealBtn"
+                class="next-button"
+            >
+                Continuer 💗
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         🌙 TRANSITION
+    ========================================== -->
+
+    <div
+        id="transitionScene"
+        class="transition-scene"
+    >
+
+        <div class="transition-content">
+
+            <div class="transition-stars">
+                ✨ 🌙 ✨
+            </div>
+
+            <p id="transitionText">
+                Bon...
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         💗 QUESTION FINALE
+    ========================================== -->
+
+    <div
+        id="questionFinale"
+        class="final-question"
+    >
+
+        <div class="final-question-box">
+
+            <div class="final-question-heart">
+                💗
+            </div>
+
+            <h1>
+                Une dernière question...
+            </h1>
+
+            <p>
+                Après tout ça,
+                j'aimerais te demander quelque chose.
+            </p>
+
+            <h2>
+                Est-ce que tu veux
+                sortir avec moi ? 🌸
+            </h2>
+
+            <div class="final-buttons">
+
+                <button
+                    id="finalYes"
+                    class="final-yes"
+                >
+                    Oui 💗
+                </button>
+
+                <button
+                    id="finalNo"
+                    class="final-no"
+                >
+                    Non 🌷
+                </button>
+
+            </div>
+
+            <div
+                id="finalNoMessage"
+                class="final-no-message"
+            ></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         💌 ENVELOPPE
+    ========================================== -->
+
+    <div
+        id="envelopeScene"
+        class="envelope-scene"
+    >
+
+        <div
+            id="envelope"
+            class="envelope"
+        >
+
+            <div class="envelope-back"></div>
+
+            <div class="envelope-paper">
+
+                <div
+                    id="letterText"
+                    class="letter-text"
+                ></div>
+
+            </div>
+
+            <div class="envelope-front"></div>
+
+            <div class="envelope-flap"></div>
+
+            <div class="envelope-heart">
+                💗
+            </div>
+
+        </div>
+
+        <p class="envelope-hint">
+            Clique sur l'enveloppe 💌
+        </p>
+
+    </div>
+
+
+    <!-- =========================================
+         🎉 MESSAGE FINAL
+    ========================================== -->
+
+    <div
+        id="revealScene"
+        class="reveal-scene"
+    >
+
+        <div class="reveal-box">
+
+            <div class="reveal-heart">
+                💖
+            </div>
+
+            <h1>
+                YAY ! 💗
+            </h1>
+
+            <p>
+                Merci d'avoir répondu 🌸
+            </p>
+
+            <p>
+                J'espère que cette petite
+                surprise t'aura fait sourire.
+            </p>
+
+            <button
+                id="instagramBtn"
+                class="next-button"
+            >
+                Me répondre sur Instagram 📱
+            </button>
+
+            <br><br>
+
+            <button
+                id="restart"
+                class="next-button"
+            >
+                Recommencer 🔄
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
