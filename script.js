@@ -1,5 +1,5 @@
 /* =====================================================
-   🌸 SURPRISE INTERACTIVE
+   🌸 SURPRISE INTERACTIVE — SCRIPT.JS COMPLET
 ===================================================== */
 
 
@@ -33,38 +33,22 @@ const revealBtn = document.getElementById("revealBtn");
 const transitionScene = document.getElementById("transitionScene");
 const transitionText = document.getElementById("transitionText");
 
-const questionFinale =
-    document.getElementById("questionFinale");
+const questionFinale = document.getElementById("questionFinale");
 
-const finalYes =
-    document.getElementById("finalYes");
+const finalYes = document.getElementById("finalYes");
+const finalNo = document.getElementById("finalNo");
+const finalNoMessage = document.getElementById("finalNoMessage");
 
-const finalNo =
-    document.getElementById("finalNo");
+const envelopeScene = document.getElementById("envelopeScene");
+const envelope = document.getElementById("envelope");
+const letterText = document.getElementById("letterText");
 
-const finalNoMessage =
-    document.getElementById("finalNoMessage");
+const revealScene = document.getElementById("revealScene");
 
-const envelopeScene =
-    document.getElementById("envelopeScene");
+const instagramBtn = document.getElementById("instagramBtn");
+const restart = document.getElementById("restart");
 
-const envelope =
-    document.getElementById("envelope");
-
-const letterText =
-    document.getElementById("letterText");
-
-const revealScene =
-    document.getElementById("revealScene");
-
-const instagramBtn =
-    document.getElementById("instagramBtn");
-
-const restart =
-    document.getElementById("restart");
-
-const game =
-    document.getElementById("game");
+const game = document.getElementById("game");
 
 const backgroundMusic =
     document.getElementById("backgroundMusic");
@@ -86,38 +70,33 @@ const particles =
 
 
 /* =========================================
-   📋 GOOGLE FORMS
+   📩 GOOGLE FORMS
 ========================================= */
-
-const GOOGLE_FORM_YES_URL =
-    "https://docs.google.com/forms/d/e/1FAIpQLSc4OfKWZ4hFxpm3ktsZEHlU5xkqP62OEFWLzXPlUtM-zDQRDA/viewform?usp=pp_url&entry.1144722576=Oui";
-
 
 /*
-   Fonction pour ouvrir le Google Form
-   avec "Oui" déjà sélectionné.
+   Ton lien prérempli :
+
+   https://docs.google.com/forms/d/e/
+   1FAIpQLSc4OfKWZ4hFxpm3ktsZEHlU5xkqP62OEFWLzXPlUtM-zDQRDA/
+   viewform?usp=pp_url&entry.1144722576=Oui
+
+   ID de la question :
+   entry.1144722576
 */
 
-function openGoogleFormYes() {
+const GOOGLE_FORM_URL =
+    "https://docs.google.com/forms/d/e/1FAIpQLSc4OfKWZ4hFxpm3ktsZEHlU5xkqP62OEFWLzXPlUtM-zDQRDA/formResponse";
 
-    window.open(
-        GOOGLE_FORM_YES_URL,
-        "_blank"
-    );
-
-}
-
-
-/* =========================================
-   📩 GOOGLE SHEETS
-========================================= */
-
-const GOOGLE_SCRIPT_URL =
-    "https://script.google.com/macros/s/AKfycbyTwZZp6sdDkxkKdNKUb3ZJRwGjYhv4sPMK66hhtXpfbutTqB6ih9RwcYm8eGW429NN8Q/exec";
+const GOOGLE_FORM_ENTRY =
+    "entry.1144722576";
 
 
 let answerSent = false;
 
+
+/* =========================================
+   📩 ENVOYER LA RÉPONSE À GOOGLE FORMS
+========================================= */
 
 function sendAnswer(answer) {
 
@@ -127,8 +106,18 @@ function sendAnswer(answer) {
 
     answerSent = true;
 
+
+    const formData =
+        new URLSearchParams();
+
+    formData.append(
+        GOOGLE_FORM_ENTRY,
+        answer
+    );
+
+
     fetch(
-        GOOGLE_SCRIPT_URL,
+        GOOGLE_FORM_URL,
         {
             method: "POST",
 
@@ -140,14 +129,13 @@ function sendAnswer(answer) {
             },
 
             body:
-                "answer=" +
-                encodeURIComponent(answer)
+                formData.toString()
         }
     )
     .then(() => {
 
         console.log(
-            "Réponse envoyée :",
+            "Réponse envoyée à Google Forms :",
             answer
         );
 
@@ -155,7 +143,7 @@ function sendAnswer(answer) {
     .catch((error) => {
 
         console.error(
-            "Erreur :",
+            "Erreur Google Forms :",
             error
         );
 
@@ -248,12 +236,11 @@ function setCatExpression(expression) {
 
     catMouth.textContent =
         face.mouth;
-
 }
 
 
 /* =========================================
-   🐱 AFFICHER CHAT
+   🐱 AFFICHER LE CHAT
 ========================================= */
 
 function showCat(
@@ -356,8 +343,7 @@ if (musicButton) {
 
                 startMusic();
 
-            }
-            else {
+            } else {
 
                 backgroundMusic.pause();
 
@@ -389,6 +375,7 @@ if (startBtn) {
             startScreen.classList.add(
                 "hidden"
             );
+
 
             setTimeout(() => {
 
@@ -511,11 +498,13 @@ if (noBtn) {
 
             noClicks++;
 
+
             const noScale =
                 Math.max(
                     0.65,
                     1 - noClicks * 0.05
                 );
+
 
             const yesScale =
                 Math.min(
@@ -523,11 +512,13 @@ if (noBtn) {
                     1 + noClicks * 0.05
                 );
 
+
             noBtn.style.transform =
                 `scale(${noScale})`;
 
             yesBtn.style.transform =
                 `scale(${yesScale})`;
+
 
             noMessage.textContent =
                 noMessages[
@@ -537,14 +528,17 @@ if (noBtn) {
                     )
                 ];
 
+
             noMessage.classList.add(
                 "show"
             );
+
 
             showCat(
                 noMessage.textContent,
                 "surpris"
             );
+
 
             createPetals(8);
 
@@ -574,10 +568,12 @@ if (yesBtn) {
                 "active"
             );
 
+
             showCat(
                 "Ohhh ! Regarde ! 😸💗",
                 "heureux"
             );
+
 
             createSparkles(30);
 
@@ -616,13 +612,16 @@ if (openGift) {
                 "shake"
             );
 
+
             giftMessage.textContent =
                 "Attends... qu'est-ce qu'il y a dedans ? 👀";
+
 
             showCat(
                 "Ça bouge ! 😳",
                 "surpris"
             );
+
 
             createSparkles(25);
 
@@ -649,6 +648,7 @@ if (openGift) {
                     "open"
                 );
 
+
                 giftMessage.textContent =
                     "Une petite surprise pour toi 💗";
 
@@ -665,10 +665,12 @@ if (openGift) {
                     "active"
                 );
 
+
                 showCat(
                     "Lis tranquillement... 🌸",
                     "content"
                 );
+
 
                 startTypingPoem();
 
@@ -690,8 +692,10 @@ function giftHeartExplosion() {
         return;
     }
 
+
     const rect =
         gift.getBoundingClientRect();
+
 
     const items = [
 
@@ -717,8 +721,10 @@ function giftHeartExplosion() {
                 "div"
             );
 
+
         item.className =
             "gift-heart";
+
 
         item.textContent =
             items[
@@ -728,11 +734,13 @@ function giftHeartExplosion() {
                 )
             ];
 
+
         item.style.left =
             (
                 rect.left +
                 rect.width / 2
             ) + "px";
+
 
         item.style.top =
             (
@@ -749,6 +757,7 @@ function giftHeartExplosion() {
         const x =
             (Math.random() - 0.5) *
             420;
+
 
         const y =
             -80 -
@@ -821,6 +830,7 @@ function startTypingPoem() {
         return;
     }
 
+
     const paragraphs =
         poem.querySelectorAll("p");
 
@@ -866,8 +876,10 @@ function startTypingPoem() {
         paragraph.textContent =
             "";
 
+
         paragraph.style.display =
             "block";
+
 
         paragraph.style.opacity =
             "1";
@@ -884,6 +896,7 @@ function startTypingPoem() {
                         charIndex
                     ];
 
+
                 charIndex++;
 
 
@@ -895,6 +908,7 @@ function startTypingPoem() {
                     clearInterval(
                         interval
                     );
+
 
                     paragraphIndex++;
 
@@ -936,13 +950,16 @@ if (revealBtn) {
                 "active"
             );
 
+
             game.classList.add(
                 "calm"
             );
 
+
             transitionScene.classList.add(
                 "active"
             );
+
 
             transitionText.textContent =
                 "Bon... j'ai une dernière petite question 😳💗";
@@ -960,14 +977,17 @@ if (revealBtn) {
                     "active"
                 );
 
+
                 questionFinale.classList.add(
                     "active"
                 );
+
 
                 showCat(
                     "Voilà... 😳💗",
                     "gene"
                 );
+
 
                 createSparkles(20);
 
@@ -1010,7 +1030,8 @@ if (finalNo) {
         () => {
 
             /*
-             * Envoie NON à Google Sheets.
+             * Envoie NON à Google Forms
+             * uniquement lors du premier clic.
              */
 
             if (!answerSent) {
@@ -1043,6 +1064,7 @@ if (finalNo) {
 
             finalNo.style.transform =
                 `scale(${noScale})`;
+
 
             finalYes.style.transform =
                 `scale(${yesScale})`;
@@ -1091,8 +1113,7 @@ if (finalYes) {
         () => {
 
             /*
-             * Enregistre la réponse
-             * dans Google Sheets.
+             * Envoie OUI à Google Forms.
              */
 
             if (!answerSent) {
@@ -1104,14 +1125,6 @@ if (finalYes) {
             }
 
 
-            /*
-             * Ouvre aussi ton Google Form
-             * avec OUI déjà sélectionné.
-             */
-
-            openGoogleFormYes();
-
-
             resetWaitingTimer();
 
 
@@ -1119,9 +1132,11 @@ if (finalYes) {
                 "active"
             );
 
+
             game.classList.remove(
                 "calm"
             );
+
 
             envelopeScene.classList.add(
                 "active"
@@ -1211,6 +1226,7 @@ function typeLetter() {
             letterText.textContent +=
                 message[index];
 
+
             index++;
 
 
@@ -1229,6 +1245,7 @@ function typeLetter() {
                     envelopeScene.classList.remove(
                         "active"
                     );
+
 
                     revealScene.classList.add(
                         "active"
@@ -1301,6 +1318,7 @@ function createStars() {
         return;
     }
 
+
     for (
         let i = 0;
         i < 80;
@@ -1312,23 +1330,28 @@ function createStars() {
                 "div"
             );
 
+
         star.className =
             "star";
+
 
         star.style.left =
             Math.random() *
             100 +
             "%";
 
+
         star.style.top =
             Math.random() *
             80 +
             "%";
 
+
         star.style.animationDelay =
             Math.random() *
             3 +
             "s";
+
 
         stars.appendChild(
             star
@@ -1352,6 +1375,7 @@ function createFlowers() {
         return;
     }
 
+
     const types = [
 
         "🌸",
@@ -1373,8 +1397,10 @@ function createFlowers() {
                 "div"
             );
 
+
         flower.className =
             "flower";
+
 
         flower.textContent =
             types[
@@ -1384,15 +1410,18 @@ function createFlowers() {
                 )
             ];
 
+
         flower.style.left =
             Math.random() *
             100 +
             "%";
 
+
         flower.style.animationDelay =
             Math.random() *
             2 +
             "s";
+
 
         flowers.appendChild(
             flower
@@ -1416,10 +1445,12 @@ function createHeart() {
         return;
     }
 
+
     const heart =
         document.createElement(
             "div"
         );
+
 
     heart.className =
         "heart";
@@ -1486,7 +1517,7 @@ setInterval(
 
 
 /* =========================================
-   ✨ PARTICULES LUMINEUSES
+   ✨ PARTICULES
 ========================================= */
 
 function createSparkles(
@@ -1496,6 +1527,7 @@ function createSparkles(
     if (!particles) {
         return;
     }
+
 
     const symbols = [
 
@@ -1520,8 +1552,10 @@ function createSparkles(
                     "div"
                 );
 
+
             sparkle.className =
                 "sparkle";
+
 
             sparkle.textContent =
                 symbols[
@@ -1531,10 +1565,12 @@ function createSparkles(
                     )
                 ];
 
+
             sparkle.style.left =
                 Math.random() *
                 100 +
                 "vw";
+
 
             sparkle.style.top =
                 Math.random() *
@@ -1572,6 +1608,7 @@ function createPetals(
         return;
     }
 
+
     const petals = [
 
         "🌸",
@@ -1593,8 +1630,10 @@ function createPetals(
                 "div"
             );
 
+
         petal.className =
             "sparkle";
+
 
         petal.textContent =
             petals[
@@ -1676,17 +1715,22 @@ function createCelebration() {
         item.style.position =
             "fixed";
 
+
         item.style.left =
             "50%";
+
 
         item.style.top =
             "50%";
 
+
         item.style.fontSize =
             "25px";
 
+
         item.style.zIndex =
             "999999";
+
 
         item.style.pointerEvents =
             "none";
@@ -1695,6 +1739,7 @@ function createCelebration() {
         const x =
             (Math.random() - 0.5) *
             800;
+
 
         const y =
             (Math.random() - 0.5) *
@@ -1759,3 +1804,8 @@ function createCelebration() {
     }
 
 }
+
+
+/* =====================================================
+   🌸 FIN DU SCRIPT
+===================================================== */
