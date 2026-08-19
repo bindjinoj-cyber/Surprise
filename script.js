@@ -30,11 +30,8 @@ const poemScene = document.getElementById("poemScene");
 const poem = document.getElementById("poem");
 const revealBtn = document.getElementById("revealBtn");
 
-const transitionScene =
-    document.getElementById("transitionScene");
-
-const transitionText =
-    document.getElementById("transitionText");
+const transitionScene = document.getElementById("transitionScene");
+const transitionText = document.getElementById("transitionText");
 
 const questionFinale =
     document.getElementById("questionFinale");
@@ -89,19 +86,82 @@ const particles =
 
 
 /* =========================================
-   📩 GOOGLE FORM
+   📋 GOOGLE FORMS
 ========================================= */
 
 const GOOGLE_FORM_YES_URL =
     "https://docs.google.com/forms/d/e/1FAIpQLSc4OfKWZ4hFxpm3ktsZEHlU5xkqP62OEFWLzXPlUtM-zDQRDA/viewform?usp=pp_url&entry.1144722576=Oui";
 
 
-function sendYesToGoogleForm() {
+/*
+   Fonction pour ouvrir le Google Form
+   avec "Oui" déjà sélectionné.
+*/
+
+function openGoogleFormYes() {
 
     window.open(
         GOOGLE_FORM_YES_URL,
         "_blank"
     );
+
+}
+
+
+/* =========================================
+   📩 GOOGLE SHEETS
+========================================= */
+
+const GOOGLE_SCRIPT_URL =
+    "https://script.google.com/macros/s/AKfycbyTwZZp6sdDkxkKdNKUb3ZJRwGjYhv4sPMK66hhtXpfbutTqB6ih9RwcYm8eGW429NN8Q/exec";
+
+
+let answerSent = false;
+
+
+function sendAnswer(answer) {
+
+    if (answerSent) {
+        return;
+    }
+
+    answerSent = true;
+
+    fetch(
+        GOOGLE_SCRIPT_URL,
+        {
+            method: "POST",
+
+            mode: "no-cors",
+
+            headers: {
+                "Content-Type":
+                    "application/x-www-form-urlencoded"
+            },
+
+            body:
+                "answer=" +
+                encodeURIComponent(answer)
+        }
+    )
+    .then(() => {
+
+        console.log(
+            "Réponse envoyée :",
+            answer
+        );
+
+    })
+    .catch((error) => {
+
+        console.error(
+            "Erreur :",
+            error
+        );
+
+        answerSent = false;
+
+    });
 
 }
 
@@ -201,6 +261,10 @@ function showCat(
     expression = "content"
 ) {
 
+    if (!catContainer) {
+        return;
+    }
+
     catContainer.classList.add("show");
 
     characterMessage.textContent =
@@ -222,9 +286,7 @@ let waitingTimer = null;
 
 function startWaitingTimer() {
 
-    clearTimeout(
-        waitingTimer
-    );
+    clearTimeout(waitingTimer);
 
     waitingTimer =
         setTimeout(() => {
@@ -241,9 +303,7 @@ function startWaitingTimer() {
 
 function resetWaitingTimer() {
 
-    clearTimeout(
-        waitingTimer
-    );
+    clearTimeout(waitingTimer);
 
     startWaitingTimer();
 
@@ -265,8 +325,7 @@ function startMusic() {
 
     backgroundMusic.volume = 0.25;
 
-    backgroundMusic
-        .play()
+    backgroundMusic.play()
         .then(() => {
 
             musicPlaying = true;
@@ -627,6 +686,10 @@ if (openGift) {
 
 function giftHeartExplosion() {
 
+    if (!gift) {
+        return;
+    }
+
     const rect =
         gift.getBoundingClientRect();
 
@@ -753,6 +816,10 @@ function giftHeartExplosion() {
 ========================================= */
 
 function startTypingPoem() {
+
+    if (!poem) {
+        return;
+    }
 
     const paragraphs =
         poem.querySelectorAll("p");
@@ -942,6 +1009,19 @@ if (finalNo) {
         "click",
         () => {
 
+            /*
+             * Envoie NON à Google Sheets.
+             */
+
+            if (!answerSent) {
+
+                sendAnswer(
+                    "Non 🌷"
+                );
+
+            }
+
+
             finalNoClicks++;
 
             resetWaitingTimer();
@@ -980,6 +1060,7 @@ if (finalNo) {
             finalNoMessage.textContent =
                 message;
 
+
             finalNoMessage.classList.add(
                 "show"
             );
@@ -1009,13 +1090,29 @@ if (finalYes) {
         "click",
         () => {
 
-            resetWaitingTimer();
+            /*
+             * Enregistre la réponse
+             * dans Google Sheets.
+             */
+
+            if (!answerSent) {
+
+                sendAnswer(
+                    "Oui 💗"
+                );
+
+            }
+
 
             /*
-             * Ouvre le Google Form
-             * avec "Oui" déjà sélectionné.
+             * Ouvre aussi ton Google Form
+             * avec OUI déjà sélectionné.
              */
-            sendYesToGoogleForm();
+
+            openGoogleFormYes();
+
+
+            resetWaitingTimer();
 
 
             questionFinale.classList.remove(
@@ -1200,6 +1297,10 @@ if (restart) {
 
 function createStars() {
 
+    if (!stars) {
+        return;
+    }
+
     for (
         let i = 0;
         i < 80;
@@ -1246,6 +1347,10 @@ createStars();
 ========================================= */
 
 function createFlowers() {
+
+    if (!flowers) {
+        return;
+    }
 
     const types = [
 
@@ -1306,6 +1411,10 @@ createFlowers();
 ========================================= */
 
 function createHeart() {
+
+    if (!fallingHearts) {
+        return;
+    }
 
     const heart =
         document.createElement(
@@ -1384,6 +1493,10 @@ function createSparkles(
     amount = 15
 ) {
 
+    if (!particles) {
+        return;
+    }
+
     const symbols = [
 
         "✨",
@@ -1454,6 +1567,10 @@ function createSparkles(
 function createPetals(
     amount = 15
 ) {
+
+    if (!particles) {
+        return;
+    }
 
     const petals = [
 
