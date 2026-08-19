@@ -30,25 +30,44 @@ const poemScene = document.getElementById("poemScene");
 const poem = document.getElementById("poem");
 const revealBtn = document.getElementById("revealBtn");
 
-const transitionScene = document.getElementById("transitionScene");
-const transitionText = document.getElementById("transitionText");
+const transitionScene =
+    document.getElementById("transitionScene");
 
-const questionFinale = document.getElementById("questionFinale");
+const transitionText =
+    document.getElementById("transitionText");
 
-const finalYes = document.getElementById("finalYes");
-const finalNo = document.getElementById("finalNo");
-const finalNoMessage = document.getElementById("finalNoMessage");
+const questionFinale =
+    document.getElementById("questionFinale");
 
-const envelopeScene = document.getElementById("envelopeScene");
-const envelope = document.getElementById("envelope");
-const letterText = document.getElementById("letterText");
+const finalYes =
+    document.getElementById("finalYes");
 
-const revealScene = document.getElementById("revealScene");
+const finalNo =
+    document.getElementById("finalNo");
 
-const instagramBtn = document.getElementById("instagramBtn");
-const restart = document.getElementById("restart");
+const finalNoMessage =
+    document.getElementById("finalNoMessage");
 
-const game = document.getElementById("game");
+const envelopeScene =
+    document.getElementById("envelopeScene");
+
+const envelope =
+    document.getElementById("envelope");
+
+const letterText =
+    document.getElementById("letterText");
+
+const revealScene =
+    document.getElementById("revealScene");
+
+const instagramBtn =
+    document.getElementById("instagramBtn");
+
+const restart =
+    document.getElementById("restart");
+
+const game =
+    document.getElementById("game");
 
 const backgroundMusic =
     document.getElementById("backgroundMusic");
@@ -70,58 +89,19 @@ const particles =
 
 
 /* =========================================
-   📩 GOOGLE SHEETS
+   📩 GOOGLE FORM
 ========================================= */
 
-const GOOGLE_SCRIPT_URL =
-    "https://script.google.com/macros/s/AKfycbyTwZZp6sdDkxkKdNKUb3ZJRwGjYhv4sPMK66hhtXpfbutTqB6ih9RwcYm8eGW429NN8Q/exec";
-
-let answerSent = false;
+const GOOGLE_FORM_YES_URL =
+    "https://docs.google.com/forms/d/e/1FAIpQLSc4OfKWZ4hFxpm3ktsZEHlU5xkqP62OEFWLzXPlUtM-zDQRDA/viewform?usp=pp_url&entry.1144722576=Oui";
 
 
-function sendAnswer(answer) {
+function sendYesToGoogleForm() {
 
-    if (answerSent) {
-        return;
-    }
-
-    answerSent = true;
-
-    fetch(
-        GOOGLE_SCRIPT_URL,
-        {
-            method: "POST",
-
-            mode: "no-cors",
-
-            headers: {
-                "Content-Type":
-                    "application/x-www-form-urlencoded"
-            },
-
-            body:
-                "answer=" +
-                encodeURIComponent(answer)
-        }
-    )
-    .then(() => {
-
-        console.log(
-            "Réponse envoyée :",
-            answer
-        );
-
-    })
-    .catch((error) => {
-
-        console.error(
-            "Erreur lors de l'envoi :",
-            error
-        );
-
-        answerSent = false;
-
-    });
+    window.open(
+        GOOGLE_FORM_YES_URL,
+        "_blank"
+    );
 
 }
 
@@ -196,7 +176,9 @@ function setCatExpression(expression) {
     const face =
         catExpressions[expression];
 
-    if (!face) return;
+    if (!face) {
+        return;
+    }
 
     catEyeLeft.textContent =
         face.left;
@@ -209,6 +191,10 @@ function setCatExpression(expression) {
 
 }
 
+
+/* =========================================
+   🐱 AFFICHER CHAT
+========================================= */
 
 function showCat(
     message,
@@ -236,7 +222,9 @@ let waitingTimer = null;
 
 function startWaitingTimer() {
 
-    clearTimeout(waitingTimer);
+    clearTimeout(
+        waitingTimer
+    );
 
     waitingTimer =
         setTimeout(() => {
@@ -253,7 +241,9 @@ function startWaitingTimer() {
 
 function resetWaitingTimer() {
 
-    clearTimeout(waitingTimer);
+    clearTimeout(
+        waitingTimer
+    );
 
     startWaitingTimer();
 
@@ -275,7 +265,8 @@ function startMusic() {
 
     backgroundMusic.volume = 0.25;
 
-    backgroundMusic.play()
+    backgroundMusic
+        .play()
         .then(() => {
 
             musicPlaying = true;
@@ -306,7 +297,8 @@ if (musicButton) {
 
                 startMusic();
 
-            } else {
+            }
+            else {
 
                 backgroundMusic.pause();
 
@@ -438,9 +430,13 @@ let noClicks = 0;
 const noMessages = [
 
     "Oh... 🥺🌸",
+
     "Le petit chat est surpris... 🥺",
+
     "Je comprends 😊",
+
     "Encore une petite chance de continuer ? 🌷",
+
     "Promis, la suite reste une surprise 💗"
 
 ];
@@ -635,6 +631,7 @@ function giftHeartExplosion() {
         gift.getBoundingClientRect();
 
     const items = [
+
         "💗",
         "💕",
         "💖",
@@ -642,6 +639,7 @@ function giftHeartExplosion() {
         "🌸",
         "✨",
         "🌷"
+
     ];
 
 
@@ -924,10 +922,15 @@ let finalNoClicks = 0;
 const finalNoMessages = [
 
     "Oh... 🥺",
+
     "Je comprends 💗",
+
     "Le petit chat est un peu surpris... 🐱",
+
     "Pas de pression 🌸",
+
     "Le plus important est d'être sincère 💕",
+
     "Merci quand même d'avoir regardé ma surprise 🌷"
 
 ];
@@ -938,13 +941,6 @@ if (finalNo) {
     finalNo.addEventListener(
         "click",
         () => {
-
-            if (!answerSent) {
-
-                sendAnswer("Non 🌷");
-
-            }
-
 
             finalNoClicks++;
 
@@ -1004,7 +1000,7 @@ if (finalNo) {
 
 
 /* =========================================
-   💗 OUI FINAL → GOOGLE FORMS
+   💗 OUI FINAL
 ========================================= */
 
 if (finalYes) {
@@ -1013,37 +1009,35 @@ if (finalYes) {
         "click",
         () => {
 
-            /*
-             * Envoie la réponse à Google Sheets
-             */
-            if (!answerSent) {
-
-                sendAnswer("Oui 💗");
-
-            }
-
             resetWaitingTimer();
 
             /*
-             * Animation
+             * Ouvre le Google Form
+             * avec "Oui" déjà sélectionné.
              */
-            createCelebration();
+            sendYesToGoogleForm();
+
+
+            questionFinale.classList.remove(
+                "active"
+            );
+
+            game.classList.remove(
+                "calm"
+            );
+
+            envelopeScene.classList.add(
+                "active"
+            );
+
 
             showCat(
-                "Merci pour ta réponse 💗",
+                "J'ai encore une petite chose pour toi 💗",
                 "heureux"
             );
 
-            /*
-             * Google Forms
-             * avec Oui prérempli
-             */
-            setTimeout(() => {
 
-                window.location.href =
-                    "https://docs.google.com/forms/d/e/1FAIpQLSc4OfKWZ4hFxpm3ktsZEHlU5xkqP62OEFWLzXPlUtM-zDQRDA/viewform?usp=pp_url&entry.1144722576=Oui";
-
-            }, 700);
+            createCelebration();
 
         }
     );
@@ -1068,6 +1062,7 @@ if (envelope) {
             ) {
 
                 return;
+
             }
 
 
@@ -1253,10 +1248,12 @@ createStars();
 function createFlowers() {
 
     const types = [
+
         "🌸",
         "🌷",
         "🌼",
         "🌺"
+
     ];
 
 
@@ -1320,11 +1317,13 @@ function createHeart() {
 
 
     const types = [
+
         "💗",
         "💕",
         "💖",
         "💓",
         "🌸"
+
     ];
 
 
@@ -1386,10 +1385,12 @@ function createSparkles(
 ) {
 
     const symbols = [
+
         "✨",
         "⭐",
         "💫",
         "🌟"
+
     ];
 
 
@@ -1455,10 +1456,12 @@ function createPetals(
 ) {
 
     const petals = [
+
         "🌸",
         "🌷",
         "🌺",
         "💕"
+
     ];
 
 
@@ -1521,12 +1524,14 @@ function createPetals(
 function createCelebration() {
 
     const items = [
+
         "💗",
         "💕",
         "💖",
         "✨",
         "🌸",
         "🌷"
+
     ];
 
 
