@@ -1,69 +1,50 @@
 /* =====================================================
-   🌸 UNE PETITE SURPRISE
-   SCRIPT.JS COMPLET
+   🌸 SURPRISE INTERACTIVE
+   VERSION AVEC ENVELOPPE AVANT QUESTION FINALE
 ===================================================== */
 
 
-/* =========================================
+/* =====================================================
    🔎 ÉLÉMENTS
-========================================= */
+===================================================== */
 
-const startScreen =
-    document.getElementById("startScreen");
+const startScreen = document.getElementById("startScreen");
+const startBtn = document.getElementById("startBtn");
 
-const startBtn =
-    document.getElementById("startBtn");
+const step1 = document.getElementById("step1");
+const step2 = document.getElementById("step2");
+const step3 = document.getElementById("step3");
 
-const step1 =
-    document.getElementById("step1");
+const next1 = document.getElementById("next1");
+const next2 = document.getElementById("next2");
 
-const step2 =
-    document.getElementById("step2");
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const noMessage = document.getElementById("noMessage");
 
-const step3 =
-    document.getElementById("step3");
+const giftScene = document.getElementById("giftScene");
+const gift = document.getElementById("gift");
+const openGift = document.getElementById("openGift");
+const giftMessage = document.getElementById("giftMessage");
 
-const next1 =
-    document.getElementById("next1");
-
-const next2 =
-    document.getElementById("next2");
-
-const yesBtn =
-    document.getElementById("yesBtn");
-
-const noBtn =
-    document.getElementById("noBtn");
-
-const noMessage =
-    document.getElementById("noMessage");
-
-const giftScene =
-    document.getElementById("giftScene");
-
-const gift =
-    document.getElementById("gift");
-
-const openGift =
-    document.getElementById("openGift");
-
-const giftMessage =
-    document.getElementById("giftMessage");
-
-const poemScene =
-    document.getElementById("poemScene");
-
-const poem =
-    document.getElementById("poem");
-
-const revealBtn =
-    document.getElementById("revealBtn");
+const poemScene = document.getElementById("poemScene");
+const poem = document.getElementById("poem");
+const revealBtn = document.getElementById("revealBtn");
 
 const transitionScene =
     document.getElementById("transitionScene");
 
 const transitionText =
     document.getElementById("transitionText");
+
+const envelopeScene =
+    document.getElementById("envelopeScene");
+
+const envelope =
+    document.getElementById("envelope");
+
+const letterText =
+    document.getElementById("letterText");
 
 const questionFinale =
     document.getElementById("questionFinale");
@@ -76,15 +57,6 @@ const finalNo =
 
 const finalNoMessage =
     document.getElementById("finalNoMessage");
-
-const envelopeScene =
-    document.getElementById("envelopeScene");
-
-const envelope =
-    document.getElementById("envelope");
-
-const letterText =
-    document.getElementById("letterText");
 
 const revealScene =
     document.getElementById("revealScene");
@@ -117,21 +89,12 @@ const particles =
     document.getElementById("particles");
 
 
-/* =========================================
-   📩 GOOGLE FORM
-========================================= */
-
-const GOOGLE_FORM_URL =
-    "https://docs.google.com/forms/d/e/1FAIpQLSc4OfKWZ4hFxpm3ktsZEHlU5xkqP62OEFWLzXPlUtM-zDQRDA/viewform?usp=pp_url&entry.1144722576=Oui";
-
-
-/* =========================================
-   📊 GOOGLE SHEETS
-========================================= */
+/* =====================================================
+   📩 GOOGLE FORM / GOOGLE APPS SCRIPT
+===================================================== */
 
 const GOOGLE_SCRIPT_URL =
     "https://script.google.com/macros/s/AKfycbyTwZZp6sdDkxkKdNKUb3ZJRwGjYhv4sPMK66hhtXpfbutTqB6ih9RwcYm8eGW429NN8Q/exec";
-
 
 let answerSent = false;
 
@@ -148,7 +111,6 @@ function sendAnswer(answer) {
         GOOGLE_SCRIPT_URL,
         {
             method: "POST",
-
             mode: "no-cors",
 
             headers: {
@@ -183,9 +145,9 @@ function sendAnswer(answer) {
 }
 
 
-/* =========================================
+/* =====================================================
    🐱 CHAT
-========================================= */
+===================================================== */
 
 const catContainer =
     document.getElementById("catContainer");
@@ -202,10 +164,6 @@ const catEyeRight =
 const catMouth =
     document.getElementById("catMouth");
 
-
-/* =========================================
-   🐱 EXPRESSIONS
-========================================= */
 
 const catExpressions = {
 
@@ -269,10 +227,6 @@ function setCatExpression(expression) {
 }
 
 
-/* =========================================
-   🐱 AFFICHER CHAT
-========================================= */
-
 function showCat(
     message,
     expression = "content"
@@ -287,10 +241,6 @@ function showCat(
 
 }
 
-
-/* =========================================
-   😴 ATTENTE
-========================================= */
 
 let waitingTimer = null;
 
@@ -321,52 +271,9 @@ function resetWaitingTimer() {
 }
 
 
-/* =========================================
-   👀 CLIGNEMENT DU CHAT
-========================================= */
-
-function catBlink() {
-
-    if (!catEyeLeft || !catEyeRight) {
-        return;
-    }
-
-    const left =
-        catEyeLeft.textContent;
-
-    const right =
-        catEyeRight.textContent;
-
-    catEyeLeft.textContent = "—";
-    catEyeRight.textContent = "—";
-
-    setTimeout(() => {
-
-        catEyeLeft.textContent = left;
-        catEyeRight.textContent = right;
-
-    }, 180);
-
-}
-
-
-setInterval(() => {
-
-    if (
-        catContainer &&
-        catContainer.classList.contains("show")
-    ) {
-
-        catBlink();
-
-    }
-
-}, 3500);
-
-
-/* =========================================
+/* =====================================================
    🎵 MUSIQUE
-========================================= */
+===================================================== */
 
 let musicPlaying = false;
 
@@ -379,8 +286,7 @@ function startMusic() {
 
     backgroundMusic.volume = 0.25;
 
-    backgroundMusic
-        .play()
+    backgroundMusic.play()
         .then(() => {
 
             musicPlaying = true;
@@ -429,9 +335,9 @@ if (musicButton) {
 }
 
 
-/* =========================================
+/* =====================================================
    🚪 COMMENCER
-========================================= */
+===================================================== */
 
 if (startBtn) {
 
@@ -468,9 +374,9 @@ if (startBtn) {
 }
 
 
-/* =========================================
+/* =====================================================
    🌸 ÉTAPE 1
-========================================= */
+===================================================== */
 
 if (next1) {
 
@@ -501,9 +407,9 @@ if (next1) {
 }
 
 
-/* =========================================
+/* =====================================================
    🌷 ÉTAPE 2
-========================================= */
+===================================================== */
 
 if (next2) {
 
@@ -534,9 +440,9 @@ if (next2) {
 }
 
 
-/* =========================================
+/* =====================================================
    ❌ PREMIER NON
-========================================= */
+===================================================== */
 
 let noClicks = 0;
 
@@ -609,9 +515,9 @@ if (noBtn) {
 }
 
 
-/* =========================================
+/* =====================================================
    💗 PREMIER OUI
-========================================= */
+===================================================== */
 
 if (yesBtn) {
 
@@ -635,7 +541,6 @@ if (yesBtn) {
             );
 
             createSparkles(30);
-
             createPetals(20);
 
         }
@@ -644,9 +549,9 @@ if (yesBtn) {
 }
 
 
-/* =========================================
+/* =====================================================
    🎁 CADEAU
-========================================= */
+===================================================== */
 
 let giftOpened = false;
 
@@ -735,9 +640,9 @@ if (openGift) {
 }
 
 
-/* =========================================
-   💗 EXPLOSION CADEAU
-========================================= */
+/* =====================================================
+   💗 EXPLOSION DE COEURS
+===================================================== */
 
 function giftHeartExplosion() {
 
@@ -745,7 +650,6 @@ function giftHeartExplosion() {
         gift.getBoundingClientRect();
 
     const items = [
-
         "💗",
         "💕",
         "💖",
@@ -753,7 +657,6 @@ function giftHeartExplosion() {
         "🌸",
         "✨",
         "🌷"
-
     ];
 
 
@@ -794,29 +697,24 @@ function giftHeartExplosion() {
 
 
         const x =
-            (Math.random() - 0.5) *
-            420;
+            (Math.random() - 0.5) * 420;
 
         const y =
             -80 -
-            Math.random() *
-            320;
+            Math.random() * 320;
 
 
         item.animate(
             [
-
                 {
                     transform:
                         "translate(-50%,-50%) scale(.2)",
-
                     opacity: 0
                 },
 
                 {
                     transform:
                         "translate(-50%,-50%) scale(1.2)",
-
                     opacity: 1
                 },
 
@@ -828,21 +726,16 @@ function giftHeartExplosion() {
                         )
                         rotate(360deg)
                         scale(.6)`,
-
                     opacity: 0
                 }
-
             ],
             {
-
                 duration:
                     1300 +
-                    Math.random() *
-                    900,
+                    Math.random() * 900,
 
                 easing:
                     "cubic-bezier(.2,.8,.3,1)"
-
             }
         );
 
@@ -858,15 +751,14 @@ function giftHeartExplosion() {
 }
 
 
-/* =========================================
+/* =====================================================
    📖 POÈME
-========================================= */
+===================================================== */
 
 function startTypingPoem() {
 
     const paragraphs =
         poem.querySelectorAll("p");
-
 
     paragraphs.forEach(
         paragraph => {
@@ -901,10 +793,8 @@ function startTypingPoem() {
                 paragraphIndex
             ];
 
-
         const originalText =
             paragraph.textContent.trim();
-
 
         paragraph.textContent =
             "";
@@ -939,7 +829,6 @@ function startTypingPoem() {
 
                     paragraphIndex++;
 
-
                     setTimeout(
                         typeParagraph,
                         900
@@ -955,15 +844,14 @@ function startTypingPoem() {
     revealBtn.style.display =
         "none";
 
-
     typeParagraph();
 
 }
 
 
-/* =========================================
-   🌙 TRANSITION MODE NUIT
-========================================= */
+/* =====================================================
+   🌙 TRANSITION
+===================================================== */
 
 if (revealBtn) {
 
@@ -986,18 +874,13 @@ if (revealBtn) {
             );
 
             transitionText.textContent =
-                "Bon... j'ai une dernière petite question 😳💗";
+                "La surprise n'est pas encore terminée... 🌙💗";
 
 
             showCat(
-                "Bon... j'ai une dernière petite question 😳💗",
+                "Il reste encore une dernière chose... 💌",
                 "gene"
             );
-
-
-            createStars();
-
-            createSparkles(30);
 
 
             setTimeout(() => {
@@ -1006,16 +889,22 @@ if (revealBtn) {
                     "active"
                 );
 
-                questionFinale.classList.add(
+                /*
+                 * ⭐ NOUVEAU :
+                 * L'ENVELOPPE ARRIVE AVANT
+                 * LA QUESTION FINALE.
+                 */
+
+                envelopeScene.classList.add(
                     "active"
                 );
 
                 showCat(
-                    "Voilà... 😳💗",
-                    "gene"
+                    "Clique sur l'enveloppe... 💌",
+                    "heureux"
                 );
 
-                createSparkles(20);
+                createSparkles(25);
 
             }, 4000);
 
@@ -1025,24 +914,121 @@ if (revealBtn) {
 }
 
 
-/* =========================================
+/* =====================================================
+   💌 OUVRIR L'ENVELOPPE
+===================================================== */
+
+let envelopeOpened = false;
+
+
+if (envelope) {
+
+    envelope.addEventListener(
+        "click",
+        () => {
+
+            if (envelopeOpened) {
+                return;
+            }
+
+            envelopeOpened = true;
+
+            resetWaitingTimer();
+
+            envelope.classList.add(
+                "open"
+            );
+
+            showCat(
+                "Lis bien cette petite lettre... 💗",
+                "heureux"
+            );
+
+            createSparkles(25);
+
+
+            const message =
+                "Avant de te poser ma dernière question... 💗\n\n" +
+                "Je voulais simplement te dire merci " +
+                "d'avoir pris le temps de regarder cette petite surprise. 🌸\n\n" +
+                "Et maintenant... il reste une dernière chose à te demander. 💌";
+
+
+            letterText.textContent =
+                "";
+
+            let index = 0;
+
+
+            const interval =
+                setInterval(() => {
+
+                    letterText.textContent +=
+                        message[index];
+
+                    index++;
+
+
+                    if (
+                        index >=
+                        message.length
+                    ) {
+
+                        clearInterval(
+                            interval
+                        );
+
+                    }
+
+                }, 25);
+
+
+            /*
+             * Après quelques secondes,
+             * on affiche la question finale.
+             */
+
+            setTimeout(() => {
+
+                envelopeScene.classList.remove(
+                    "active"
+                );
+
+                questionFinale.classList.add(
+                    "active"
+                );
+
+                showCat(
+                    "Voilà... ma dernière question 💗",
+                    "gene"
+                );
+
+                createSparkles(30);
+
+            }, 6500);
+
+        }
+    );
+
+}
+
+
+/* =====================================================
    ❌ NON FINAL
-========================================= */
+===================================================== */
 
 let finalNoClicks = 0;
 
 
 const finalNoMessages = [
 
-    "Oh... 🥺",
-
     "Je comprends 💗",
 
-    "Le petit chat est un peu surpris... 🐱",
+    "Merci d'être sincère 🌸",
 
-    "Pas de pression 🌸",
+    "Aucun problème 😊",
 
-    "Le plus important est d'être sincère 💕",
+    "Le plus important est ta réponse 💕",
 
     "Merci quand même d'avoir regardé ma surprise 🌷"
 
@@ -1057,7 +1043,9 @@ if (finalNo) {
 
             if (!answerSent) {
 
-                sendAnswer("Non 🌷");
+                sendAnswer(
+                    "Non 🌷"
+                );
 
             }
 
@@ -1119,10 +1107,9 @@ if (finalNo) {
 }
 
 
-/* =========================================
+/* =====================================================
    💗 OUI FINAL
-   → GOOGLE FORM
-========================================= */
+===================================================== */
 
 if (finalYes) {
 
@@ -1131,58 +1118,40 @@ if (finalYes) {
         () => {
 
             /*
-             * Enregistre la réponse.
+             * Enregistre OUI
              */
 
             if (!answerSent) {
 
-                sendAnswer("Oui 💗");
+                sendAnswer(
+                    "Oui 💗"
+                );
 
             }
 
 
             resetWaitingTimer();
 
-
-            /*
-             * On cache la question.
-             */
-
             questionFinale.classList.remove(
                 "active"
             );
 
+            game.classList.remove(
+                "calm"
+            );
 
-            /*
-             * Message du chat.
-             */
+            revealScene.classList.add(
+                "active"
+            );
+
 
             showCat(
-                "Yay ! 💗 Merci pour ta réponse !",
+                "Merci pour ta réponse 💗",
                 "heureux"
             );
 
 
-            /*
-             * Feux d'artifice.
-             */
-
-            createFireworks();
-
-
-            /*
-             * Petite attente avant
-             * d'ouvrir le formulaire.
-             */
-
-            setTimeout(() => {
-
-                window.open(
-                    GOOGLE_FORM_URL,
-                    "_blank"
-                );
-
-            }, 1800);
+            createCelebration();
 
         }
     );
@@ -1190,273 +1159,9 @@ if (finalYes) {
 }
 
 
-/* =========================================
-   🎆 FEUX D'ARTIFICE
-========================================= */
-
-function createFireworks() {
-
-    const colors = [
-        "💗",
-        "💕",
-        "💖",
-        "✨",
-        "🌸",
-        "⭐",
-        "🌟"
-    ];
-
-
-    for (
-        let burst = 0;
-        burst < 8;
-        burst++
-    ) {
-
-        setTimeout(() => {
-
-            const centerX =
-                15 +
-                Math.random() * 70;
-
-            const centerY =
-                15 +
-                Math.random() * 55;
-
-
-            for (
-                let i = 0;
-                i < 22;
-                i++
-            ) {
-
-                const particle =
-                    document.createElement("div");
-
-                particle.textContent =
-                    colors[
-                        Math.floor(
-                            Math.random() *
-                            colors.length
-                        )
-                    ];
-
-                particle.style.position =
-                    "fixed";
-
-                particle.style.left =
-                    centerX + "vw";
-
-                particle.style.top =
-                    centerY + "vh";
-
-                particle.style.fontSize =
-                    "20px";
-
-                particle.style.zIndex =
-                    "1000000";
-
-                particle.style.pointerEvents =
-                    "none";
-
-
-                document.body.appendChild(
-                    particle
-                );
-
-
-                const angle =
-                    (
-                        Math.PI * 2
-                    ) *
-                    i / 22;
-
-                const distance =
-                    80 +
-                    Math.random() *
-                    180;
-
-                const x =
-                    Math.cos(angle) *
-                    distance;
-
-                const y =
-                    Math.sin(angle) *
-                    distance;
-
-
-                particle.animate(
-                    [
-
-                        {
-                            transform:
-                                "translate(-50%,-50%) scale(.2)",
-
-                            opacity: 0
-                        },
-
-                        {
-                            transform:
-                                "translate(-50%,-50%) scale(1)",
-
-                            opacity: 1
-                        },
-
-                        {
-                            transform:
-                                `translate(
-                                    calc(-50% + ${x}px),
-                                    calc(-50% + ${y}px)
-                                )
-                                scale(.2)`,
-
-                            opacity: 0
-                        }
-
-                    ],
-                    {
-
-                        duration:
-                            1400 +
-                            Math.random() *
-                            700,
-
-                        easing:
-                            "ease-out"
-
-                    }
-                );
-
-
-                setTimeout(() => {
-
-                    particle.remove();
-
-                }, 2300);
-
-            }
-
-        }, burst * 350);
-
-    }
-
-}
-
-
-/* =========================================
-   💌 OUVRIR ENVELOPPE
-========================================= */
-
-if (envelope) {
-
-    envelope.addEventListener(
-        "click",
-        () => {
-
-            if (
-                envelope.classList.contains(
-                    "open"
-                )
-            ) {
-
-                return;
-
-            }
-
-
-            envelope.classList.add(
-                "open"
-            );
-
-
-            showCat(
-                "Une dernière petite surprise... 💗",
-                "heureux"
-            );
-
-
-            createSparkles(25);
-
-
-            setTimeout(() => {
-
-                typeLetter();
-
-            }, 900);
-
-        }
-    );
-
-}
-
-
-/* =========================================
-   💌 LETTRE
-========================================= */
-
-function typeLetter() {
-
-    const message =
-        "Merci d'avoir pris le temps de regarder toute cette petite surprise. 🌸\n\n" +
-        "J'espère simplement qu'elle t'aura fait sourire. 💗\n\n" +
-        "Peu importe ta réponse, le plus important est qu'elle soit sincère. 😊";
-
-
-    letterText.textContent =
-        "";
-
-
-    let index = 0;
-
-
-    const interval =
-        setInterval(() => {
-
-            letterText.textContent +=
-                message[index];
-
-            index++;
-
-
-            if (
-                index >=
-                message.length
-            ) {
-
-                clearInterval(interval);
-
-
-                setTimeout(() => {
-
-                    envelopeScene.classList.remove(
-                        "active"
-                    );
-
-                    revealScene.classList.add(
-                        "active"
-                    );
-
-
-                    showCat(
-                        "Merci beaucoup ! 😸💗",
-                        "heureux"
-                    );
-
-
-                    createCelebration();
-
-                }, 2500);
-
-            }
-
-        }, 25);
-
-}
-
-
-/* =========================================
+/* =====================================================
    📱 INSTAGRAM
-========================================= */
+===================================================== */
 
 if (instagramBtn) {
 
@@ -1475,9 +1180,9 @@ if (instagramBtn) {
 }
 
 
-/* =========================================
+/* =====================================================
    🔄 RECOMMENCER
-========================================= */
+===================================================== */
 
 if (restart) {
 
@@ -1493,18 +1198,11 @@ if (restart) {
 }
 
 
-/* =========================================
+/* =====================================================
    ⭐ ÉTOILES
-========================================= */
+===================================================== */
 
 function createStars() {
-
-    if (!stars) {
-        return;
-    }
-
-    stars.innerHTML = "";
-
 
     for (
         let i = 0;
@@ -1519,24 +1217,15 @@ function createStars() {
             "star";
 
         star.style.left =
-            Math.random() *
-            100 +
-            "%";
+            Math.random() * 100 + "%";
 
         star.style.top =
-            Math.random() *
-            80 +
-            "%";
+            Math.random() * 80 + "%";
 
         star.style.animationDelay =
-            Math.random() *
-            3 +
-            "s";
+            Math.random() * 3 + "s";
 
-
-        stars.appendChild(
-            star
-        );
+        stars.appendChild(star);
 
     }
 
@@ -1546,26 +1235,17 @@ function createStars() {
 createStars();
 
 
-/* =========================================
+/* =====================================================
    🌷 FLEURS
-========================================= */
+===================================================== */
 
 function createFlowers() {
 
-    if (!flowers) {
-        return;
-    }
-
-    flowers.innerHTML = "";
-
-
     const types = [
-
         "🌸",
         "🌷",
         "🌼",
         "🌺"
-
     ];
 
 
@@ -1590,15 +1270,10 @@ function createFlowers() {
             ];
 
         flower.style.left =
-            Math.random() *
-            100 +
-            "%";
+            Math.random() * 100 + "%";
 
         flower.style.animationDelay =
-            Math.random() *
-            2 +
-            "s";
-
+            Math.random() * 2 + "s";
 
         flowers.appendChild(
             flower
@@ -1612,16 +1287,11 @@ function createFlowers() {
 createFlowers();
 
 
-/* =========================================
+/* =====================================================
    💕 COEURS QUI TOMBENT
-========================================= */
+===================================================== */
 
 function createHeart() {
-
-    if (!fallingHearts) {
-        return;
-    }
-
 
     const heart =
         document.createElement("div");
@@ -1631,13 +1301,11 @@ function createHeart() {
 
 
     const types = [
-
         "💗",
         "💕",
         "💖",
         "💓",
         "🌸"
-
     ];
 
 
@@ -1651,22 +1319,18 @@ function createHeart() {
 
 
     heart.style.left =
-        Math.random() *
-        100 +
-        "%";
+        Math.random() * 100 + "%";
 
 
     heart.style.fontSize =
         15 +
-        Math.random() *
-        18 +
+        Math.random() * 18 +
         "px";
 
 
     heart.style.animationDuration =
         4 +
-        Math.random() *
-        5 +
+        Math.random() * 5 +
         "s";
 
 
@@ -1690,26 +1354,19 @@ setInterval(
 );
 
 
-/* =========================================
+/* =====================================================
    ✨ PARTICULES
-========================================= */
+===================================================== */
 
 function createSparkles(
     amount = 15
 ) {
 
-    if (!particles) {
-        return;
-    }
-
-
     const symbols = [
-
         "✨",
         "⭐",
         "💫",
         "🌟"
-
     ];
 
 
@@ -1736,14 +1393,10 @@ function createSparkles(
                 ];
 
             sparkle.style.left =
-                Math.random() *
-                100 +
-                "vw";
+                Math.random() * 100 + "vw";
 
             sparkle.style.top =
-                Math.random() *
-                100 +
-                "vh";
+                Math.random() * 100 + "vh";
 
 
             particles.appendChild(
@@ -1764,26 +1417,19 @@ function createSparkles(
 }
 
 
-/* =========================================
+/* =====================================================
    🌸 PÉTALES
-========================================= */
+===================================================== */
 
 function createPetals(
     amount = 15
 ) {
 
-    if (!particles) {
-        return;
-    }
-
-
     const petals = [
-
         "🌸",
         "🌷",
         "🌺",
         "💕"
-
     ];
 
 
@@ -1809,15 +1455,11 @@ function createPetals(
 
 
         petal.style.left =
-            Math.random() *
-            100 +
-            "vw";
-
+            Math.random() * 100 + "vw";
 
         petal.style.top =
             70 +
-            Math.random() *
-            20 +
+            Math.random() * 20 +
             "vh";
 
 
@@ -1837,27 +1479,25 @@ function createPetals(
 }
 
 
-/* =========================================
+/* =====================================================
    🎉 CÉLÉBRATION
-========================================= */
+===================================================== */
 
 function createCelebration() {
 
     const items = [
-
         "💗",
         "💕",
         "💖",
         "✨",
         "🌸",
         "🌷"
-
     ];
 
 
     for (
         let i = 0;
-        i < 45;
+        i < 60;
         i++
     ) {
 
@@ -1895,27 +1535,24 @@ function createCelebration() {
 
         const x =
             (Math.random() - 0.5) *
-            800;
+            900;
 
         const y =
             (Math.random() - 0.5) *
-            650;
+            700;
 
 
         item.animate(
             [
-
                 {
                     transform:
                         "translate(-50%,-50%) scale(.2)",
-
                     opacity: 0
                 },
 
                 {
                     transform:
                         "translate(-50%,-50%) scale(1.2)",
-
                     opacity: 1
                 },
 
@@ -1927,21 +1564,16 @@ function createCelebration() {
                         )
                         rotate(360deg)
                         scale(.5)`,
-
                     opacity: 0
                 }
-
             ],
             {
-
                 duration:
                     1500 +
-                    Math.random() *
-                    1000,
+                    Math.random() * 1000,
 
                 easing:
                     "ease-out"
-
             }
         );
 
