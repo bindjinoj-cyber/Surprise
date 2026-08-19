@@ -76,7 +76,6 @@ const particles =
 const GOOGLE_SCRIPT_URL =
     "https://script.google.com/macros/s/AKfycbyTwZZp6sdDkxkKdNKUb3ZJRwGjYhv4sPMK66hhtXpfbutTqB6ih9RwcYm8eGW429NN8Q/exec";
 
-
 let answerSent = false;
 
 
@@ -207,12 +206,9 @@ function setCatExpression(expression) {
 
     catMouth.textContent =
         face.mouth;
+
 }
 
-
-/* =========================================
-   🐱 AFFICHER CHAT
-========================================= */
 
 function showCat(
     message,
@@ -310,8 +306,7 @@ if (musicButton) {
 
                 startMusic();
 
-            }
-            else {
+            } else {
 
                 backgroundMusic.pause();
 
@@ -443,13 +438,9 @@ let noClicks = 0;
 const noMessages = [
 
     "Oh... 🥺🌸",
-
     "Le petit chat est surpris... 🥺",
-
     "Je comprends 😊",
-
     "Encore une petite chance de continuer ? 🌷",
-
     "Promis, la suite reste une surprise 💗"
 
 ];
@@ -644,7 +635,6 @@ function giftHeartExplosion() {
         gift.getBoundingClientRect();
 
     const items = [
-
         "💗",
         "💕",
         "💖",
@@ -652,7 +642,6 @@ function giftHeartExplosion() {
         "🌸",
         "✨",
         "🌷"
-
     ];
 
 
@@ -935,15 +924,10 @@ let finalNoClicks = 0;
 const finalNoMessages = [
 
     "Oh... 🥺",
-
     "Je comprends 💗",
-
     "Le petit chat est un peu surpris... 🐱",
-
     "Pas de pression 🌸",
-
     "Le plus important est d'être sincère 💕",
-
     "Merci quand même d'avoir regardé ma surprise 🌷"
 
 ];
@@ -955,11 +939,6 @@ if (finalNo) {
         "click",
         () => {
 
-            /*
-             * On enregistre la première réponse.
-             * Les clics suivants servent seulement
-             * aux animations du bouton.
-             */
             if (!answerSent) {
 
                 sendAnswer("Non 🌷");
@@ -1025,7 +1004,7 @@ if (finalNo) {
 
 
 /* =========================================
-   💗 OUI FINAL
+   💗 OUI FINAL → GOOGLE FORMS
 ========================================= */
 
 if (finalYes) {
@@ -1035,8 +1014,7 @@ if (finalYes) {
         () => {
 
             /*
-             * Enregistre OUI seulement si
-             * aucune réponse n'a déjà été envoyée.
+             * Envoie la réponse à Google Sheets
              */
             if (!answerSent) {
 
@@ -1044,29 +1022,28 @@ if (finalYes) {
 
             }
 
-
             resetWaitingTimer();
 
-            questionFinale.classList.remove(
-                "active"
-            );
-
-            game.classList.remove(
-                "calm"
-            );
-
-            envelopeScene.classList.add(
-                "active"
-            );
-
+            /*
+             * Animation
+             */
+            createCelebration();
 
             showCat(
-                "J'ai encore une petite chose pour toi 💗",
+                "Merci pour ta réponse 💗",
                 "heureux"
             );
 
+            /*
+             * Google Forms
+             * avec Oui prérempli
+             */
+            setTimeout(() => {
 
-            createCelebration();
+                window.location.href =
+                    "https://docs.google.com/forms/d/e/1FAIpQLSc4OfKWZ4hFxpm3ktsZEHlU5xkqP62OEFWLzXPlUtM-zDQRDA/viewform?usp=pp_url&entry.1144722576=Oui";
+
+            }, 700);
 
         }
     );
@@ -1091,7 +1068,6 @@ if (envelope) {
             ) {
 
                 return;
-
             }
 
 
@@ -1277,12 +1253,10 @@ createStars();
 function createFlowers() {
 
     const types = [
-
         "🌸",
         "🌷",
         "🌼",
         "🌺"
-
     ];
 
 
@@ -1346,13 +1320,11 @@ function createHeart() {
 
 
     const types = [
-
         "💗",
         "💕",
         "💖",
         "💓",
         "🌸"
-
     ];
 
 
@@ -1414,12 +1386,10 @@ function createSparkles(
 ) {
 
     const symbols = [
-
         "✨",
         "⭐",
         "💫",
         "🌟"
-
     ];
 
 
@@ -1485,12 +1455,10 @@ function createPetals(
 ) {
 
     const petals = [
-
         "🌸",
         "🌷",
         "🌺",
         "💕"
-
     ];
 
 
@@ -1553,14 +1521,12 @@ function createPetals(
 function createCelebration() {
 
     const items = [
-
         "💗",
         "💕",
         "💖",
         "✨",
         "🌸",
         "🌷"
-
     ];
 
 
