@@ -1,3 +1,12 @@
+/* =====================================================
+   🌸 SURPRISE INTERACTIVE
+===================================================== */
+
+
+/* =========================================
+   🔎 ÉLÉMENTS
+========================================= */
+
 const startScreen = document.getElementById("startScreen");
 const startBtn = document.getElementById("startBtn");
 
@@ -35,6 +44,7 @@ const envelope = document.getElementById("envelope");
 const letterText = document.getElementById("letterText");
 
 const revealScene = document.getElementById("revealScene");
+
 const instagramBtn = document.getElementById("instagramBtn");
 const restart = document.getElementById("restart");
 
@@ -57,6 +67,64 @@ const fallingHearts =
 
 const particles =
     document.getElementById("particles");
+
+
+/* =========================================
+   📩 GOOGLE SHEETS
+========================================= */
+
+const GOOGLE_SCRIPT_URL =
+    "https://script.google.com/macros/s/AKfycbyTwZZp6sdDkxkKdNKUb3ZJRwGjYhv4sPMK66hhtXpfbutTqB6ih9RwcYm8eGW429NN8Q/exec";
+
+
+let answerSent = false;
+
+
+function sendAnswer(answer) {
+
+    if (answerSent) {
+        return;
+    }
+
+    answerSent = true;
+
+    fetch(
+        GOOGLE_SCRIPT_URL,
+        {
+            method: "POST",
+
+            mode: "no-cors",
+
+            headers: {
+                "Content-Type":
+                    "application/x-www-form-urlencoded"
+            },
+
+            body:
+                "answer=" +
+                encodeURIComponent(answer)
+        }
+    )
+    .then(() => {
+
+        console.log(
+            "Réponse envoyée :",
+            answer
+        );
+
+    })
+    .catch((error) => {
+
+        console.error(
+            "Erreur lors de l'envoi :",
+            error
+        );
+
+        answerSent = false;
+
+    });
+
+}
 
 
 /* =========================================
@@ -88,44 +156,39 @@ const catExpressions = {
     content: {
         left: "^",
         right: "^",
-        mouth: "◡",
-        className: "expression-happy"
+        mouth: "◡"
     },
 
     gene: {
         left: "•",
         right: "•",
-        mouth: "⌣",
-        className: "expression-shy"
+        mouth: "⌣"
     },
 
     surpris: {
         left: "O",
         right: "O",
-        mouth: "o",
-        className: "expression-surprised"
+        mouth: "o"
     },
 
     heureux: {
         left: "♥",
         right: "♥",
-        mouth: "◡",
-        className: "expression-excited"
+        mouth: "◡"
     },
 
     fatigue: {
         left: "—",
         right: "—",
-        mouth: "︵",
-        className: "expression-tired"
+        mouth: "︵"
     },
 
     triste: {
         left: "•",
         right: "•",
-        mouth: "︵",
-        className: "expression-shy"
+        mouth: "︵"
     }
+
 };
 
 
@@ -144,30 +207,11 @@ function setCatExpression(expression) {
 
     catMouth.textContent =
         face.mouth;
-
-
-    catContainer.classList.remove(
-        "expression-happy",
-        "expression-shy",
-        "expression-surprised",
-        "expression-excited",
-        "expression-tired"
-    );
-
-
-    if (face.className) {
-
-        catContainer.classList.add(
-            face.className
-        );
-
-    }
-
 }
 
 
 /* =========================================
-   🐱 AFFICHER LE CHAT
+   🐱 AFFICHER CHAT
 ========================================= */
 
 function showCat(
@@ -175,9 +219,7 @@ function showCat(
     expression = "content"
 ) {
 
-    catContainer.classList.add(
-        "show"
-    );
+    catContainer.classList.add("show");
 
     characterMessage.textContent =
         message;
@@ -190,7 +232,7 @@ function showCat(
 
 
 /* =========================================
-   😴 ATTENTE
+   😴 CHAT SI ON ATTEND
 ========================================= */
 
 let waitingTimer = null;
@@ -198,32 +240,24 @@ let waitingTimer = null;
 
 function startWaitingTimer() {
 
-    clearTimeout(
-        waitingTimer
-    );
-
+    clearTimeout(waitingTimer);
 
     waitingTimer =
-        setTimeout(
-            () => {
+        setTimeout(() => {
 
-                showCat(
-                    "Tu réfléchis encore ? 😴💗",
-                    "fatigue"
-                );
+            showCat(
+                "Tu réfléchis encore ? 😴💗",
+                "fatigue"
+            );
 
-            },
-            15000
-        );
+        }, 15000);
 
 }
 
 
 function resetWaitingTimer() {
 
-    clearTimeout(
-        waitingTimer
-    );
+    clearTimeout(waitingTimer);
 
     startWaitingTimer();
 
@@ -243,35 +277,25 @@ function startMusic() {
         return;
     }
 
+    backgroundMusic.volume = 0.25;
 
-    backgroundMusic.volume =
-        0.25;
+    backgroundMusic.play()
+        .then(() => {
 
+            musicPlaying = true;
 
-    backgroundMusic
-        .play()
-        .then(
-            () => {
+            musicButton.textContent =
+                "🔊";
 
-                musicPlaying =
-                    true;
+        })
+        .catch(() => {
 
-                musicButton.textContent =
-                    "🔊";
+            musicPlaying = false;
 
-            }
-        )
-        .catch(
-            () => {
+            musicButton.textContent =
+                "🔇";
 
-                musicPlaying =
-                    false;
-
-                musicButton.textContent =
-                    "🔇";
-
-            }
-        );
+        });
 
 }
 
@@ -291,8 +315,7 @@ if (musicButton) {
 
                 backgroundMusic.pause();
 
-                musicPlaying =
-                    false;
+                musicPlaying = false;
 
                 musicButton.textContent =
                     "🔇";
@@ -317,41 +340,26 @@ if (startBtn) {
 
             startMusic();
 
-
             startScreen.classList.add(
                 "hidden"
             );
 
+            setTimeout(() => {
 
-            setTimeout(
-                () => {
+                step1.classList.add(
+                    "active"
+                );
 
-                    step1.classList.add(
-                        "active"
-                    );
+                showCat(
+                    "Coucou ! 🐱💗",
+                    "content"
+                );
 
+                createSparkles(15);
 
-                    showCat(
-                        "Coucou ! 🐱💗",
-                        "content"
-                    );
+                startWaitingTimer();
 
-
-                    createSparkles(
-                        20
-                    );
-
-
-                    createPetals(
-                        10
-                    );
-
-
-                    startWaitingTimer();
-
-                },
-                600
-            );
+            }, 600);
 
         }
     );
@@ -371,7 +379,6 @@ if (next1) {
 
             resetWaitingTimer();
 
-
             step1.classList.remove(
                 "active"
             );
@@ -380,16 +387,12 @@ if (next1) {
                 "active"
             );
 
-
             showCat(
                 "On continue ? 🌸",
                 "content"
             );
 
-
-            createSparkles(
-                20
-            );
+            createSparkles(20);
 
         }
     );
@@ -409,7 +412,6 @@ if (next2) {
 
             resetWaitingTimer();
 
-
             step2.classList.remove(
                 "active"
             );
@@ -418,16 +420,12 @@ if (next2) {
                 "active"
             );
 
-
             showCat(
                 "J'ai une petite question... 😳",
                 "gene"
             );
 
-
-            createPetals(
-                15
-            );
+            createPetals(15);
 
         }
     );
@@ -467,30 +465,25 @@ if (noBtn) {
 
             noClicks++;
 
-
             const noScale =
                 Math.max(
-                    .65,
-                    1 - noClicks * .05
+                    0.65,
+                    1 - noClicks * 0.05
                 );
-
 
             const yesScale =
                 Math.min(
                     1.35,
-                    1 + noClicks * .05
+                    1 + noClicks * 0.05
                 );
-
 
             noBtn.style.transform =
                 `scale(${noScale})`;
 
-
             yesBtn.style.transform =
                 `scale(${yesScale})`;
 
-
-            const message =
+            noMessage.textContent =
                 noMessages[
                     Math.min(
                         noClicks - 1,
@@ -498,25 +491,16 @@ if (noBtn) {
                     )
                 ];
 
-
-            noMessage.textContent =
-                message;
-
-
             noMessage.classList.add(
                 "show"
             );
 
-
             showCat(
-                message,
+                noMessage.textContent,
                 "surpris"
             );
 
-
-            createPetals(
-                8
-            );
+            createPetals(8);
 
         }
     );
@@ -536,31 +520,22 @@ if (yesBtn) {
 
             resetWaitingTimer();
 
-
             step3.classList.remove(
                 "active"
             );
 
-
             giftScene.classList.add(
                 "active"
             );
-
 
             showCat(
                 "Ohhh ! Regarde ! 😸💗",
                 "heureux"
             );
 
+            createSparkles(30);
 
-            createSparkles(
-                30
-            );
-
-
-            createPetals(
-                20
-            );
+            createPetals(20);
 
         }
     );
@@ -572,8 +547,7 @@ if (yesBtn) {
    🎁 CADEAU
 ========================================= */
 
-let giftOpened =
-    false;
+let giftOpened = false;
 
 
 if (openGift) {
@@ -586,104 +560,73 @@ if (openGift) {
                 return;
             }
 
-
-            giftOpened =
-                true;
-
+            giftOpened = true;
 
             resetWaitingTimer();
 
-
-            openGift.disabled =
-                true;
-
+            openGift.disabled = true;
 
             gift.classList.add(
                 "shake"
             );
 
-
             giftMessage.textContent =
                 "Attends... qu'est-ce qu'il y a dedans ? 👀";
-
 
             showCat(
                 "Ça bouge ! 😳",
                 "surpris"
             );
 
-
-            createSparkles(
-                25
-            );
+            createSparkles(25);
 
 
-            setTimeout(
-                () => {
+            setTimeout(() => {
 
-                    giftHeartExplosion();
+                giftHeartExplosion();
 
+                showCat(
+                    "Ohhh !!! 😸💗",
+                    "heureux"
+                );
 
-                    showCat(
-                        "Ohhh !!! 😸💗",
-                        "heureux"
-                    );
-
-                },
-                700
-            );
+            }, 700);
 
 
-            setTimeout(
-                () => {
+            setTimeout(() => {
 
-                    gift.classList.remove(
-                        "shake"
-                    );
+                gift.classList.remove(
+                    "shake"
+                );
 
+                gift.classList.add(
+                    "open"
+                );
 
-                    gift.classList.add(
-                        "open"
-                    );
+                giftMessage.textContent =
+                    "Une petite surprise pour toi 💗";
 
-
-                    giftMessage.textContent =
-                        "Une petite surprise pour toi 💗";
-
-
-                    createSparkles(
-                        35
-                    );
-
-                },
-                1200
-            );
+            }, 1200);
 
 
-            setTimeout(
-                () => {
+            setTimeout(() => {
 
-                    giftScene.classList.remove(
-                        "active"
-                    );
+                giftScene.classList.remove(
+                    "active"
+                );
 
+                poemScene.classList.add(
+                    "active"
+                );
 
-                    poemScene.classList.add(
-                        "active"
-                    );
+                showCat(
+                    "Lis tranquillement... 🌸",
+                    "content"
+                );
 
+                startTypingPoem();
 
-                    showCat(
-                        "Lis tranquillement... 🌸",
-                        "content"
-                    );
-
-
-                    startTypingPoem();
-
-                },
-                3000
-            );
+            }, 3000);
 
         }
     );
@@ -692,14 +635,13 @@ if (openGift) {
 
 
 /* =========================================
-   💗 COEURS DU CADEAU
+   💗 EXPLOSION DE COEURS
 ========================================= */
 
 function giftHeartExplosion() {
 
     const rect =
         gift.getBoundingClientRect();
-
 
     const items = [
 
@@ -716,7 +658,7 @@ function giftHeartExplosion() {
 
     for (
         let i = 0;
-        i < 40;
+        i < 35;
         i++
     ) {
 
@@ -725,10 +667,8 @@ function giftHeartExplosion() {
                 "div"
             );
 
-
         item.className =
             "gift-heart";
-
 
         item.textContent =
             items[
@@ -738,13 +678,11 @@ function giftHeartExplosion() {
                 )
             ];
 
-
         item.style.left =
             (
                 rect.left +
                 rect.width / 2
             ) + "px";
-
 
         item.style.top =
             (
@@ -759,14 +697,13 @@ function giftHeartExplosion() {
 
 
         const x =
-            (Math.random() - .5) *
-            450;
-
+            (Math.random() - 0.5) *
+            420;
 
         const y =
             -80 -
             Math.random() *
-            350;
+            320;
 
 
         item.animate(
@@ -813,14 +750,11 @@ function giftHeartExplosion() {
         );
 
 
-        setTimeout(
-            () => {
+        setTimeout(() => {
 
-                item.remove();
+            item.remove();
 
-            },
-            2300
-        );
+        }, 2300);
 
     }
 
@@ -828,7 +762,7 @@ function giftHeartExplosion() {
 
 
 /* =========================================
-   📖 POÈME — ÉCRITURE
+   📖 POÈME
 ========================================= */
 
 function startTypingPoem() {
@@ -843,15 +777,11 @@ function startTypingPoem() {
             paragraph.style.display =
                 "none";
 
-            paragraph.style.opacity =
-                "0";
-
         }
     );
 
 
-    let paragraphIndex =
-        0;
+    let paragraphIndex = 0;
 
 
     function typeParagraph() {
@@ -863,13 +793,6 @@ function startTypingPoem() {
 
             revealBtn.style.display =
                 "inline-block";
-
-
-            showCat(
-                "C'était pour toi 💗",
-                "content"
-            );
-
 
             return;
 
@@ -892,58 +815,44 @@ function startTypingPoem() {
         paragraph.style.display =
             "block";
 
-
-        setTimeout(
-            () => {
-
-                paragraph.style.opacity =
-                    "1";
-
-            },
-            50
-        );
+        paragraph.style.opacity =
+            "1";
 
 
-        let charIndex =
-            0;
+        let charIndex = 0;
 
 
         const interval =
-            setInterval(
-                () => {
+            setInterval(() => {
 
-                    paragraph.textContent +=
-                        originalText[
-                            charIndex
-                        ];
+                paragraph.textContent +=
+                    originalText[
+                        charIndex
+                    ];
 
-
-                    charIndex++;
+                charIndex++;
 
 
-                    if (
-                        charIndex >=
-                        originalText.length
-                    ) {
+                if (
+                    charIndex >=
+                    originalText.length
+                ) {
 
-                        clearInterval(
-                            interval
-                        );
+                    clearInterval(
+                        interval
+                    );
+
+                    paragraphIndex++;
 
 
-                        paragraphIndex++;
+                    setTimeout(
+                        typeParagraph,
+                        900
+                    );
 
+                }
 
-                        setTimeout(
-                            typeParagraph,
-                            800
-                        );
-
-                    }
-
-                },
-                32
-            );
+            }, 32);
 
     }
 
@@ -969,21 +878,17 @@ if (revealBtn) {
 
             resetWaitingTimer();
 
-
             poemScene.classList.remove(
                 "active"
             );
-
 
             game.classList.add(
                 "calm"
             );
 
-
             transitionScene.classList.add(
                 "active"
             );
-
 
             transitionText.textContent =
                 "Bon... j'ai une dernière petite question 😳💗";
@@ -995,40 +900,24 @@ if (revealBtn) {
             );
 
 
-            createSparkles(
-                15
-            );
+            setTimeout(() => {
 
+                transitionScene.classList.remove(
+                    "active"
+                );
 
-            setTimeout(
-                () => {
+                questionFinale.classList.add(
+                    "active"
+                );
 
-                    transitionScene.classList.remove(
-                        "active"
-                    );
+                showCat(
+                    "Voilà... 😳💗",
+                    "gene"
+                );
 
+                createSparkles(20);
 
-                    questionFinale.classList.add(
-                        "active"
-                    );
-
-
-                    showCat(
-                        "Voilà... 😳💗",
-                        "gene"
-                    );
-
-
-                    createSparkles(
-                        20
-                    );
-
-
-                    startWaitingTimer();
-
-                },
-                4000
-            );
+            }, 4000);
 
         }
     );
@@ -1040,8 +929,7 @@ if (revealBtn) {
    ❌ NON FINAL
 ========================================= */
 
-let finalNoClicks =
-    0;
+let finalNoClicks = 0;
 
 
 const finalNoMessages = [
@@ -1067,29 +955,39 @@ if (finalNo) {
         "click",
         () => {
 
-            finalNoClicks++;
+            /*
+             * On enregistre la première réponse.
+             * Les clics suivants servent seulement
+             * aux animations du bouton.
+             */
+            if (!answerSent) {
 
+                sendAnswer("Non 🌷");
+
+            }
+
+
+            finalNoClicks++;
 
             resetWaitingTimer();
 
 
             const noScale =
                 Math.max(
-                    .65,
-                    1 - finalNoClicks * .05
+                    0.65,
+                    1 - finalNoClicks * 0.05
                 );
 
 
             const yesScale =
                 Math.min(
                     1.35,
-                    1 + finalNoClicks * .05
+                    1 + finalNoClicks * 0.05
                 );
 
 
             finalNo.style.transform =
                 `scale(${noScale})`;
-
 
             finalYes.style.transform =
                 `scale(${yesScale})`;
@@ -1107,7 +1005,6 @@ if (finalNo) {
             finalNoMessage.textContent =
                 message;
 
-
             finalNoMessage.classList.add(
                 "show"
             );
@@ -1119,9 +1016,7 @@ if (finalNo) {
             );
 
 
-            createPetals(
-                8
-            );
+            createPetals(8);
 
         }
     );
@@ -1139,18 +1034,26 @@ if (finalYes) {
         "click",
         () => {
 
-            resetWaitingTimer();
+            /*
+             * Enregistre OUI seulement si
+             * aucune réponse n'a déjà été envoyée.
+             */
+            if (!answerSent) {
 
+                sendAnswer("Oui 💗");
+
+            }
+
+
+            resetWaitingTimer();
 
             questionFinale.classList.remove(
                 "active"
             );
 
-
             game.classList.remove(
                 "calm"
             );
-
 
             envelopeScene.classList.add(
                 "active"
@@ -1203,22 +1106,11 @@ if (envelope) {
             );
 
 
-            createSparkles(
-                30
-            );
+            setTimeout(() => {
 
+                typeLetter();
 
-            createCelebration();
-
-
-            setTimeout(
-                () => {
-
-                    typeLetter();
-
-                },
-                900
-            );
+            }, 900);
 
         }
     );
@@ -1227,74 +1119,67 @@ if (envelope) {
 
 
 /* =========================================
-   💌 LETTRE
+   💌 MESSAGE DE LA LETTRE
 ========================================= */
 
 function typeLetter() {
 
     const message =
-        "Merci d'avoir pris le temps de regarder toute cette petite surprise. 🌸\n\nJ'espère simplement qu'elle t'aura fait sourire. 💗\n\nPeu importe ta réponse, le plus important est qu'elle soit sincère. 😊";
+        "Merci d'avoir pris le temps de regarder toute cette petite surprise. 🌸\n\n" +
+        "J'espère simplement qu'elle t'aura fait sourire. 💗\n\n" +
+        "Peu importe ta réponse, le plus important est qu'elle soit sincère. 😊";
 
 
     letterText.textContent =
         "";
 
 
-    let index =
-        0;
+    let index = 0;
 
 
     const interval =
-        setInterval(
-            () => {
+        setInterval(() => {
 
-                letterText.textContent +=
-                    message[index];
+            letterText.textContent +=
+                message[index];
 
-
-                index++;
+            index++;
 
 
-                if (
-                    index >=
-                    message.length
-                ) {
+            if (
+                index >=
+                message.length
+            ) {
 
-                    clearInterval(
-                        interval
+                clearInterval(
+                    interval
+                );
+
+
+                setTimeout(() => {
+
+                    envelopeScene.classList.remove(
+                        "active"
+                    );
+
+                    revealScene.classList.add(
+                        "active"
                     );
 
 
-                    setTimeout(
-                        () => {
-
-                            envelopeScene.classList.remove(
-                                "active"
-                            );
-
-
-                            revealScene.classList.add(
-                                "active"
-                            );
-
-
-                            showCat(
-                                "Merci beaucoup ! 😸💗",
-                                "heureux"
-                            );
-
-
-                            createCelebration();
-
-                        },
-                        2500
+                    showCat(
+                        "Merci beaucoup ! 😸💗",
+                        "heureux"
                     );
 
-                }
 
-            },
-            25
-        );
+                    createCelebration();
+
+                }, 2500);
+
+            }
+
+        }, 25);
 
 }
 
@@ -1355,28 +1240,23 @@ function createStars() {
                 "div"
             );
 
-
         star.className =
             "star";
-
 
         star.style.left =
             Math.random() *
             100 +
             "%";
 
-
         star.style.top =
             Math.random() *
             80 +
             "%";
 
-
         star.style.animationDelay =
             Math.random() *
             3 +
             "s";
-
 
         stars.appendChild(
             star
@@ -1417,10 +1297,8 @@ function createFlowers() {
                 "div"
             );
 
-
         flower.className =
             "flower";
-
 
         flower.textContent =
             types[
@@ -1430,18 +1308,15 @@ function createFlowers() {
                 )
             ];
 
-
         flower.style.left =
             Math.random() *
             100 +
             "%";
 
-
         flower.style.animationDelay =
             Math.random() *
             2 +
             "s";
-
 
         flowers.appendChild(
             flower
@@ -1465,7 +1340,6 @@ function createHeart() {
         document.createElement(
             "div"
         );
-
 
     heart.className =
         "heart";
@@ -1516,14 +1390,11 @@ function createHeart() {
     );
 
 
-    setTimeout(
-        () => {
+    setTimeout(() => {
 
-            heart.remove();
+        heart.remove();
 
-        },
-        9000
-    );
+    }, 9000);
 
 }
 
@@ -1535,7 +1406,7 @@ setInterval(
 
 
 /* =========================================
-   ✨ PARTICULES
+   ✨ PARTICULES LUMINEUSES
 ========================================= */
 
 function createSparkles(
@@ -1558,57 +1429,47 @@ function createSparkles(
         i++
     ) {
 
-        setTimeout(
-            () => {
+        setTimeout(() => {
 
-                const sparkle =
-                    document.createElement(
-                        "div"
-                    );
-
-
-                sparkle.className =
-                    "sparkle";
-
-
-                sparkle.textContent =
-                    symbols[
-                        Math.floor(
-                            Math.random() *
-                            symbols.length
-                        )
-                    ];
-
-
-                sparkle.style.left =
-                    Math.random() *
-                    100 +
-                    "vw";
-
-
-                sparkle.style.top =
-                    Math.random() *
-                    100 +
-                    "vh";
-
-
-                particles.appendChild(
-                    sparkle
+            const sparkle =
+                document.createElement(
+                    "div"
                 );
 
+            sparkle.className =
+                "sparkle";
 
-                setTimeout(
-                    () => {
+            sparkle.textContent =
+                symbols[
+                    Math.floor(
+                        Math.random() *
+                        symbols.length
+                    )
+                ];
 
-                        sparkle.remove();
+            sparkle.style.left =
+                Math.random() *
+                100 +
+                "vw";
 
-                    },
-                    1600
-                );
+            sparkle.style.top =
+                Math.random() *
+                100 +
+                "vh";
 
-            },
-            i * 60
-        );
+
+            particles.appendChild(
+                sparkle
+            );
+
+
+            setTimeout(() => {
+
+                sparkle.remove();
+
+            }, 1600);
+
+        }, i * 60);
 
     }
 
@@ -1644,10 +1505,8 @@ function createPetals(
                 "div"
             );
 
-
         petal.className =
             "sparkle";
-
 
         petal.textContent =
             petals[
@@ -1676,14 +1535,11 @@ function createPetals(
         );
 
 
-        setTimeout(
-            () => {
+        setTimeout(() => {
 
-                petal.remove();
+            petal.remove();
 
-            },
-            1600
-        );
+        }, 1600);
 
     }
 
@@ -1732,34 +1588,28 @@ function createCelebration() {
         item.style.position =
             "fixed";
 
-
         item.style.left =
             "50%";
-
 
         item.style.top =
             "50%";
 
-
         item.style.fontSize =
             "25px";
 
-
         item.style.zIndex =
             "999999";
-
 
         item.style.pointerEvents =
             "none";
 
 
         const x =
-            (Math.random() - .5) *
+            (Math.random() - 0.5) *
             800;
 
-
         const y =
-            (Math.random() - .5) *
+            (Math.random() - 0.5) *
             650;
 
 
@@ -1812,14 +1662,11 @@ function createCelebration() {
         );
 
 
-        setTimeout(
-            () => {
+        setTimeout(() => {
 
-                item.remove();
+            item.remove();
 
-            },
-            2600
-        );
+        }, 2600);
 
     }
 
